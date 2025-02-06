@@ -9,8 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody _rbPlayer;
 
-    [SerializeField] private float _runSpeed = 5;
-    [SerializeField] private float _turnSpeed = 3;
+    [SerializeField] private float _runSpeed = 0;
+    [SerializeField] private float _turnSpeed = 0;
 
     private float _horizontal = 0;
     private float _vertical = 0;

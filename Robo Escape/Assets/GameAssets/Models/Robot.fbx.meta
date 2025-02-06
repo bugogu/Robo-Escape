@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 38578fe7d4ef32445865bb86732de174
+guid: a048f8b2dd9606042b5b749042fd1a4e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,18 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: default
-    second: {fileID: 2100000, guid: 0224ed56d812c73459fa2d0e091b6c59, type: 2}
+      name: Black_Matt
+    second: {fileID: 2100000, guid: 2655835a97e750b4187468fcb2b4fc45, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: eye
-    second: {fileID: 2100000, guid: 28bd5c9ded974634da275ba57825b1e3, type: 2}
+      name: Blue_Light
+    second: {fileID: 2100000, guid: 6c1f3192a3019ef49951b0883e79e70a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: gap
-    second: {fileID: 2100000, guid: 3b810a0f226054045b9ab1a866391276, type: 2}
+      name: White_Glossy
+    second: {fileID: 2100000, guid: d867b5e893f39da40bc2e3cbfa29e76f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
