@@ -6,7 +6,7 @@ namespace MaskTransitions
     using UnityEngine.SceneManagement;
     using UnityEngine.UI;
 
-    public class TransitionManager : MonoBehaviour
+    public class TransitionManager : MonoSingleton<TransitionManager>
     {
         public static TransitionManager Instance;
 
