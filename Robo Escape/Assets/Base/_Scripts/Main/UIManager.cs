@@ -1,10 +1,22 @@
+using MaskTransitions;
 using UnityEngine;
+using UnityEngine.UI;
+
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoSingleton<UIManager>
 {
-    public int Level 
+    [Header("Home Button")]
+    [SerializeField] private Button _homeButton;
+    [SerializeField] private float _loadDelay = 1f;
+
+    void OnEnable()
     {
-        get => PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1);
-        set => PlayerPrefs.SetInt(Consts.Prefs.LEVEL, value);
+        _homeButton.onClick.RemoveAllListeners();
+        _homeButton.onClick.AddListener(HomeButton);
+    }
+
+    private void HomeButton()
+    {
+        TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
     }
 }
