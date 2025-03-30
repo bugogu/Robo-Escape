@@ -4,4 +4,12 @@ public class Consts
     {
         public const string WALKING = "Walking";
     }
+
+    public struct Prefs
+    {
+        public const string LEVEL = "Level";
+        public const string MUSIC = "Music";
+        public const string SOUND = "Sound";
+        public const string HAPTIC = "Haptic";
+    }
 }
