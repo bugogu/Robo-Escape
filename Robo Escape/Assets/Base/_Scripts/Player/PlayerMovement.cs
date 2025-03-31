@@ -3,8 +3,9 @@ using UnityEngine;
 [RequireComponent ( typeof ( Rigidbody ) )]
 public class PlayerMovement : MonoBehaviour
 {
-    #region Variables
+    [HideInInspector] public bool _isMoving;
 
+    [Header("References")]
     [SerializeField] private DynamicJoystick dynamicJoystick;
     [SerializeField] private Animator _animator;
     [SerializeField] private float _runSpeed = 0;
@@ -14,21 +15,13 @@ public class PlayerMovement : MonoBehaviour
     private float _horizontal = 0;
     private float _vertical = 0;
 
-    #endregion
-
     private void Awake() => Initial();
 
     private void Initial() => _rbPlayer = GetComponent<Rigidbody>();
 
     private void FixedUpdate()
     {
-        if (Input.touchCount > 0)
-            JoystickMovement();
-        else
-        {
-            _animator.SetBool(Consts.PlayerAnimations.WALKING, false);
-            _rbPlayer.linearVelocity = Vector3.zero;
-        }
+       IsMoving();
     }
 
     public void JoystickMovement()
@@ -44,4 +37,19 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), _turnSpeed * Time.fixedDeltaTime);
     }
 
+    public void IsMoving()
+    {
+        if(Input.touchCount > 0)
+        {
+            JoystickMovement();
+            _isMoving = true;
+        }
+        else
+        {
+            _animator.SetBool(Consts.PlayerAnimations.WALKING, false);
+            _rbPlayer.linearVelocity = Vector3.zero;
+            _isMoving = false;
+        }
+        PlayerController.Instance.MovingFX(_isMoving);
+    }
 }

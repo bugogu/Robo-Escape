@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoSingleton<PlayerController>
 {
+    [SerializeField] private GameObject _playerMovingFX;
     private PlayerMovement _playerMovement;
 
     void OnEnable()
@@ -16,4 +17,7 @@ public class PlayerController : MonoBehaviour
         if(gameState == GameState.Play) _playerMovement.enabled = true;
         else _playerMovement.enabled = false;
     }
+
+    public void MovingFX(bool status)=>
+        _playerMovingFX.SetActive(status);
 }
