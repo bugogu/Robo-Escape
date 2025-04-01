@@ -12,6 +12,11 @@ public class PlayerController : MonoSingleton<PlayerController>
         GameManager.Instance.OnGameStateChanged += CanMove;
     }
 
+    void OnDisable()
+    {
+        GameManager.Instance.OnGameStateChanged -= CanMove;
+    }
+
     private void CanMove(GameState gameState)
     {
         if(gameState == GameState.Play) _playerMovement.enabled = true;
