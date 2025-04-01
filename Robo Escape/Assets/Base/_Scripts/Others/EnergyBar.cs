@@ -31,7 +31,6 @@ public class EnergyBar : MonoSingleton<EnergyBar>
     {
         float clampedEnergy = Mathf.Clamp(newEnergy, 0f, _maxEnergyCapacity);
         UpdateEnergyUI(clampedEnergy);
-        Debug.Log("Energy: " + clampedEnergy);
     }
 
     private void UpdateEnergyUI(float energyAmount)

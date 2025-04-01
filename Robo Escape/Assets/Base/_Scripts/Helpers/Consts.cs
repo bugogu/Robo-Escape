@@ -12,4 +12,9 @@ public class Consts
         public const string SOUND = "Sound";
         public const string HAPTIC = "Haptic";
     }
+
+    public struct Tags
+    {
+        public const string MAGNETIC_AREA = "MagneticArea";
+    }
 }

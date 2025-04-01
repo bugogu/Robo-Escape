@@ -4,17 +4,23 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector] public bool _isMoving;
+    [HideInInspector] public bool _isMagnetized = false;
 
     [Header("References")]
     [SerializeField] private DynamicJoystick dynamicJoystick;
     [SerializeField] private Animator _animator;
+
+    [Header("Movement")]
     [SerializeField] private float _runSpeed = 0;
     [SerializeField] private float _walkSpeed = 0;
     [SerializeField] private float _turnSpeed = 0;
+    [SerializeField] private float _magnetismSpeedMultiplier = 2;
 
     [Header("Energy Consumption")]
     [SerializeField] private float _replenishAmount = 1f;
     [SerializeField] private float _consumeAmount = 0.3f;
+    [SerializeField] private float _magnetismConsumptionMultiplier = 1.5f;
+    [SerializeField] private float _magnetismReplenishMultiplier = 2f;
 
     private Rigidbody _rbPlayer;
     private float _horizontal = 0;
@@ -37,12 +43,14 @@ public class PlayerMovement : MonoBehaviour
 
         if(EnergyBar.Instance.GetCurrentEnergy() <= 0) 
         {
-            Vector3 newPos = new Vector3(_horizontal * _walkSpeed * Time.fixedDeltaTime, 0, _vertical * _walkSpeed * Time.fixedDeltaTime);
+            Vector3 newPos = new Vector3(_horizontal * (_isMagnetized ? _walkSpeed / _magnetismSpeedMultiplier : _walkSpeed) * Time.fixedDeltaTime,
+             0, _vertical * (_isMagnetized ? _walkSpeed / _magnetismSpeedMultiplier : _walkSpeed) * Time.fixedDeltaTime);
             _rbPlayer.linearVelocity = newPos;
         }
         else
         {
-            Vector3 newPos = new Vector3(_horizontal * _runSpeed * Time.fixedDeltaTime, 0, _vertical * _runSpeed * Time.fixedDeltaTime);
+            Vector3 newPos = new Vector3(_horizontal * (_isMagnetized ? _runSpeed / _magnetismSpeedMultiplier : _runSpeed) * Time.fixedDeltaTime,
+             0, _vertical * (_isMagnetized ? _runSpeed / _magnetismSpeedMultiplier : _runSpeed) * Time.fixedDeltaTime);
             _rbPlayer.linearVelocity = newPos;
         }
 
@@ -56,14 +64,14 @@ public class PlayerMovement : MonoBehaviour
         {
             JoystickMovement();
             _isMoving = true;
-            EnergyBar.Instance.ConsumeEnergy(_consumeAmount);
+            EnergyBar.Instance.ConsumeEnergy(_isMagnetized ? _magnetismConsumptionMultiplier * _consumeAmount : _consumeAmount);
         }
         else
         {
             _animator.SetBool(Consts.PlayerAnimations.WALKING, false);
             _rbPlayer.linearVelocity = Vector3.zero;
             _isMoving = false;
-            EnergyBar.Instance.ReplenishEnergy(_replenishAmount);
+            EnergyBar.Instance.ReplenishEnergy(_isMagnetized ? _magnetismReplenishMultiplier * _replenishAmount : _replenishAmount);
         }
         PlayerController.Instance.MovingFX(_isMoving);
     }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Folder
   - Music
+  - MagneticArea
   layers:
   - Default
   - TransparentFX

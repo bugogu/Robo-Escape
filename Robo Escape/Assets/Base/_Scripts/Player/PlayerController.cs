@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
+    public ParticleSystem _energyCellFX;
+    public ParticleSystem _drainCellFX;
+    
     [SerializeField] private GameObject _playerMovingFX;
     private PlayerMovement _playerMovement;
 
