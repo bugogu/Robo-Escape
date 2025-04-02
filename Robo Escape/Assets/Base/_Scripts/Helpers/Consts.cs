@@ -5,6 +5,11 @@ public class Consts
         public const string WALKING = "Walking";
     }
 
+    public struct AnimationParameters
+    {
+        
+    }
+
     public struct Prefs
     {
         public const string LEVEL = "Level";

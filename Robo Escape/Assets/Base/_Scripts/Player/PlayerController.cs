@@ -5,7 +5,13 @@ public class PlayerController : MonoSingleton<PlayerController>
     public ParticleSystem _energyCellFX;
     public ParticleSystem _drainCellFX;
     
+    public ParticleSystem _gateHackFX;
+    public ParticleSystem _blueHackFX;
+    public ParticleSystem _yellowHackFX;
+    public ParticleSystem _purpleHackFX;
+
     [SerializeField] private GameObject _playerMovingFX;
+
     private PlayerMovement _playerMovement;
 
     void OnEnable()
@@ -28,4 +34,23 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void MovingFX(bool status)=>
         _playerMovingFX.SetActive(status);
+
+    public void HackFxActive(InteractionType interactionType, bool status)
+    {
+        switch (interactionType)
+        {
+            case InteractionType.Gate:
+                _gateHackFX.gameObject.SetActive(status);
+                break;
+            case InteractionType.YellowBox:
+                _yellowHackFX.gameObject.SetActive(status);
+                break;
+            case InteractionType.BlueBox:
+                _blueHackFX.gameObject.SetActive(status);
+                break;
+            case InteractionType.PurpleBox:
+                _purpleHackFX.gameObject.SetActive(status);
+                break;
+        }
+    }
 }
