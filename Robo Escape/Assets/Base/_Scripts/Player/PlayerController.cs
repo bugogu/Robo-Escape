@@ -11,6 +11,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public ParticleSystem _purpleHackFX;
 
     [SerializeField] private GameObject _playerMovingFX;
+    [SerializeField] private GameObject _passwordCanvas;
 
     private PlayerMovement _playerMovement;
 
@@ -23,6 +24,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     void OnDisable()
     {
+        // Önemsiz bir null hatası veriyor.
         GameManager.Instance.OnGameStateChanged -= CanMove;
     }
 
