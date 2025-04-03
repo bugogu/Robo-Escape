@@ -24,7 +24,7 @@ public class PasswordPanel : MonoBehaviour
         }
         else
         {
-            // Alarm Aktifleştirilicek.
+            GameManager.Instance.SetAlarm(true);
             _passwordGate.OpenGate();
             _passwordInput = "";
             GameManager.Instance.ChangeGameState(GameState.Play);

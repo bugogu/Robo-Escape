@@ -7,6 +7,7 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private PlayableDirector _playableDirector;
  
     public event Action<GameState> OnGameStateChanged;
+    public event Action<bool> OnAlarmSetted;
 
     public void ChangeGameState(GameState gameState) 
     {
@@ -27,4 +28,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void OnTimeLineFinished(PlayableDirector director)=>
         ChangeGameState(GameState.Play);
+
+    public void SetAlarm(bool status)=>
+    OnAlarmSetted?.Invoke(status);
 }

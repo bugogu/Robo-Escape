@@ -9,6 +9,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private Button _homeButton;
     [SerializeField] private float _loadDelay = 1f;
     [SerializeField] private TMPro.TMP_Text _levelText;
+    [SerializeField] private CanvasGroup _alarmImage;
 
     void Start()
     {
@@ -19,10 +20,26 @@ public class UIManager : MonoSingleton<UIManager>
     {
         _homeButton.onClick.RemoveAllListeners();
         _homeButton.onClick.AddListener(HomeButton);
+
+        GameManager.Instance.OnAlarmSetted += AlarmImageAlpha;
+    }
+
+    void OnDisable()
+    {
+        GameManager.Instance.OnAlarmSetted -= AlarmImageAlpha;
     }
 
     private void HomeButton()
     {
         TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
+    }
+
+    private void AlarmImageAlpha(bool isAlarmActive)
+    {
+        if(isAlarmActive)
+        _alarmImage.alpha = 1f;
+
+        if(!isAlarmActive)
+        _alarmImage.alpha = 0.3f;
     }
 }
