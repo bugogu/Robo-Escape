@@ -5,11 +5,6 @@ public class Consts
         public const string WALKING = "Walking";
     }
 
-    public struct AnimationParameters
-    {
-        
-    }
-
     public struct Prefs
     {
         public const string LEVEL = "Level";
@@ -21,5 +16,6 @@ public class Consts
     public struct Tags
     {
         public const string MAGNETIC_AREA = "MagneticArea";
+        public const string PLAYER = "Player";
     }
 }

@@ -9,6 +9,9 @@ public class GameManager : MonoSingleton<GameManager>
     public event Action<GameState> OnGameStateChanged;
     public event Action<bool> OnAlarmSetted;
 
+    [HideInInspector]
+    public bool isAlarmActive = false;
+
     public void ChangeGameState(GameState gameState) 
     {
         OnGameStateChanged?.Invoke(gameState);
@@ -29,6 +32,10 @@ public class GameManager : MonoSingleton<GameManager>
     private void OnTimeLineFinished(PlayableDirector director)=>
         ChangeGameState(GameState.Play);
 
-    public void SetAlarm(bool status)=>
-    OnAlarmSetted?.Invoke(status);
+    public void SetAlarm(bool status)
+    {
+        OnAlarmSetted?.Invoke(status);
+        isAlarmActive = status;
+    }
+    
 }
