@@ -16,6 +16,12 @@ public class InteractionPlate : MonoBehaviour, IInteractable
     [HideInInspector]
     public bool _isInteractionComplete = false;
 
+    void Awake()
+    {
+        if(_visualCanHide)
+        _plateVisualObject.SetActive(false);
+    }
+
     public void OnInteractionTrigger()
     {
         if(_visualCanHide)

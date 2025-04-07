@@ -9,6 +9,7 @@ public class LaserGate : MonoBehaviour
     [SerializeField] private float _deactiveTime = 5f;
     [SerializeField] private Transform _reloadImageParent;
     [SerializeField] private Image _reloadFill;
+    [SerializeField] private float _consumeEnergyAmount = 50f;
 
     [Header("Movement")]
     [SerializeField] private bool _canMove = false;
@@ -66,7 +67,10 @@ public class LaserGate : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(Consts.Tags.PLAYER))
+        if(!other.CompareTag(Consts.Tags.PLAYER)) return;
+
         GameManager.Instance.SetAlarm(true);
+
+        EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount);
     }
 }
