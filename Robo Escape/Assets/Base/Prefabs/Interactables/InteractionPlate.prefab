@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5639909959968088198
 RectTransform:
   m_ObjectHideFlags: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _plateVisualObject: {fileID: 2000913360353823807}
-  _interacitonType: 0
+  _interactionType: 0
   _interactionDuration: 5
   _plateFillImage: {fileID: 2037589370747821460}
 --- !u!65 &1430296974923715423

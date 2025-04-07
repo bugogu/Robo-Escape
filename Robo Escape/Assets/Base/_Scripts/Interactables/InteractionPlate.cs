@@ -5,17 +5,20 @@ public class InteractionPlate : MonoBehaviour, IInteractable
 {
     [SerializeField] private UnityEngine.Events.UnityEvent _action;
     [Space(10)]
+    [SerializeField] private bool _visualCanHide = false;
     [SerializeField] private GameObject _plateVisualObject;
     [SerializeField] private InteractionType _interactionType ;
     [SerializeField] private float _interactionDuration = 5f;
-    [SerializeField] private Image _plateFillImage;
 
+    public Image _plateFillImage;
     public InteractionType InteractionType => _interactionType;
 
-    private bool _isInteractionComplete = false;
+    [HideInInspector]
+    public bool _isInteractionComplete = false;
 
     public void OnInteractionTrigger()
     {
+        if(_visualCanHide)
         _plateVisualObject.SetActive(true);
     }
 
@@ -37,7 +40,9 @@ public class InteractionPlate : MonoBehaviour, IInteractable
 
     public void OnInteractionExit()
     {
+        if(_visualCanHide)
         _plateVisualObject.SetActive(false);
+
         _plateFillImage.fillAmount = 0f;
     }
 }
