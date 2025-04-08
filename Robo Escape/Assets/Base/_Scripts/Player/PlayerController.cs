@@ -5,7 +5,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public ParticleSystem _energyCellFX;
     public ParticleSystem _drainCellFX;
     
-    public ParticleSystem _gateHackFX;
+    public ParticleSystem _redHackFX;
     public ParticleSystem _blueHackFX;
     public ParticleSystem _yellowHackFX;
     public ParticleSystem _purpleHackFX;
@@ -41,8 +41,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         switch (interactionType)
         {
-            case InteractionType.Gate:
-                _gateHackFX.gameObject.SetActive(status);
+            case InteractionType.Red:
+                _redHackFX.gameObject.SetActive(status);
                 break;
             case InteractionType.YellowBox:
                 _yellowHackFX.gameObject.SetActive(status);

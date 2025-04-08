@@ -71,6 +71,6 @@ public class LaserGate : MonoBehaviour
 
         GameManager.Instance.SetAlarm(true);
 
-        EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount);
+        EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount, true); 
     }
 }

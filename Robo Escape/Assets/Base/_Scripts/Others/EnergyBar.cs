@@ -6,17 +6,23 @@ public class EnergyBar : MonoSingleton<EnergyBar>
     [SerializeField] private float _maxEnergyCapacity = 100f;
     [SerializeField] private Image _energyBarFillImage;
 
-    public void ConsumeEnergy(float amount)
+    public void ConsumeEnergy(float amount, bool burst = false)
     {
         if (amount <= 0) return;
+
+        if(burst)
+        EnergyPopUpText.Instance.ShowEnergyPopup((int)amount, false);
 
         float newEnergy = GetCurrentEnergy() - amount;
         SetEnergy(newEnergy);
     }
 
-    public void ReplenishEnergy(float amount)
+    public void ReplenishEnergy(float amount, bool burst = false)
     {
         if (amount <= 0) return;
+
+        if(burst)
+        EnergyPopUpText.Instance.ShowEnergyPopup((int)amount, true);
 
         float newEnergy = GetCurrentEnergy() + amount;
         SetEnergy(newEnergy);
