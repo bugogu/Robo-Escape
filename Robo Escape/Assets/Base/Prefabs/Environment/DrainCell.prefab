@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: vfx_LootDrop_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1193953125369175018, guid: 7d39067bead4bc14aa0b451564aa5198, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4380190821754405079, guid: 7d39067bead4bc14aa0b451564aa5198, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

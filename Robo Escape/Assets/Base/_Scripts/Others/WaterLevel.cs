@@ -7,7 +7,12 @@ public class WaterLevel : MonoBehaviour
     [Tooltip("Seconds")][SerializeField] private float _timeToFill;
 
     private float _currentFillAmount = 0f;
-    private bool _canFill = false;
+    private bool _canFill;
+
+    void Awake()
+    {
+        _canFill = GameManager.Instance.waterLevel;
+    }
 
     void Update()
     {

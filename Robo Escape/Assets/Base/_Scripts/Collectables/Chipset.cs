@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class EnergyCell : MonoBehaviour, ICollectable
+public class Chipset : MonoBehaviour, ICollectable
 {
-    [SerializeField] private float _replenishAmount = 35f;
-
     private GameObject _player;
     
     private void Start()
@@ -13,8 +11,8 @@ public class EnergyCell : MonoBehaviour, ICollectable
 
     public bool Collect()
     {
-        _player.GetComponent<AudioSource>()?.Play();
-        EnergyBar.Instance.ReplenishEnergy(_replenishAmount , true);
+         _player.GetComponent<AudioSource>()?.Play();
+        LevelManager.Instance.CollectChipset();
         gameObject.SetActive(false);
         return true;
     }

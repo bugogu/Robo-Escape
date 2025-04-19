@@ -10,6 +10,11 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private float _loadDelay = 1f;
     [SerializeField] private TMPro.TMP_Text _levelText;
     [SerializeField] private CanvasGroup _alarmImage;
+    [SerializeField] private GameObject _waterCanvas;
+
+    [Header("UI Elements")]
+    [Tooltip("These element are goint to open when cutscene is finished")] 
+    [SerializeField] private GameObject[] _uiElements;
 
     void Start()
     {
@@ -22,6 +27,7 @@ public class UIManager : MonoSingleton<UIManager>
         _homeButton.onClick.AddListener(HomeButton);
 
         GameManager.Instance.OnAlarmSetted += AlarmImageAlpha;
+        GameManager.Instance.OnGameStateChanged += OpenUI;
     }
 
     void OnDisable()
@@ -41,5 +47,14 @@ public class UIManager : MonoSingleton<UIManager>
 
         if(!isAlarmActive)
         _alarmImage.alpha = 0.3f;
+    }
+
+    private void OpenUI(GameState gameState)
+    {
+        if(gameState != GameState.Play) return;
+
+        foreach (GameObject uiElement in _uiElements) uiElement.SetActive(true); 
+
+        if(GameManager.Instance.waterLevel) _waterCanvas.SetActive(true);
     }
 }

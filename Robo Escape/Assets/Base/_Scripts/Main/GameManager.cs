@@ -6,11 +6,18 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private PlayableDirector _playableDirector;
  
+    public bool waterLevel = false;
     public event Action<GameState> OnGameStateChanged;
     public event Action<bool> OnAlarmSetted;
 
     [HideInInspector]
     public bool isAlarmActive = false;
+
+    public int ProtocolCount 
+    { 
+        get => PlayerPrefs.GetInt("ProtocolCount", 0); 
+        set => PlayerPrefs.SetInt("ProtocolCount", value);
+    }
 
     public void ChangeGameState(GameState gameState) 
     {
