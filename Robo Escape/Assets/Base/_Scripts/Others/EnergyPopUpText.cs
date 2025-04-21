@@ -7,13 +7,13 @@ public class EnergyPopUpText : MonoSingleton<EnergyPopUpText>
     [Header("References")]
     [SerializeField] private TextMeshProUGUI popupText;
     [SerializeField] private RectTransform textRectTransform;
+    [SerializeField] private GameDesignData _gameDesignData;
 
-    [Header("Settings")]
-    [SerializeField] private float moveDistance = 100f;
-    [SerializeField] private float moveDuration = 0.8f;
-    [SerializeField] private float returnDuration = 0.3f;
-    [SerializeField] private float displayDuration = 1f;
-    [SerializeField] private Color _positiveColor, _negativeColor;
+    private float moveDistance = 100f;
+    private float moveDuration = 0.8f;
+    private float returnDuration = 0.3f;
+    private float displayDuration = 1f;
+    private Color _positiveColor, _negativeColor;
 
     private Vector2 originalPosition;
     private bool isAvailable = true;
@@ -22,6 +22,13 @@ public class EnergyPopUpText : MonoSingleton<EnergyPopUpText>
     {
         originalPosition = textRectTransform.anchoredPosition;
         popupText.text = ""; 
+
+        moveDistance = _gameDesignData.moveDistance;
+        moveDuration = _gameDesignData.moveDuration;
+        returnDuration = _gameDesignData.returnDuration;
+        displayDuration = _gameDesignData.displayDuration;
+        _positiveColor = _gameDesignData._positiveColor;
+        _negativeColor = _gameDesignData._negativeColor;
     }
 
     public void ShowEnergyPopup(int energyAmount, bool positive)

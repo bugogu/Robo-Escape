@@ -10,17 +10,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private DynamicJoystick dynamicJoystick;
     [SerializeField] private Animator _animator;
 
-    [Header("Movement")]
-    [SerializeField] private float _runSpeed = 0;
-    [SerializeField] private float _walkSpeed = 0;
-    [SerializeField] private float _turnSpeed = 0;
-    [SerializeField] private float _magnetismSpeedMultiplier = 2;
+    [SerializeField] private GameDesignData _gameDesignData;
 
-    [Header("Energy Consumption")]
-    [SerializeField] private float _replenishAmount = 1f;
-    [SerializeField] private float _consumeAmount = 0.3f;
-    [SerializeField] private float _magnetismConsumptionMultiplier = 1.5f;
-    [SerializeField] private float _magnetismReplenishMultiplier = 2f;
+    // Movement
+    private float _runSpeed;
+    private float _walkSpeed;
+    private float _turnSpeed;
+    private float _magnetismSpeedMultiplier;
+
+    // Energy Settings
+    private float _replenishAmount;
+    private float _consumeAmount;
+    private float _magnetismConsumptionMultiplier;
+    private float _magnetismReplenishMultiplier;
 
     private Rigidbody _rbPlayer;
     private float _horizontal = 0;
@@ -28,7 +30,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake() => Initial();
 
-    private void Initial() => _rbPlayer = GetComponent<Rigidbody>();
+    private void Initial() 
+    {
+        SetReferecnes();
+
+        _rbPlayer = GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate()
     {
@@ -74,5 +81,18 @@ public class PlayerMovement : MonoBehaviour
             EnergyBar.Instance.ReplenishEnergy(_isMagnetized ? _magnetismReplenishMultiplier * _replenishAmount : _replenishAmount);
         }
         PlayerController.Instance.MovingFX(_isMoving);
+    }
+
+    private void SetReferecnes()
+    {
+        _runSpeed = _gameDesignData.characterRunSpeed;
+        _walkSpeed = _gameDesignData.characterWalkSpeed;
+        _turnSpeed = _gameDesignData.characterTurnSpeed;
+        _magnetismSpeedMultiplier = _gameDesignData.magnetismSpeedMultiplier;
+
+        _replenishAmount = _gameDesignData.replenishAmount;
+        _consumeAmount = _gameDesignData.consumeAmount;
+        _magnetismConsumptionMultiplier = _gameDesignData.magnetismConsumptionMultiplier;
+        _magnetismReplenishMultiplier = _gameDesignData.magnetismReplenishMultiplier;
     }
 }

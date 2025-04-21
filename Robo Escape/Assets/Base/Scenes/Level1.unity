@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playableDirector: {fileID: 1154482593}
-  waterLevel: 1
+  waterLevel: 0
   isAlarmActive: 0
 --- !u!1 &131789671
 GameObject:
@@ -3863,12 +3863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupText: {fileID: 323440061}
   textRectTransform: {fileID: 323440060}
-  moveDistance: 100
-  moveDuration: 0.5
-  returnDuration: 0.3
-  displayDuration: 0.2
-  _positiveColor: {r: 1, g: 0.64705884, b: 0, a: 1}
-  _negativeColor: {r: 0.9803922, g: 0.30980393, b: 0, a: 1}
+  _gameDesignData: {fileID: 11400000, guid: 3ab85925d1febac40a7d197bb1ea49c0, type: 2}
 --- !u!1 &574239938
 GameObject:
   m_ObjectHideFlags: 0
@@ -11531,7 +11526,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c8fa1975828e52a4db1d402fd5e0093c, type: 2}
+  - {fileID: 2100000, guid: 632dd32a5192af5438f5bef2b02a6b45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12776,7 +12771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 277304255960636225, guid: 7c7eb30deae09534d9a37caee6b60b8a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.23826511
+      value: -0.286
       objectReference: {fileID: 0}
     - target: {fileID: 277304255960636225, guid: 7c7eb30deae09534d9a37caee6b60b8a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13323,7 +13318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7528825308757234170, guid: 1303fe5f80dea4d4e9ba9ce8ca2057b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.34489214
+      value: -0.084
       objectReference: {fileID: 0}
     - target: {fileID: 7528825308757234170, guid: 1303fe5f80dea4d4e9ba9ce8ca2057b5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13803,7 +13798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 277304255960636225, guid: 7c7eb30deae09534d9a37caee6b60b8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.13870661
+      value: -0.241
       objectReference: {fileID: 0}
     - target: {fileID: 277304255960636225, guid: 7c7eb30deae09534d9a37caee6b60b8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13811,7 +13806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 277304255960636225, guid: 7c7eb30deae09534d9a37caee6b60b8a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.14200827
+      value: 0.202
       objectReference: {fileID: 0}
     - target: {fileID: 277304255960636225, guid: 7c7eb30deae09534d9a37caee6b60b8a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14834,9 +14829,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2538325068525490328, guid: 4be7a99d429a19840a38df28f88a8680, type: 3}
+      propertyPath: _gameDesignData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3ab85925d1febac40a7d197bb1ea49c0, type: 2}
+    - target: {fileID: 2538325068525490328, guid: 4be7a99d429a19840a38df28f88a8680, type: 3}
       propertyPath: _energyBarFillImage
       value: 
       objectReference: {fileID: 1661280713}
+    - target: {fileID: 6441351816663638946, guid: 4be7a99d429a19840a38df28f88a8680, type: 3}
+      propertyPath: _gameDesignData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3ab85925d1febac40a7d197bb1ea49c0, type: 2}
     - target: {fileID: 6441351816663638946, guid: 4be7a99d429a19840a38df28f88a8680, type: 3}
       propertyPath: dynamicJoystick
       value: 
