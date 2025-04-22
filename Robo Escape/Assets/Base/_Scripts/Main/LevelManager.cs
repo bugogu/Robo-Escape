@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
-    public int chipsetCount = 4;
-    [Tooltip("Seconds")] public float _timeLimit = 90f;
+    public LevelDesignData levelData;
+    [HideInInspector] public int chipsetCount;
+    [HideInInspector]
+    [Tooltip("Seconds")] public float _timeLimit;
     private int _collectedChipsetCount = 0;
     private float _passedTime;
     private bool _levelStarted = false;
@@ -11,6 +13,12 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void CollectChipset() => _collectedChipsetCount++;
 
     private bool IsNessaryChipsetCollected() => _collectedChipsetCount >= chipsetCount;
+
+    void Start()
+    {
+        chipsetCount = levelData.chipsetCount;
+        _timeLimit = levelData.timeLimit;
+    }
 
     void OnEnable()
     {

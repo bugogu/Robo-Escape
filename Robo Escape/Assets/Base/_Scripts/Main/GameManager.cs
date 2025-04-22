@@ -6,7 +6,7 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private PlayableDirector _playableDirector;
  
-    public bool waterLevel = false;
+    [HideInInspector] public bool waterLevel;
     public event Action<GameState> OnGameStateChanged;
     public event Action<bool> OnAlarmSetted;
 
@@ -17,6 +17,11 @@ public class GameManager : MonoSingleton<GameManager>
     { 
         get => PlayerPrefs.GetInt("ProtocolCount", 0); 
         set => PlayerPrefs.SetInt("ProtocolCount", value);
+    }
+
+    void Start()
+    {
+        waterLevel = LevelManager.Instance.levelData.waterLevel;
     }
 
     public void ChangeGameState(GameState gameState) 

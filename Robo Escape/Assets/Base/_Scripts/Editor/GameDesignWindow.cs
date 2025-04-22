@@ -7,6 +7,7 @@ public class GameDesignWindow : EditorWindow
     private bool showCharacterMovementSettings = false;
     private bool showCharacterEnergySettings = false;
     private bool showUIPopUpTextSettings = false;
+    private bool showGeneralUISettings = false;
 
     private GUIStyle customFoldoutStyle;
     
@@ -71,6 +72,10 @@ public class GameDesignWindow : EditorWindow
             EditorGUILayout.LabelField("User Interface Settings", EditorStyles.boldLabel);
 
             EditorGUI.indentLevel++; 
+
+            DrawGeneralUISettings();
+
+            EditorGUILayout.Space(5);
 
             DrawEnergyPopTextSettings();
 
@@ -215,8 +220,29 @@ public class GameDesignWindow : EditorWindow
         designData._negativeColor = EditorGUILayout.ColorField(new GUIContent("Negative Color", "Energy Consumption"),designData._negativeColor, GUILayout.Width(205f));
 
         EditorGUI.indentLevel--; 
-    }
+    } 
+  }
     
+    private void DrawGeneralUISettings()
+    {
+        showGeneralUISettings = EditorGUILayout.Foldout(
+        showGeneralUISettings, 
+        "General", 
+        true, 
+        EditorStyles.boldLabel
+        );
+
+        if (showGeneralUISettings)
+        {
+            EditorGUI.indentLevel++; 
+
+        EditorGUILayout.LabelField("Home Button Delay", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.menuLoadDelay = EditorGUILayout.FloatField(designData.menuLoadDelay, EditorStyles.miniTextField);
+
+        EditorGUILayout.Space(5);
+
+    }
     #endregion
   }
 }

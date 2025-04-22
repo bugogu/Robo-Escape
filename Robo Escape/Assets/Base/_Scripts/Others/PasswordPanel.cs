@@ -3,11 +3,17 @@ using UnityEngine;
 
 public class PasswordPanel : MonoBehaviour
 {
-    [SerializeField] private string _password;
     [SerializeField] private TMP_Text _passwordText;
     [SerializeField] private PasswordGate _passwordGate;
 
+    private string _password;
+
     private string _passwordInput ="";
+
+    void Start()
+    {
+        _password = LevelManager.Instance.levelData.password;
+    }
 
     void Update()
     {
@@ -24,6 +30,8 @@ public class PasswordPanel : MonoBehaviour
         }
         else
         {
+            if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
+            
             GameManager.Instance.SetAlarm(true);
             _passwordGate.OpenGate();
             _passwordInput = "";

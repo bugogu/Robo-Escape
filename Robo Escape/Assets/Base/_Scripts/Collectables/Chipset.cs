@@ -11,7 +11,7 @@ public class Chipset : MonoBehaviour, ICollectable
 
     public bool Collect()
     {
-         _player.GetComponent<AudioSource>()?.Play();
+        if(Settings.Instance.Sound == 1) _player.GetComponent<AudioSource>()?.Play();
         LevelManager.Instance.CollectChipset();
         gameObject.SetActive(false);
         return true;

@@ -6,16 +6,20 @@ using TMPro;
 public class MissionDisplay : MonoBehaviour
 {
     [SerializeField] private TMP_Text missionText;
-    [SerializeField] private float typingSpeed = 0.05f; 
-    [SerializeField] private float delayBetweenMissions = 0.5f;
-    [SerializeField] private float closeDelay = 2f; 
-
     [Header("Sound Settings")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip keyboardSound;
 
+    private float _typingSpeed; 
+    private float _delayBetweenMissions;
+    private float _closeDelay; 
+
     private void Start()
     {
+        _typingSpeed = LevelManager.Instance.levelData.typingSpeed;
+        _delayBetweenMissions = LevelManager.Instance.levelData.delayBetweenMissions;
+        _closeDelay = LevelManager.Instance.levelData.closeDelay;
+
         missionText.text = "";
         
         List<string> missions = new List<string>()
@@ -36,10 +40,10 @@ public class MissionDisplay : MonoBehaviour
         {
             string currentMission = "- " + mission + "\n"; 
             yield return StartCoroutine(TypeText(currentMission)); 
-            yield return new WaitForSeconds(delayBetweenMissions); 
+            yield return new WaitForSeconds(_delayBetweenMissions); 
         }
 
-        yield return new WaitForSeconds(closeDelay);
+        yield return new WaitForSeconds(_closeDelay);
         missionText.transform.parent.gameObject.SetActive(false);
     }
 
@@ -52,7 +56,7 @@ public class MissionDisplay : MonoBehaviour
             if (letter != ' ' && letter != '\n' && audioSource != null && keyboardSound != null)
                 audioSource.PlayOneShot(keyboardSound); 
                 
-            yield return new WaitForSeconds(typingSpeed); 
+            yield return new WaitForSeconds(_typingSpeed); 
         }
     }
 }

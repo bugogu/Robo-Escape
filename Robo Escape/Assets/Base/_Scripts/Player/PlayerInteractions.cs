@@ -22,7 +22,11 @@ public class PlayerInteractions : MonoBehaviour
             fxPlay.Play();
         }
 
-        if(other.CompareTag(Consts.Tags.MAGNETIC_AREA)) _playerMovement._isMagnetized = true;
+        if(other.CompareTag(Consts.Tags.MAGNETIC_AREA))
+        {
+            if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
+            _playerMovement._isMagnetized = true;
+        } 
 
         if (other.TryGetComponent(out IInteractable interactable))
         {

@@ -5,9 +5,10 @@ using UnityEngine.UI;
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoSingleton<UIManager>
 {
-    [Header("Home Button")]
+    [SerializeField] private GameDesignData _gameDesignData;
+
+    [Header("Home Canvas")]
     [SerializeField] private Button _homeButton;
-    [SerializeField] private float _loadDelay = 1f;
     [SerializeField] private TMPro.TMP_Text _levelText;
     [SerializeField] private CanvasGroup _alarmImage;
     [SerializeField] private GameObject _waterCanvas;
@@ -16,9 +17,12 @@ public class UIManager : MonoSingleton<UIManager>
     [Tooltip("These element are goint to open when cutscene is finished")] 
     [SerializeField] private GameObject[] _uiElements;
 
+    private float _loadDelay;
+
     void Start()
     {
         _levelText.text = "Lab-" + PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1);
+        _loadDelay = _gameDesignData.menuLoadDelay;
     }
 
     void OnEnable()

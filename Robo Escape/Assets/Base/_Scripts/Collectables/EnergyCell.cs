@@ -13,7 +13,8 @@ public class EnergyCell : MonoBehaviour, ICollectable
 
     public bool Collect()
     {
-        _player.GetComponent<AudioSource>()?.Play();
+        if(Settings.Instance.Sound == 1) _player.GetComponent<AudioSource>()?.Play();
+        
         EnergyBar.Instance.ReplenishEnergy(_replenishAmount , true);
         gameObject.SetActive(false);
         return true;

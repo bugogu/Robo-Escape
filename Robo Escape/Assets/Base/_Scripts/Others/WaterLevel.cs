@@ -4,14 +4,15 @@ using UnityEngine;
 public class WaterLevel : MonoBehaviour
 {
     [SerializeField] private Image _waterFill;
-    [Tooltip("Seconds")][SerializeField] private float _timeToFill;
 
+    private float _timeToFill;
     private float _currentFillAmount = 0f;
     private bool _canFill;
 
     void Awake()
     {
         _canFill = GameManager.Instance.waterLevel;
+        _timeToFill = LevelManager.Instance.levelData.waterFillTime;
     }
 
     void Update()

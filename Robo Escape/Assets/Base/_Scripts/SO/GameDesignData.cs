@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameDesignData", menuName = "Game/Design Data")]
+[CreateAssetMenu(fileName = "GameDesignData", menuName = "Scriptable Objects/Game Design Data")]
 public class GameDesignData : ScriptableObject
 {
     [Header("Character Movement Settings")]
@@ -22,6 +22,9 @@ public class GameDesignData : ScriptableObject
     public float returnDuration = 0.3f;
     public float displayDuration = 0.2f;
     public Color _positiveColor, _negativeColor;
+
+    [Header("UI General")]
+    public float menuLoadDelay = 0.1f;
 
 
 

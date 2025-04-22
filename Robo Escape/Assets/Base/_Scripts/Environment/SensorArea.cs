@@ -14,7 +14,8 @@ public class SensorArea : MonoBehaviour
     {
         if(other.CompareTag(Consts.Tags.PLAYER))
         {
-             SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
+            SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
              
             foreach (var sensor in allSensors)
             {
