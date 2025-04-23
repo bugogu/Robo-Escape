@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,8 +9,9 @@ public class GameDesignWindow : EditorWindow
     private bool showCharacterEnergySettings = false;
     private bool showUIPopUpTextSettings = false;
     private bool showGeneralUISettings = false;
+    private bool showPowerUpSettings = false;
 
-    private GUIStyle customFoldoutStyle;
+    private Vector2 scrollPosition;
     
     [MenuItem("Design/Game Design Window")]
     public static void ShowWindow()
@@ -20,20 +22,18 @@ public class GameDesignWindow : EditorWindow
     private void OnEnable()
     {
         designData = Resources.Load<GameDesignData>("GameDesignData");
-
-        customFoldoutStyle = new GUIStyle(EditorStyles.foldoutHeader)
-    {
-        normal = { background = null }, // Arka planı kaldır
-        margin = new RectOffset(15, 0, 0, 0)
-    };
     }
 
     private void OnGUI()
     {
          if (designData == null) return;
 
-        DrawPlayerSettingsContainer();
-        DrawUISettingsContainer();
+         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+         {
+             DrawPlayerSettingsContainer();
+             DrawUISettingsContainer();
+         }
+         EditorGUILayout.EndScrollView();
         
         if (GUILayout.Button("Save"))
         {
@@ -60,11 +60,16 @@ public class GameDesignWindow : EditorWindow
 
             EditorGUILayout.Space(5);
 
+            DrawCharacterPowerUpSettings();
+
+            EditorGUILayout.Space(5);
+
             EditorGUI.indentLevel--; 
         }
         
         EditorGUILayout.EndVertical(); 
     }
+
     private void DrawUISettingsContainer()
     {
         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
@@ -239,10 +244,34 @@ public class GameDesignWindow : EditorWindow
         EditorGUILayout.LabelField("Home Button Delay", EditorStyles.label);
         EditorGUILayout.Space(2);
         designData.menuLoadDelay = EditorGUILayout.FloatField(designData.menuLoadDelay, EditorStyles.miniTextField);
+        }
+    }
+
+    private void DrawCharacterPowerUpSettings()
+    {
+        showPowerUpSettings = EditorGUILayout.Foldout(
+        showPowerUpSettings, 
+        "Power Ups", 
+        true, 
+        EditorStyles.boldLabel
+        );
+
+        if (showPowerUpSettings)
+        {
+            EditorGUI.indentLevel++; 
+
+        EditorGUILayout.LabelField("Flash Speed Multiplier", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.flashSpeedMultiplier = EditorGUILayout.FloatField(designData.flashSpeedMultiplier, EditorStyles.miniTextField);
+
+        EditorGUILayout.LabelField("Flash Power Up Duration", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.flashPowerUpDuration = EditorGUILayout.FloatField(designData.flashPowerUpDuration, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
-
     }
+
     #endregion
+  
   }
 }

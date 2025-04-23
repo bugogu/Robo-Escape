@@ -12,18 +12,24 @@ public class SensorArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(Consts.Tags.PLAYER))
+        
+        if(!PlayerController.Instance._isProtectionActive)
         {
-            if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
-            SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-             
-            foreach (var sensor in allSensors)
+            if(other.CompareTag(Consts.Tags.PLAYER))
             {
-                sensor.SetTriggeredColor();
-            }
+                if(GameManager.Instance.isAlarmActive) return;
+                
+                if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
+                SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-            GameManager.Instance.SetAlarm(true);
+                foreach (var sensor in allSensors)
+                {
+                    sensor.SetTriggeredColor();
+                }
+            }
         }
+
+        GameManager.Instance.SetAlarm(true);
     }
 
     public void SetTriggeredColor()

@@ -297,6 +297,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2037589370747821460, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
+      propertyPath: m_Color.a
+      value: 0.70980394
+      objectReference: {fileID: 0}
     - target: {fileID: 3231658342266463301, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1

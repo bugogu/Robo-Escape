@@ -24,10 +24,20 @@ public class PlayerInteractions : MonoBehaviour
 
         if(other.CompareTag(Consts.Tags.MAGNETIC_AREA))
         {
+            if(_playerController.GetFlashStatus()) return;
+
             if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
             _playerMovement._isMagnetized = true;
         } 
 
+        if(other.CompareTag(Consts.Tags.ELEVATOR))
+        {
+            GameManager.Instance.ChangeGameState(GameState.Win);
+            other.GetComponent<Animator>().SetTrigger(Consts.AnimationParameters.CLOSEELEVATOR);
+            GetComponent<Animator>().enabled = false;
+            _playerMovement.StopMovement();
+        }
+           
         if (other.TryGetComponent(out IInteractable interactable))
         {
             _currentInteractable = interactable;

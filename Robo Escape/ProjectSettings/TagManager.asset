@@ -7,6 +7,7 @@ TagManager:
   - Folder
   - Music
   - MagneticArea
+  - Elevator
   layers:
   - Default
   - TransparentFX

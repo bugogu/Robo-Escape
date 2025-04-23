@@ -32,7 +32,7 @@ public class PasswordPanel : MonoBehaviour
         {
             if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
             
-            GameManager.Instance.SetAlarm(true);
+            GameManager.Instance.SetAlarm(true, true);
             _passwordGate.OpenGate();
             _passwordInput = "";
             GameManager.Instance.ChangeGameState(GameState.Play);

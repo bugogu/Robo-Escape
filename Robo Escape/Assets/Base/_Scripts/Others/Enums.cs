@@ -5,3 +5,10 @@ public enum InteractionType
         BlueBox,
         PurpleBox
 }
+
+public enum PowerUpType
+{
+        Shield,
+        Flash,
+        MagneticPulse
+}

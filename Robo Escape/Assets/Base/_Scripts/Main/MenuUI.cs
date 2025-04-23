@@ -5,16 +5,21 @@ using UnityEngine.UI;
 public class MenuUI : MonoSingleton<MenuUI>
 {
     [SerializeField] private TMPro.TMP_Text _levelText;
+    [SerializeField] private TMPro.TMP_Text _protocolText;
     [SerializeField] private Button _playButton;
+    [SerializeField] private GameObject _escapeButton;
 
     void Start()
     {
        _levelText.text = "Lab-" + PlayerPrefs.GetInt("Level", 1);  
+       _protocolText.text = $"{PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0)}";
+
        _playButton.onClick.AddListener(PlayButton);
     }
 
     private void PlayButton() 
     {
+        _escapeButton.SetActive(false);
         TransitionManager.Instance.PlayTransition(1f);
         Invoke(nameof(LoadLevel), 0.3f);
         

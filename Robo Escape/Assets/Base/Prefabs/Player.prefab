@@ -1067,10 +1067,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &9139394289425951439
 MonoBehaviour:
@@ -1084,14 +1084,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446790e591de92241924727ef0dd8579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isProtectionActive: 0
+  _hasAnyPowerUp: 0
   _energyCellFX: {fileID: 763194543647536747}
   _drainCellFX: {fileID: 2185556094797044515}
   _redHackFX: {fileID: 9113792371452118293}
   _blueHackFX: {fileID: 7778901787336143931}
   _yellowHackFX: {fileID: 6125571659817524391}
   _purpleHackFX: {fileID: 5364692739963873708}
+  _gameDesignData: {fileID: 11400000, guid: 3ab85925d1febac40a7d197bb1ea49c0, type: 2}
+  _shieldDuration: 10
   _playerMovingFX: {fileID: 3100331665748500590}
   _passwordCanvas: {fileID: 0}
+  _antiAlarmShieldFX: {fileID: 8944220589902098210}
+  _flashTrailFX: {fileID: 3847020329363925611}
 --- !u!114 &3850190000082187709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1120,14 +1126,7 @@ MonoBehaviour:
   _isMagnetized: 0
   dynamicJoystick: {fileID: 0}
   _animator: {fileID: 4543599822464761607}
-  _runSpeed: 750
-  _walkSpeed: 500
-  _turnSpeed: 10
-  _magnetismSpeedMultiplier: 2
-  _replenishAmount: 0.5
-  _consumeAmount: 0.4
-  _magnetismConsumptionMultiplier: 1.5
-  _magnetismReplenishMultiplier: 2
+  _gameDesignData: {fileID: 11400000, guid: 3ab85925d1febac40a7d197bb1ea49c0, type: 2}
 --- !u!114 &2538325068525490328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,7 +1139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342e16b31e78fdc48be3400ad01b7e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxEnergyCapacity: 150
+  _maxEnergyCapacity: 0
+  _gameDesignData: {fileID: 11400000, guid: 3ab85925d1febac40a7d197bb1ea49c0, type: 2}
   _energyBarFillImage: {fileID: 0}
 --- !u!95 &4543599822464761607
 Animator:
@@ -1906,6 +1906,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MagneticPulseAura
       objectReference: {fileID: 0}
+    - target: {fileID: 1911589577765208344, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9006556849210545193, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2051,9 +2055,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8667958270397761752}
     m_Modifications:
+    - target: {fileID: 2451653152160812965, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451653152160812965, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451653152160812965, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834536046668260444, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834536046668260444, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073172731675797501, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073172731675797501, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6220538677450057406, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
       propertyPath: m_Name
       value: AntiAlarmShield
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220538677450057406, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980890079255368993, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980890079255368993, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8535484265428289062, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2103,6 +2147,11 @@ PrefabInstance:
 --- !u!4 &2905495789944989345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8535484265428289062, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
+  m_PrefabInstance: {fileID: 6784185417875480711}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8944220589902098210 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2451653152160812965, guid: 8a2d2f42299825848b7ff17c2461faf3, type: 3}
   m_PrefabInstance: {fileID: 6784185417875480711}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8214675061285839285
@@ -2166,6 +2215,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a40662ab446f8284fbec994f3e171ed3, type: 3}
+--- !u!1 &3847020329363925611 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5144025475827534814, guid: a40662ab446f8284fbec994f3e171ed3, type: 3}
+  m_PrefabInstance: {fileID: 8214675061285839285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5210879252523230913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4202034802404771700, guid: a40662ab446f8284fbec994f3e171ed3, type: 3}

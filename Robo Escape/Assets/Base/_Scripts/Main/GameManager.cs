@@ -15,8 +15,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public int ProtocolCount 
     { 
-        get => PlayerPrefs.GetInt("ProtocolCount", 0); 
-        set => PlayerPrefs.SetInt("ProtocolCount", value);
+        get => PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0); 
+        set => PlayerPrefs.SetInt(Consts.Prefs.PROTOCOLCOUNT, value);
     }
 
     void Start()
@@ -46,8 +46,21 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void SetAlarm(bool status)
     {
+        if(PlayerController.Instance._isProtectionActive)
+        {
+            PlayerController.Instance.RemoveProtection();
+            return;
+        }
+
         OnAlarmSetted?.Invoke(status);
         isAlarmActive = status;
     }
-    
+
+    public void SetAlarm(bool status, bool passwordTriggered = false)
+    {
+        if(!passwordTriggered) return;
+        
+        OnAlarmSetted?.Invoke(status);
+        isAlarmActive = status;
+    }
 }

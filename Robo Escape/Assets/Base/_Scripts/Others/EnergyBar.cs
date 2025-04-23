@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class EnergyBar : MonoSingleton<EnergyBar>
 {
+    [HideInInspector] public float _maxEnergyCapacity;
+
     [SerializeField] private GameDesignData _gameDesignData;
     [SerializeField] private Image _energyBarFillImage;
-
-    private float _maxEnergyCapacity;
 
     void Awake()
     {

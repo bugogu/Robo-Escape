@@ -3,18 +3,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameDesignData", menuName = "Scriptable Objects/Game Design Data")]
 public class GameDesignData : ScriptableObject
 {
-    [Header("Character Movement Settings")]
+    [Header("Player Movement Settings")]
     public float characterRunSpeed;
     public float characterWalkSpeed;
     public float characterTurnSpeed;
     public float magnetismSpeedMultiplier = 2f; 
 
-    [Header("Character Energy Consumption Settings")]
+    [Header("Player Energy Consumption Settings")]
     public float replenishAmount = 1f;
     public float consumeAmount = 0.3f;
     public float magnetismConsumptionMultiplier = 1.5f;
     public float magnetismReplenishMultiplier = 2f;
     public float maxEnergyCapacity = 150f;
+
+    [Header("Player Power Ups Settings")]
+    public float flashSpeedMultiplier = 2f;
+    public float flashPowerUpDuration = 10f;
 
     [Header("Energy PopUp Text")]
     public float moveDistance = 100f;

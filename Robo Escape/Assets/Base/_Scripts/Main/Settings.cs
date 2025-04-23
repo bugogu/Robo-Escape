@@ -32,6 +32,8 @@ public class Settings : MonoSingleton<Settings>
     {
         _settingsButton.onClick.RemoveAllListeners();
         _settingsButton.onClick.AddListener(SettingsPanel);
+
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void SettingsPanel()

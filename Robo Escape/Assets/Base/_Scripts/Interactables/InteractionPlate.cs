@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class InteractionPlate : MonoBehaviour, IInteractable
 {
+    public bool isPowerUpPlate = false;
+
     [SerializeField] private UnityEngine.Events.UnityEvent _action;
     [Space(10)]
     [SerializeField] private bool _visualCanHide = false;
@@ -30,18 +32,21 @@ public class InteractionPlate : MonoBehaviour, IInteractable
 
     public void OnInteractionStay(float duration)
     {
-        if(_isInteractionComplete) return;
+        if(isPowerUpPlate)
+            if(PlayerController.Instance._hasAnyPowerUp) return;
 
-        _plateFillImage.fillAmount = Mathf.Clamp01(duration / Mathf.Max(0.001f, _interactionDuration));
+            if(_isInteractionComplete) return;
 
-         if (duration >= _interactionDuration) 
-        {
-            FindAnyObjectByType<PlayerController>().HackFxActive(_interactionType, false);
-            _action.RemoveAllListeners();
-            _action?.Invoke();
-            gameObject.SetActive(false);
-            _isInteractionComplete = true;
-        }
+            _plateFillImage.fillAmount = Mathf.Clamp01(duration / Mathf.Max(0.001f, _interactionDuration));
+
+             if (duration >= _interactionDuration) 
+            {
+                FindAnyObjectByType<PlayerController>().HackFxActive(_interactionType, false);
+                _action.RemoveAllListeners();
+                _action?.Invoke();
+                gameObject.SetActive(false);
+                _isInteractionComplete = true;
+            }
     }
 
     public void OnInteractionExit()

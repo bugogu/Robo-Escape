@@ -16,14 +16,17 @@ MonoBehaviour:
   characterWalkSpeed: 400
   characterTurnSpeed: 10
   magnetismSpeedMultiplier: 2
-  replenishAmount: 1
+  replenishAmount: 0.7
   consumeAmount: 0.3
   magnetismConsumptionMultiplier: 1.5
   magnetismReplenishMultiplier: 2
   maxEnergyCapacity: 150
+  flashSpeedMultiplier: 2
+  flashPowerUpDuration: 10
   moveDistance: 100
   moveDuration: 0.5
   returnDuration: 0.3
   displayDuration: 0.2
-  _positiveColor: {r: 1, g: 0.64705884, b: 0, a: 0}
-  _negativeColor: {r: 0.9921569, g: 0.32941177, b: 0, a: 0}
+  _positiveColor: {r: 1, g: 0.64705884, b: 0, a: 1}
+  _negativeColor: {r: 0.9921569, g: 0.32941177, b: 0, a: 1}
+  menuLoadDelay: 0.1

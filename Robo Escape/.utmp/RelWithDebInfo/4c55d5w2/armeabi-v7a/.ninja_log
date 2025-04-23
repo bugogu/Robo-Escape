@@ -1,0 +1,10 @@
+# ninja log v5
+1	1708	7670262507190350	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	e28e43c6bb64fd29
+42	1787	7670262507453788	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	507ddd9b2f57a922
+32	1789	7670262507661427	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	cd88f06ea8886e7f
+88	1962	7670262509714568	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	e03b946923f78d3e
+9	2004	7670262510013934	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	5073e7e3162e13aa
+56	2005	7670262510023935	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	d5481407b9a6c4ff
+25	2280	7670262512976298	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	8e94eb03f690f862
+17	2507	7670262515261119	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	63454247c80300ae
+2508	2642	7670262516762205	C:/HAN/Projects/Robo-Escape/Robo Escape/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4c55d5w2/obj/armeabi-v7a/libgame.so	1922f3af5a98621d

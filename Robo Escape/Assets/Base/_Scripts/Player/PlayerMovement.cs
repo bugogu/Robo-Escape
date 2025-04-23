@@ -24,9 +24,14 @@ public class PlayerMovement : MonoBehaviour
     private float _magnetismConsumptionMultiplier;
     private float _magnetismReplenishMultiplier;
 
+    private float _flashSpeedMultiplier;
+    private float _initialRunSpeed;
+    private float _initialWalkSpeed;
+
     private Rigidbody _rbPlayer;
     private float _horizontal = 0;
     private float _vertical = 0;
+    private PlayerController _playerController;
 
     private void Awake() => Initial();
 
@@ -35,6 +40,12 @@ public class PlayerMovement : MonoBehaviour
         SetReferecnes();
 
         _rbPlayer = GetComponent<Rigidbody>();
+        _playerController = GetComponent<PlayerController>();
+
+        _flashSpeedMultiplier = _gameDesignData.flashSpeedMultiplier;
+
+        _initialRunSpeed = _runSpeed;
+        _initialWalkSpeed = _walkSpeed;
     }
 
     private void FixedUpdate()
@@ -71,13 +82,14 @@ public class PlayerMovement : MonoBehaviour
         {
             JoystickMovement();
             _isMoving = true;
+
+            if(!_playerController.GetFlashStatus())
             EnergyBar.Instance.ConsumeEnergy(_isMagnetized ? _magnetismConsumptionMultiplier * _consumeAmount : _consumeAmount);
         }
         else
         {
             _animator.SetBool(Consts.PlayerAnimations.WALKING, false);
-            _rbPlayer.linearVelocity = Vector3.zero;
-            _isMoving = false;
+            StopMovement();
             EnergyBar.Instance.ReplenishEnergy(_isMagnetized ? _magnetismReplenishMultiplier * _replenishAmount : _replenishAmount);
         }
         PlayerController.Instance.MovingFX(_isMoving);
@@ -94,5 +106,26 @@ public class PlayerMovement : MonoBehaviour
         _consumeAmount = _gameDesignData.consumeAmount;
         _magnetismConsumptionMultiplier = _gameDesignData.magnetismConsumptionMultiplier;
         _magnetismReplenishMultiplier = _gameDesignData.magnetismReplenishMultiplier;
+    }
+
+    public void SetSpeed(bool isFlashed)
+    {
+        if(isFlashed)
+        {
+            _runSpeed *= _flashSpeedMultiplier;
+            _walkSpeed *= _flashSpeedMultiplier;
+        } 
+
+        else
+        {
+            _walkSpeed = _initialWalkSpeed;
+            _runSpeed = _initialRunSpeed;
+        } 
+    }
+
+    public void StopMovement()
+    {
+        _rbPlayer.linearVelocity = Vector3.zero;
+        _isMoving = false;
     }
 }

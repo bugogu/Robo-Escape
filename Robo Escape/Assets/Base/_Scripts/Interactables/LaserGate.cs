@@ -67,12 +67,22 @@ public class LaserGate : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(!other.CompareTag(Consts.Tags.PLAYER)) return;
+        if(!PlayerController.Instance._isProtectionActive)
+        {
+            if(!other.CompareTag(Consts.Tags.PLAYER)) return;
 
-        if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
+            if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
+
+            EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount, true); 
+
+            SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+            foreach (var sensor in allSensors)
+            {
+                sensor.SetTriggeredColor();
+            }
+        }
 
         GameManager.Instance.SetAlarm(true);
-
-        EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount, true); 
     }
 }
