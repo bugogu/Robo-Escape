@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b0e80944f73c4459282fc4bfbfcd92, type: 3}
   m_Name: Lab1
   m_EditorClassIdentifier: 
-  chipsetCount: 3
-  timeLimit: 90
+  chipsetCount: 0
+  timeLimit: 0
   waterLevel: 0
   waterFillTime: 60
   password: 4283
-  typingSpeed: 0.035
+  typingSpeed: 0.032
   delayBetweenMissions: 0.1
   closeDelay: 2

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1975144200799327207}
   - component: {fileID: 2576226899116878597}
   - component: {fileID: 5614053151708242921}
+  - component: {fileID: 6054535632614610175}
   m_Layer: 0
   m_Name: PowerBox
   m_TagString: Untagged
@@ -99,6 +100,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a741008b56980149b8f5f6bbfb0da44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6054535632614610175
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8493257608452882445}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5506027, y: 0.34357297, z: 0.4129118}
+  m_Center: {x: -0.00000046227063, y: 0.17280692, z: 0.000000047234003}
 --- !u!1001 &3297884032150504644
 PrefabInstance:
   m_ObjectHideFlags: 0

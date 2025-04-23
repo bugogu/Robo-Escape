@@ -31,6 +31,10 @@ namespace MaskTransitions
 
         private void Awake()
         {
+            Application.targetFrameRate = 30;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            QualitySettings.vSyncCount = 0;
+
             if (Instance == null)
                 Instance = this;
             else
