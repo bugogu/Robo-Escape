@@ -21,7 +21,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     void Start()
     {
-        _levelText.text = "Lab-" + PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1);
+        _levelText.text = PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1 ? "Test-Lab" : "Lab-" + PlayerPrefs.GetInt(Consts.Prefs.LEVEL);
         _loadDelay = _gameDesignData.menuLoadDelay;
     }
 

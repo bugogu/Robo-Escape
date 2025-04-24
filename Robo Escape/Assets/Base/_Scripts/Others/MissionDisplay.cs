@@ -14,8 +14,12 @@ public class MissionDisplay : MonoBehaviour
     private float _delayBetweenMissions;
     private float _closeDelay; 
 
+
     private void Start()
     {
+        if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
+            gameObject.SetActive(false);
+
         _typingSpeed = LevelManager.Instance.levelData.typingSpeed;
         _delayBetweenMissions = LevelManager.Instance.levelData.delayBetweenMissions;
         _closeDelay = LevelManager.Instance.levelData.closeDelay;

@@ -17,6 +17,6 @@ MonoBehaviour:
   waterLevel: 0
   waterFillTime: 60
   password: 4283
-  typingSpeed: 0.032
+  typingSpeed: 0.03
   delayBetweenMissions: 0.1
   closeDelay: 2
