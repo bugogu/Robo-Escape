@@ -508,7 +508,7 @@ RectTransform:
   m_AnchorMin: {x: 0.8873704, y: 0.7511368}
   m_AnchorMax: {x: 0.8873704, y: 0.7511368}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 128, y: 128}
+  m_SizeDelta: {x: 109.1843, y: 109.1843}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &430298932
 MonoBehaviour:
@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -2293,7 +2293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingsButton: {fileID: 430298934}
   _settingsPanel: {fileID: 484940941}
-  _openingTime: 1
+  _openingTime: 0.3
 --- !u!1 &1801832978
 GameObject:
   m_ObjectHideFlags: 0
@@ -3324,7 +3324,7 @@ MonoBehaviour:
   m_Texture: {fileID: 2800000, guid: df6bc8d764a9bc148a29bdb4c9892244, type: 3}
   m_UVRect:
     serializedVersion: 2
-    x: 0
+    x: 0.04
     y: 0
     width: 1
     height: 1

@@ -335,8 +335,100 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1910830246110256577, guid: 3492d4745d85b3a49996e364543f6bb5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 529997325}
+    - targetCorrespondingSourceObject: {fileID: 6350805121104593007, guid: 3492d4745d85b3a49996e364543f6bb5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 529997324}
+    - targetCorrespondingSourceObject: {fileID: 8414858426371814213, guid: 3492d4745d85b3a49996e364543f6bb5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 529997323}
+    - targetCorrespondingSourceObject: {fileID: 5899807680386129165, guid: 3492d4745d85b3a49996e364543f6bb5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 529997322}
   m_SourcePrefab: {fileID: 100100000, guid: 3492d4745d85b3a49996e364543f6bb5, type: 3}
+--- !u!1 &529997318 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5899807680386129165, guid: 3492d4745d85b3a49996e364543f6bb5, type: 3}
+  m_PrefabInstance: {fileID: 529997317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &529997319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8414858426371814213, guid: 3492d4745d85b3a49996e364543f6bb5, type: 3}
+  m_PrefabInstance: {fileID: 529997317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &529997320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6350805121104593007, guid: 3492d4745d85b3a49996e364543f6bb5, type: 3}
+  m_PrefabInstance: {fileID: 529997317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &529997321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1910830246110256577, guid: 3492d4745d85b3a49996e364543f6bb5, type: 3}
+  m_PrefabInstance: {fileID: 529997317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &529997322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529997318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &529997323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529997319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &529997324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529997320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &529997325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529997321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &710626754
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +467,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.36862746, g: 0.06666667, b: 0.7058824, a: 0}
+  m_BackGroundColor: {r: 0.78823537, g: 0.5019608, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

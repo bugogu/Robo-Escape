@@ -32,6 +32,10 @@ public class PasswordPanel : MonoBehaviour
         {
             if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
             
+            SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var sensor in allSensors)
+                sensor.SetTriggeredColor();
+                
             GameManager.Instance.SetAlarm(true, true);
             _passwordGate.OpenGate();
             _passwordInput = "";

@@ -78,9 +78,7 @@ public class LaserGate : MonoBehaviour
             SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
             foreach (var sensor in allSensors)
-            {
                 sensor.SetTriggeredColor();
-            }
         }
 
         GameManager.Instance.SetAlarm(true);
