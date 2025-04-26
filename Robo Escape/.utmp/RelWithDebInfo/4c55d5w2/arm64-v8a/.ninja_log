@@ -1,19 +1,19 @@
 # ninja log v5
-29	890	7672984342598162	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	15929ac8538368fc
-23	892	7672984343173950	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	42d9fe8a727e5e30
-55	954	7672984343819711	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	c5d1620ffe4b692a
-8	891	7672984342774707	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	4f3742b66aacb914
-45	953	7672984343334449	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	dc642ce848e77120
-2	987	7672984344088920	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	e184bc193fde83ce
-37	1089	7672984345149347	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b18ded25ce8c6f66
-15	1181	7672984346076251	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	8c7b9e361bbcd146
-1181	1283	7672984347117641	C:/HAN/Projects/Robo-Escape/Robo Escape/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4c55d5w2/obj/arm64-v8a/libgame.so	4eda9371b5895389
-41	2138	7673078554408351	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	15929ac8538368fc
-14	2173	7673078554514615	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	42d9fe8a727e5e30
-47	2184	7673078554875298	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	dc642ce848e77120
-24	2303	7673078555455175	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	4f3742b66aacb914
-52	2303	7673078555298487	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	c5d1620ffe4b692a
-19	2304	7673078555712425	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	e184bc193fde83ce
-35	2379	7673078556841091	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b18ded25ce8c6f66
-2	2453	7673078557582934	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	8c7b9e361bbcd146
-2453	2628	7673078559386577	C:/HAN/Projects/Robo-Escape/Robo Escape/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4c55d5w2/obj/arm64-v8a/libgame.so	4eda9371b5895389
+17	581	7673489181716675	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	15929ac8538368fc
+31	700	7673489182930882	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	c5d1620ffe4b692a
+14	664	7673489182612390	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	42d9fe8a727e5e30
+6	617	7673489182074894	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	4f3742b66aacb914
+10	756	7673489183508304	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	e184bc193fde83ce
+27	688	7673489182807355	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	dc642ce848e77120
+22	866	7673489184650990	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b18ded25ce8c6f66
+1	929	7673489185271856	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	8c7b9e361bbcd146
+929	1017	7673489186143396	C:/HAN/Projects/Robo-Escape/Robo Escape/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4c55d5w2/obj/arm64-v8a/libgame.so	4eda9371b5895389
+46	931	7673512580110632	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	15929ac8538368fc
+16	967	7673512580534553	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	42d9fe8a727e5e30
+10	984	7673512580683250	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	4f3742b66aacb914
+30	1029	7673512581213625	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	dc642ce848e77120
+53	1058	7673512581476696	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	c5d1620ffe4b692a
+23	1079	7673512581695897	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	e184bc193fde83ce
+38	1204	7673512582968307	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b18ded25ce8c6f66
+3	1284	7673512583763657	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	8c7b9e361bbcd146
+1284	1368	7673512584659208	C:/HAN/Projects/Robo-Escape/Robo Escape/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4c55d5w2/obj/arm64-v8a/libgame.so	4eda9371b5895389

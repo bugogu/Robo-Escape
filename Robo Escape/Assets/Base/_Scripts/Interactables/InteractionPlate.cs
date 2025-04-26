@@ -4,6 +4,7 @@ using UnityEngine;
 public class InteractionPlate : MonoBehaviour, IInteractable
 {
     public bool isPowerUpPlate = false;
+    public bool oneTimeUseable = true;
 
     [SerializeField] private UnityEngine.Events.UnityEvent _action;
     [Space(10)]
@@ -44,8 +45,12 @@ public class InteractionPlate : MonoBehaviour, IInteractable
                 FindAnyObjectByType<PlayerController>().HackFxActive(_interactionType, false);
                 _action.RemoveAllListeners();
                 _action?.Invoke();
-                gameObject.SetActive(false);
-                _isInteractionComplete = true;
+
+                if(oneTimeUseable)
+                {
+                    gameObject.SetActive(false);
+                    _isInteractionComplete = true;  
+                }
             }
     }
 
