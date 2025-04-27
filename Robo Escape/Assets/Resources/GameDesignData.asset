@@ -16,7 +16,7 @@ MonoBehaviour:
   characterWalkSpeed: 500
   characterTurnSpeed: 10
   magnetismSpeedMultiplier: 2
-  replenishAmount: 0.7
+  replenishAmount: 0.6
   consumeAmount: 0.3
   magnetismConsumptionMultiplier: 1.5
   magnetismReplenishMultiplier: 2

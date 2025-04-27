@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6889688796742574202}
   - component: {fileID: 1975144200799327207}
   - component: {fileID: 2576226899116878597}
-  - component: {fileID: 1349332730738392303}
   - component: {fileID: 6895020684388206387}
+  - component: {fileID: 1042753130814025371}
   m_Layer: 0
   m_Name: PowerBox
   m_TagString: Untagged
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8493257608452882445}
-  m_Mesh: {fileID: -3907431257814167731, guid: 86b75d06a8e78ee43a4e32ff3a3a7c67, type: 3}
+  m_Mesh: {fileID: 1112115847375050598, guid: e8df03bcfb938054dbf2a8b131ee9f1c, type: 3}
 --- !u!23 &2576226899116878597
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 60b9bcbe267df694eacae156f8da36d0, type: 2}
+  - {fileID: 2100000, guid: 2cf7461221bc34e4abe76574fda8f92f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,18 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1349332730738392303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8493257608452882445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cceaed610187de41b2f46b78ccaf91f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &6895020684388206387
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -121,6 +109,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.537546, y: 0.31516492, z: 0.42999855}
   m_Center: {x: 0.000000013366125, y: 0.15856619, z: -0.00000089543164}
+--- !u!114 &1042753130814025371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8493257608452882445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b410ca7154c4654c8608f6354796ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3297884032150504644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4338995656917058521, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_Name
-      value: InteractionPlateOrangeBox
+      value: InteractionPlatePurpleBox
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_Pivot.x
@@ -187,27 +187,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 287.81
+      value: 317.28
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6532815
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.6532815
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.27059805
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.27059805
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -9.9
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -223,7 +223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: isPowerUpPlate
@@ -248,18 +248,18 @@ PrefabInstance:
     - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: _action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1349332730738392303}
+      objectReference: {fileID: 1042753130814025371}
     - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: _action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: _action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ActivateFlash
+      value: ActivateMagneticCharge
       objectReference: {fileID: 0}
     - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: _action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Flash, Assembly-CSharp
+      value: MagneticPulse, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: _action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -291,15 +291,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9018207243594023050, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.94117653
       objectReference: {fileID: 0}
     - target: {fileID: 9018207243594023050, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_Color.g
-      value: 0.5254902
+      value: 0.13333334
       objectReference: {fileID: 0}
     - target: {fileID: 9018207243594023050, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.627451
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

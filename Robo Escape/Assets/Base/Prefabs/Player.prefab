@@ -1086,6 +1086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isProtectionActive: 0
   _hasAnyPowerUp: 0
+  _hasMagneticCharge: 0
   _energyCellFX: {fileID: 763194543647536747}
   _drainCellFX: {fileID: 2185556094797044515}
   _redHackFX: {fileID: 9113792371452118293}
@@ -1098,6 +1099,9 @@ MonoBehaviour:
   _passwordCanvas: {fileID: 0}
   _antiAlarmShieldFX: {fileID: 8944220589902098210}
   _flashTrailFX: {fileID: 3847020329363925611}
+  _magneticPulseFX: {fileID: 6817188361474785724}
+  _magneticPulseRadiusSprite: {fileID: 0}
+  _magneticPulseRadius: 12
 --- !u!114 &3850190000082187709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,8 +1187,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.2, z: 0.58}
-  m_Center: {x: 0, y: 1.08, z: -0.04}
+  m_Size: {x: 1, y: 2.304197, z: 0.58}
+  m_Center: {x: 0, y: 1.1300544, z: -0.040000007}
 --- !u!82 &7043515621821192649
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1958,6 +1962,11 @@ PrefabInstance:
 --- !u!4 &4098671045281010829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9006556849210545193, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
+  m_PrefabInstance: {fileID: 4908026554877542564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6817188361474785724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1911589577765208344, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
   m_PrefabInstance: {fileID: 4908026554877542564}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5135785048888464245

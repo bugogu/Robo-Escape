@@ -34,11 +34,13 @@ public class GameManager : MonoSingleton<GameManager>
     {
         ChangeGameState(GameState.Intro);
         _playableDirector.stopped += OnTimeLineFinished;
+        OnAlarmSetted += PlayAlarmSound;
     }
 
     void OnDisable()
     {
         _playableDirector.stopped -= OnTimeLineFinished;
+        OnAlarmSetted -= PlayAlarmSound;
     }
 
     private void OnTimeLineFinished(PlayableDirector director)=>
@@ -62,5 +64,11 @@ public class GameManager : MonoSingleton<GameManager>
         
         OnAlarmSetted?.Invoke(status);
         isAlarmActive = status;
+    }
+
+    private void PlayAlarmSound(bool alarmActive)
+    {
+        GetComponent<AudioSource>().Play();
+        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Stop();
     }
 }

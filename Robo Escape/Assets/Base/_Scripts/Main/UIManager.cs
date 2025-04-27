@@ -5,9 +5,11 @@ using UnityEngine.UI;
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoSingleton<UIManager>
 {
+    public Button magneticPulseButton;
+
     [SerializeField] private GameDesignData _gameDesignData;
 
-    [Header("Home Canvas")]
+    [Header("General")]
     [SerializeField] private Button _homeButton;
     [SerializeField] private TMPro.TMP_Text _levelText;
     [SerializeField] private CanvasGroup _alarmImage;

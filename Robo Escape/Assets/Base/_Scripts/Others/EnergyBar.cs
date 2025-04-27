@@ -22,6 +22,8 @@ public class EnergyBar : MonoSingleton<EnergyBar>
 
         float newEnergy = GetCurrentEnergy() - amount;
         SetEnergy(newEnergy);
+
+        EnoughForMagneticPulse();
     }
 
     public void ReplenishEnergy(float amount, bool burst = false)
@@ -33,6 +35,8 @@ public class EnergyBar : MonoSingleton<EnergyBar>
 
         float newEnergy = GetCurrentEnergy() + amount;
         SetEnergy(newEnergy);
+
+        EnoughForMagneticPulse();
     }
 
     public float GetCurrentEnergy()
@@ -49,5 +53,15 @@ public class EnergyBar : MonoSingleton<EnergyBar>
     private void UpdateEnergyUI(float energyAmount)
     {
         _energyBarFillImage.fillAmount = energyAmount / _maxEnergyCapacity;
+    }
+
+    private void EnoughForMagneticPulse() 
+    {
+        if(!PlayerController.Instance._hasMagneticCharge) return;
+
+        if(GetCurrentEnergy() >= _maxEnergyCapacity/2)
+        UIManager.Instance.magneticPulseButton.interactable = true;
+        else
+        UIManager.Instance.magneticPulseButton.interactable = false;
     }
 }
