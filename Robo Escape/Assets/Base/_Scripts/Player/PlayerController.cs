@@ -20,6 +20,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject _passwordCanvas;
     [SerializeField] private ParticleSystem _antiAlarmShieldFX;
     [SerializeField] private GameObject _flashTrailFX;
+    [SerializeField] private GameObject _magneticPulseAuraFX;
     [SerializeField] private GameObject _magneticPulseFX;
     [SerializeField] private GameObject _magneticPulseRadiusSprite;
     [SerializeField] private float _magneticPulseRadius;
@@ -38,6 +39,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         _playerMovement = GetComponent<PlayerMovement>();
         _playerMovement.enabled = false;
         GameManager.Instance.OnGameStateChanged += CanMove;
+        UIManager.Instance.magneticPulseButton.onClick.RemoveAllListeners();
         UIManager.Instance.magneticPulseButton.onClick.AddListener(UseMagneticPulse);
     }
 
@@ -151,7 +153,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         _magneticPulseRadiusSprite.SetActive(true);
         UIManager.Instance.magneticPulseButton.transform.parent.gameObject.SetActive(true);
         _hasAnyPowerUp = true;
-        _magneticPulseFX.SetActive(true);
+        _magneticPulseAuraFX.SetActive(true);
         _hasMagneticCharge = true;
     }
 
@@ -161,8 +163,10 @@ public class PlayerController : MonoSingleton<PlayerController>
         _magneticPulseRadiusSprite.SetActive(false);
         UIManager.Instance.magneticPulseButton.transform.parent.gameObject.SetActive(false);
         _hasAnyPowerUp = false;
-        _magneticPulseFX.SetActive(false);
+        _magneticPulseAuraFX.SetActive(false);
         _hasMagneticCharge = false;
+        _magneticPulseFX.SetActive(true);
+        Invoke(nameof(CloseMagneticPulseFX), 2f);
         // TODO: EMP sesi oynatılabilir.
     }
 
@@ -179,6 +183,9 @@ public class PlayerController : MonoSingleton<PlayerController>
                 empTarget.EffectFromEMP();
         }
     }
+
+    private void CloseMagneticPulseFX()=>
+        _magneticPulseFX.SetActive(false);
 
     void OnDrawGizmosSelected()
     {

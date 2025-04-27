@@ -68,7 +68,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void PlayAlarmSound(bool alarmActive)
     {
-        GetComponent<AudioSource>().Play();
+        if(Settings.Instance.Sound == 1) GetComponent<AudioSource>()?.Play();
         GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Stop();
     }
 }

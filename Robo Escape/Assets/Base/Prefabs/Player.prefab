@@ -1099,7 +1099,8 @@ MonoBehaviour:
   _passwordCanvas: {fileID: 0}
   _antiAlarmShieldFX: {fileID: 8944220589902098210}
   _flashTrailFX: {fileID: 3847020329363925611}
-  _magneticPulseFX: {fileID: 6817188361474785724}
+  _magneticPulseAuraFX: {fileID: 6817188361474785724}
+  _magneticPulseFX: {fileID: 0}
   _magneticPulseRadiusSprite: {fileID: 0}
   _magneticPulseRadius: 12
 --- !u!114 &3850190000082187709
@@ -1128,6 +1129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isMoving: 0
   _isMagnetized: 0
+  _movementThreshold: 0.35
   dynamicJoystick: {fileID: 0}
   _animator: {fileID: 4543599822464761607}
   _gameDesignData: {fileID: 11400000, guid: 3ab85925d1febac40a7d197bb1ea49c0, type: 2}
@@ -1906,6 +1908,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8667958270397761752}
     m_Modifications:
+    - target: {fileID: 1106377995291122080, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1911589577765208344, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
       propertyPath: m_Name
       value: MagneticPulseAura
@@ -1913,6 +1919,14 @@ PrefabInstance:
     - target: {fileID: 1911589577765208344, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7930155611877051995, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259896923051335420, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9006556849210545193, guid: 50fa70dfe5d8b9f46a9c153acb77448a, type: 3}
       propertyPath: m_LocalPosition.x

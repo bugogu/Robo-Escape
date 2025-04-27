@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool _isMoving;
     [HideInInspector] public bool _isMagnetized = false;
 
+    [Tooltip("The threshold at which the player is considered moving.")][SerializeField] private float _movementThreshold = 0.2f;
+    [Tooltip("The threshold at which the player is considered stopped.")][SerializeField] private float _stopThreshold = 0.2f;
+
     [Header("References")]
     [SerializeField] private DynamicJoystick dynamicJoystick;
     [SerializeField] private Animator _animator;
@@ -53,11 +56,17 @@ public class PlayerMovement : MonoBehaviour
        IsMoving();
     }
 
-    public void JoystickMovement()
+    public bool JoystickMovement()
     {
-        _animator.SetBool(Consts.PlayerAnimations.WALKING,true);
+        
         _horizontal = dynamicJoystick.Horizontal;
         _vertical = dynamicJoystick.Vertical;
+    
+        bool isJoystickMoving = Mathf.Abs(_horizontal) > _movementThreshold || Mathf.Abs(_vertical) > _movementThreshold;
+
+        if(isJoystickMoving) 
+        {
+            _animator.SetBool(Consts.PlayerAnimations.WALKING, isJoystickMoving);
 
         if(EnergyBar.Instance.GetCurrentEnergy() <= 0) 
         {
@@ -74,17 +83,35 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 dir = (Vector3.forward * _vertical) + (Vector3.right * _horizontal);
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), _turnSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            if(Mathf.Abs(_horizontal) < _stopThreshold || Mathf.Abs(_vertical) < _stopThreshold)
+            {
+                return false;
+            }
+        }
+
+        return isJoystickMoving;
     }
 
     public void IsMoving()
     {
         if(Input.touchCount > 0)
         {
-            JoystickMovement();
-            _isMoving = true;
+            if(JoystickMovement())
+            {
+                _isMoving = true;
 
-            if(!_playerController.GetFlashStatus())
-            EnergyBar.Instance.ConsumeEnergy(_isMagnetized ? _magnetismConsumptionMultiplier * _consumeAmount : _consumeAmount);
+                if(!_playerController.GetFlashStatus())
+                EnergyBar.Instance.ConsumeEnergy(_isMagnetized ? _magnetismConsumptionMultiplier * _consumeAmount : _consumeAmount);
+            }
+            else
+            {
+                _animator.SetBool(Consts.PlayerAnimations.WALKING, false);
+                StopMovement();
+                EnergyBar.Instance.ReplenishEnergy(_isMagnetized ? _magnetismReplenishMultiplier * _replenishAmount : _replenishAmount);
+            }
         }
         else
         {
