@@ -6,9 +6,6 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool _isMoving;
     [HideInInspector] public bool _isMagnetized = false;
 
-    [Tooltip("The threshold at which the player is considered moving.")][SerializeField] private float _movementThreshold = 0.2f;
-    [Tooltip("The threshold at which the player is considered stopped.")][SerializeField] private float _stopThreshold = 0.2f;
-
     [Header("References")]
     [SerializeField] private DynamicJoystick dynamicJoystick;
     [SerializeField] private Animator _animator;
@@ -30,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     private float _flashSpeedMultiplier;
     private float _initialRunSpeed;
     private float _initialWalkSpeed;
+
+    private float _movementThreshold;
+    private float _stopThreshold;
 
     private Rigidbody _rbPlayer;
     private float _horizontal = 0;
@@ -133,6 +133,9 @@ public class PlayerMovement : MonoBehaviour
         _consumeAmount = _gameDesignData.consumeAmount;
         _magnetismConsumptionMultiplier = _gameDesignData.magnetismConsumptionMultiplier;
         _magnetismReplenishMultiplier = _gameDesignData.magnetismReplenishMultiplier;
+
+        _movementThreshold = _gameDesignData.movementThreshold;
+        _stopThreshold = _gameDesignData.stopThreshold;
     }
 
     public void SetSpeed(bool isFlashed)

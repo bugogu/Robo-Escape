@@ -131,6 +131,18 @@ public class GameDesignWindow : EditorWindow
         EditorGUILayout.Space(2);
         designData.magnetismSpeedMultiplier = EditorGUILayout.FloatField(designData.magnetismSpeedMultiplier, EditorStyles.miniTextField);
 
+        EditorGUILayout.Space(5);
+
+        EditorGUILayout.LabelField("Movement Threshold", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.movementThreshold = EditorGUILayout.FloatField(designData.movementThreshold, EditorStyles.miniTextField);
+
+        EditorGUILayout.Space(5);
+
+        EditorGUILayout.LabelField("Stop Threshold", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.stopThreshold = EditorGUILayout.FloatField(designData.stopThreshold, EditorStyles.miniTextField);
+
         EditorGUI.indentLevel--; 
 
         }

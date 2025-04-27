@@ -8,6 +8,8 @@ public class GameDesignData : ScriptableObject
     public float characterWalkSpeed;
     public float characterTurnSpeed;
     public float magnetismSpeedMultiplier = 2f; 
+    public float movementThreshold = 0.35f;
+    public float stopThreshold = 0.25f;
 
     [Header("Player Energy Consumption Settings")]
     public float replenishAmount = 1f;
