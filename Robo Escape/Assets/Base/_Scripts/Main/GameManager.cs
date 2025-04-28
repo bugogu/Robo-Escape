@@ -35,12 +35,14 @@ public class GameManager : MonoSingleton<GameManager>
         ChangeGameState(GameState.Intro);
         _playableDirector.stopped += OnTimeLineFinished;
         OnAlarmSetted += PlayAlarmSound;
+        OnGameStateChanged += StopAlarmSound;
     }
 
     void OnDisable()
     {
         _playableDirector.stopped -= OnTimeLineFinished;
         OnAlarmSetted -= PlayAlarmSound;
+        OnGameStateChanged -= StopAlarmSound;
     }
 
     private void OnTimeLineFinished(PlayableDirector director)=>
@@ -70,5 +72,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if(Settings.Instance.Sound == 1) GetComponent<AudioSource>()?.Play();
         GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Stop();
+    }
+
+    private void StopAlarmSound(GameState gameState)
+    {
+        if(gameState == GameState.Win)
+        GetComponent<AudioSource>()?.Stop();  
     }
 }

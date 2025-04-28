@@ -13,6 +13,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public ParticleSystem _blueHackFX;
     public ParticleSystem _yellowHackFX;
     public ParticleSystem _purpleHackFX;
+    public GameObject teleportFX;
 
     [SerializeField] private GameDesignData _gameDesignData;
     [SerializeField] private float _shieldDuration = 10f;

@@ -8,6 +8,8 @@ public class Consts
     public struct AnimationParameters
     {
         public const string CLOSEELEVATOR = "Close";
+        public const string OPEN = "Open";
+        public const string CLOSE = "Close";
     }
 
     public struct Prefs
