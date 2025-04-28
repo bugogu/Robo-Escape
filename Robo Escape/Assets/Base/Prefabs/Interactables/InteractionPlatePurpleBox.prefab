@@ -231,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: _interactionType
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: _interactionDuration
