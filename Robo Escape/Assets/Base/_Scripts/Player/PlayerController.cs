@@ -105,6 +105,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         if(_isProtectionActive) return;
 
+        UIManager.Instance.ActivatePowerCounter(_shieldDuration, true);
+
         _hasAnyPowerUp = true;
         _isProtectionActive = true;
         _antiAlarmShieldFX.gameObject.SetActive(true);
@@ -115,6 +117,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     private void GainFlash()
     {
         if(_hasAnyPowerUp) return;
+
+        UIManager.Instance.ActivatePowerCounter(_flashDuration, false);
 
         _playerMovement.SetSpeed(true);
 
@@ -173,7 +177,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void EMP()
     {
-        EnergyBar.Instance.ConsumeEnergy(EnergyBar.Instance._maxEnergyCapacity/2);
+        EnergyBar.Instance.ConsumeEnergy(EnergyBar.Instance._maxEnergyCapacity/2, true);
         Collider[] _hitColliders = Physics.OverlapSphere(transform.position, _magneticPulseRadius);
 
         foreach (Collider col in _hitColliders)

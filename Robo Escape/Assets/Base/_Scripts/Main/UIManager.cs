@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using MaskTransitions;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoSingleton<UIManager>
@@ -20,6 +21,10 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private float _typingSpeed = 0.05f;
     [SerializeField] private AudioClip _keyboardSound;
     [SerializeField] private List<GameObject> _levelEndClosingElements;
+    [SerializeField] private GameObject _powerUpCounter;
+    [SerializeField] private Image _powerUpFill;
+    [SerializeField] private Color _shieldPowerUpColor;
+    [SerializeField] private Color _flashPowerUpColor;
 
     [Header("UI Elements")]
     [Tooltip("These element are goint to open when cutscene is finished")] 
@@ -108,5 +113,21 @@ public class UIManager : MonoSingleton<UIManager>
 
             yield return new WaitForSeconds(_typingSpeed); 
         }
+    }
+
+    public void ActivatePowerCounter(float time, bool isShield)
+    {
+        if(isShield) _powerUpFill.color = _shieldPowerUpColor;
+        else _powerUpFill.color = _flashPowerUpColor;
+
+        _powerUpCounter.SetActive(true);
+        
+        _powerUpFill.FillImageAnimation(1,0,time).SetEase(Ease.Linear).OnComplete(()=> ResetPowerCounter());
+    }
+
+    private void ResetPowerCounter()
+    {
+        _powerUpCounter.SetActive(false);
+        _powerUpFill.fillAmount = 1f;
     }
 }

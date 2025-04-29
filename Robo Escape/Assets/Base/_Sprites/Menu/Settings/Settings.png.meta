@@ -1,5 +1,12 @@
 fileFormatVersion: 2
-guid: 6fa01da15f1447a4f9428c3293c34d85
+guid: 2b2fbe827095a42dc877b0dc05da381f
+AssetOrigin:
+  serializedVersion: 1
+  productId: 290437
+  packageName: Space Game Icon Set
+  packageVersion: 1.0.0
+  assetPath: Assets/FlexUnit/SpaceGameIconSet/Sprites/Icons/Diskette.png
+  uploadId: 677966
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -39,7 +46,7 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -50,7 +57,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -82,6 +89,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1

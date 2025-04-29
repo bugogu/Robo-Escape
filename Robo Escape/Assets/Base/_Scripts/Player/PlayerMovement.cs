@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void IsMoving()
     {
-        if(Input.touchCount > 0)
+        if(Input.touchCount > 0 || Input.GetMouseButton(0))
         {
             if(JoystickMovement())
             {
