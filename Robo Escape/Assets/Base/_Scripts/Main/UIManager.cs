@@ -25,6 +25,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private Image _powerUpFill;
     [SerializeField] private Color _shieldPowerUpColor;
     [SerializeField] private Color _flashPowerUpColor;
+    [SerializeField] private ParticleSystem _levelEndConfetti;
 
     [Header("UI Elements")]
     [Tooltip("These element are goint to open when cutscene is finished")] 
@@ -89,6 +90,8 @@ public class UIManager : MonoSingleton<UIManager>
             SetText("Try Again?");
         else
             return;
+
+        _levelEndConfetti.Play();
 
         foreach (GameObject element in _levelEndClosingElements) element.SetActive(false);
         
