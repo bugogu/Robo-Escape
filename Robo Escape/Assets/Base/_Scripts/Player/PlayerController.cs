@@ -29,10 +29,12 @@ public class PlayerController : MonoSingleton<PlayerController>
     private PlayerMovement _playerMovement;
     private bool _isFlashActive = false;
     private float _flashDuration = 10f;
+    private float _initialAnimatorSpeed;
 
     void Start()
     {
         _flashDuration = _gameDesignData.flashPowerUpDuration;
+        _initialAnimatorSpeed = GetComponent<Animator>().speed;
     }
 
     void OnEnable()
@@ -120,6 +122,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         UIManager.Instance.ActivatePowerCounter(_flashDuration, false);
 
+        GetComponent<Animator>().speed = _gameDesignData.flashSpeedMultiplier;
+
         _playerMovement.SetSpeed(true);
 
         _hasAnyPowerUp = true;
@@ -142,6 +146,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void RemoveFlash()
     {
+        GetComponent<Animator>().speed = _initialAnimatorSpeed;
+
         _playerMovement.SetSpeed(false);
 
         _hasAnyPowerUp = false;
