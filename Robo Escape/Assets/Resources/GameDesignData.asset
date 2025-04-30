@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f980f5d7d518064438b1539c87dca041, type: 3}
   m_Name: GameDesignData
   m_EditorClassIdentifier: 
-  characterRunSpeed: 400
-  characterWalkSpeed: 275
+  characterRunSpeed: 550
+  characterWalkSpeed: 350
   characterTurnSpeed: 10
   magnetismSpeedMultiplier: 2
   movementThreshold: 0.35
   stopThreshold: 0.25
   replenishAmount: 0.6
-  consumeAmount: 0.3
+  consumeAmount: 0.2
   magnetismConsumptionMultiplier: 1.5
   magnetismReplenishMultiplier: 2
-  maxEnergyCapacity: 150
-  flashSpeedMultiplier: 1.3
+  maxEnergyCapacity: 200
+  flashSpeedMultiplier: 1.5
   flashPowerUpDuration: 10
   moveDistance: 100
   moveDuration: 0.5
