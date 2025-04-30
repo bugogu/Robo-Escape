@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: GameDesignData
   m_EditorClassIdentifier: 
   characterRunSpeed: 550
-  characterWalkSpeed: 350
+  characterWalkSpeed: 400
   characterTurnSpeed: 10
   magnetismSpeedMultiplier: 2
   movementThreshold: 0.35
   stopThreshold: 0.25
-  replenishAmount: 0.6
-  consumeAmount: 0.2
+  replenishAmount: 0.5
+  consumeAmount: 0.35
   magnetismConsumptionMultiplier: 1.5
   magnetismReplenishMultiplier: 2
   maxEnergyCapacity: 200

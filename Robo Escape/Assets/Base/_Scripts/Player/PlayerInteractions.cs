@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class PlayerInteractions : MonoBehaviour
 {
+    [SerializeField] private GameDesignData _gameDesignData;
     private PlayerMovement _playerMovement;
     private PlayerController _playerController;
 
     private IInteractable _currentInteractable;
     private float _interactionTimer;
+    private float _initialAnimatorSpeed;
 
     void Start()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _playerController = GetComponent<PlayerController>();
+        _initialAnimatorSpeed = GetComponent<Animator>().speed;
     }
 
     void OnTriggerEnter(Collider other)
@@ -25,6 +28,8 @@ public class PlayerInteractions : MonoBehaviour
         if(other.CompareTag(Consts.Tags.MAGNETIC_AREA))
         {
             if(_playerController.GetFlashStatus()) return;
+
+            GetComponent<Animator>().speed /= _gameDesignData.magnetismSpeedMultiplier;
 
             if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
             _playerMovement._isMagnetized = true;
@@ -58,7 +63,12 @@ public class PlayerInteractions : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag(Consts.Tags.MAGNETIC_AREA)) _playerMovement._isMagnetized = false;
+        if(other.CompareTag(Consts.Tags.MAGNETIC_AREA)) 
+        {
+            _playerMovement._isMagnetized = false;
+            GetComponent<Animator>().speed = _initialAnimatorSpeed;
+        }
+        
 
         if (_currentInteractable != null)
         {
