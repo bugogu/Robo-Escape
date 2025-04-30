@@ -22,6 +22,8 @@ public class GameManager : MonoSingleton<GameManager>
     void Start()
     {
         waterLevel = LevelManager.Instance.levelData.waterLevel;
+
+        Settings.Instance.SetOutlines(Settings.Instance.Outlines == 1);
     }
 
     public void ChangeGameState(GameState gameState) 
@@ -36,6 +38,7 @@ public class GameManager : MonoSingleton<GameManager>
         _playableDirector.stopped += OnTimeLineFinished;
         OnAlarmSetted += PlayAlarmSound;
         OnGameStateChanged += StopAlarmSound;
+        Settings.Instance.OnOutlinesSetted += SetBasicOutlines;
     }
 
     void OnDisable()
@@ -43,6 +46,7 @@ public class GameManager : MonoSingleton<GameManager>
         _playableDirector.stopped -= OnTimeLineFinished;
         OnAlarmSetted -= PlayAlarmSound;
         OnGameStateChanged -= StopAlarmSound;
+        Settings.Instance.OnOutlinesSetted -= SetBasicOutlines;
     }
 
     private void OnTimeLineFinished(PlayableDirector director)=>
@@ -78,5 +82,13 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if(gameState == GameState.Win)
         GetComponent<AudioSource>()?.Stop();  
+    }
+
+    private void SetBasicOutlines(bool status) 
+    {
+        Material[] materials = Resources.LoadAll<Material>("Outlines");
+        foreach (Material material in materials) 
+        if(!status)
+        material.SetFloat("_Scale", 1f);
     }
 }

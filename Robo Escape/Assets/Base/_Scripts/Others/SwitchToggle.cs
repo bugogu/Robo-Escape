@@ -7,7 +7,7 @@ public class SwitchToggle : MonoBehaviour {
    [SerializeField] Color backgroundActiveColor ;
    [SerializeField] Color handleActiveColor ;
    [SerializeField] SwitchType _switchType ;
-   private enum SwitchType { Music, Sound, Haptic }
+   private enum SwitchType { Music, Sound, Haptic, Outlines }
 
    Image backgroundImage, handleImage ;
 
@@ -43,6 +43,9 @@ public class SwitchToggle : MonoBehaviour {
          case SwitchType.Haptic:
             toggle.isOn = Settings.Instance.Haptic == 1 ? true : false;
             break;
+         case SwitchType.Outlines:
+            toggle.isOn = Settings.Instance.Outlines == 1 ? true : false;
+            break;
       }
 
       if (toggle.isOn)
@@ -61,6 +64,9 @@ public class SwitchToggle : MonoBehaviour {
             break ;
          case SwitchType.Haptic:
             HapticToggle ( ) ;
+            break;
+         case SwitchType.Outlines:
+            OutlinesToggle ( ) ;
             break ;
       }
 
@@ -107,5 +113,18 @@ public class SwitchToggle : MonoBehaviour {
          Settings.Instance.Haptic = 0;
       else
          Settings.Instance.Haptic = 1;
+   }
+   private void OutlinesToggle()
+   {
+      if(Settings.Instance.Outlines == 1)
+      {
+         Settings.Instance.Outlines = 0;
+         Settings.Instance.SetOutlines(false);
+      }
+      else
+      {
+         Settings.Instance.Outlines = 1;
+         Settings.Instance.SetOutlines(true);
+      }
    }
 }

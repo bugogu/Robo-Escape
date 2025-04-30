@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 1283411100003147510}
   - component: {fileID: 191147613123543021}
   - component: {fileID: 7727937929009107421}
-  m_Layer: 0
+  - component: {fileID: 5745309287166037731}
+  m_Layer: 9
   m_Name: EnergyCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,6 +142,19 @@ MonoBehaviour:
   x: 0
   y: 1
   z: 0
+--- !u!114 &5745309287166037731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856398555087085630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cd2c4de61daf443b00befe92add13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerName: OutlineCell
 --- !u!1001 &5935199048670384137
 PrefabInstance:
   m_ObjectHideFlags: 0

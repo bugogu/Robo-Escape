@@ -42,10 +42,13 @@ public class PlayerController : MonoSingleton<PlayerController>
         _flashDuration = _gameDesignData.flashPowerUpDuration;
         _initialAnimatorSpeed = GetComponent<Animator>().speed;
 
-        _initialOutline = _outlineMaterial.GetColor("_Color");
-        _flashOutline = _gameDesignData.flashOutlineColor;
-        _empOutline = _gameDesignData.empOutlineColor;
-        _shieldOutline = _gameDesignData.shieldOutlineColor;
+        if(Settings.Instance.Outlines == 1)
+        {
+            _initialOutline = _outlineMaterial.GetColor("_Color");
+            _flashOutline = _gameDesignData.flashOutlineColor;
+            _empOutline = _gameDesignData.empOutlineColor;
+            _shieldOutline = _gameDesignData.shieldOutlineColor;
+        }
     }
 
     void OnEnable()
@@ -120,6 +123,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         UIManager.Instance.ActivatePowerCounter(_shieldDuration, true);
 
+        if(Settings.Instance.Outlines == 1)
         _outlineMaterial.SetColor("_Color", _shieldOutline);
 
         _hasAnyPowerUp = true;
@@ -135,6 +139,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         UIManager.Instance.ActivatePowerCounter(_flashDuration, false);
 
+        if(Settings.Instance.Outlines == 1)
         _outlineMaterial.SetColor("_Color", _flashOutline);
 
         GetComponent<Animator>().speed = _gameDesignData.flashSpeedMultiplier;
@@ -154,6 +159,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         if(!_isProtectionActive) return;
 
+        if(Settings.Instance.Outlines == 1)
         _outlineMaterial.SetColor("_Color", _initialOutline);
 
         _isProtectionActive = false;
@@ -165,6 +171,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         GetComponent<Animator>().speed = _initialAnimatorSpeed;
 
+        if(Settings.Instance.Outlines == 1)
         _outlineMaterial.SetColor("_Color", _initialOutline);
 
         _playerMovement.SetSpeed(false);
@@ -182,6 +189,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         if(_hasAnyPowerUp) return;
 
+        if(Settings.Instance.Outlines == 1)
         _outlineMaterial.SetColor("_Color", _empOutline);
 
         _magneticPulseRadiusSprite.SetActive(true);
@@ -194,7 +202,10 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void UseMagneticPulse()
     {
         EMP();
+
+        if(Settings.Instance.Outlines == 1)
         _outlineMaterial.SetColor("_Color", _initialOutline);
+        
         _magneticPulseRadiusSprite.SetActive(false);
         UIManager.Instance.magneticPulseButton.transform.parent.gameObject.SetActive(false);
         _hasAnyPowerUp = false;

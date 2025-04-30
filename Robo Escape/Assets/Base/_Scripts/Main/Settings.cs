@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class Settings : MonoSingleton<Settings>
 {
     [SerializeField] private Button _settingsButton;
     [SerializeField] private RectTransform _settingsPanel;
     [SerializeField] private float _openingTime;
+
+    public event Action<bool> OnOutlinesSetted;
 
     public int Music 
     {
@@ -26,6 +29,12 @@ public class Settings : MonoSingleton<Settings>
         set => PlayerPrefs.SetInt(Consts.Prefs.HAPTIC, value);
     }
 
+    public int Outlines 
+    {
+        get => PlayerPrefs.GetInt(Consts.Prefs.OUTLINES, 1);
+        set => PlayerPrefs.SetInt(Consts.Prefs.OUTLINES, value);
+    }
+
     private bool _isOpen;
 
     void Awake()
@@ -34,6 +43,11 @@ public class Settings : MonoSingleton<Settings>
         _settingsButton.onClick.AddListener(SettingsPanel);
 
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    void Start()
+    {
+        OnOutlinesSetted?.Invoke(Outlines == 1);
     }
 
     private void SettingsPanel()
@@ -51,5 +65,10 @@ public class Settings : MonoSingleton<Settings>
             _settingsButton.interactable = false;
             _settingsPanel.DOScale(Vector3.zero, _openingTime).OnComplete(()=> _settingsPanel.gameObject.SetActive(_isOpen)).OnComplete(()=> _settingsButton.interactable = true);
         }
+    }
+
+    public void SetOutlines(bool status)
+    {
+        OnOutlinesSetted?.Invoke(status);   
     }
 }
