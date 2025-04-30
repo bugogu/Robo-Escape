@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 399193873}
   - component: {fileID: 399193872}
   - component: {fileID: 399193875}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3509,7 +3509,7 @@ GameObject:
   - component: {fileID: 4183178383869695023}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

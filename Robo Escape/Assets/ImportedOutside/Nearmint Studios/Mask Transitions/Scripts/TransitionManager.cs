@@ -28,10 +28,13 @@ namespace MaskTransitions
         [SerializeField] private RectTransform transitionCanvas;
         [SerializeField] private Image parentMaskImage;
         [SerializeField] private CutoutMaskUI cutoutMask;
+        [SerializeField] private bool _capFps = true;
 
         private void Awake()
         {
+            if(_capFps)
             Application.targetFrameRate = 30;
+            
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             QualitySettings.vSyncCount = 0;
 

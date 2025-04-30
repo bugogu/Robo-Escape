@@ -18,10 +18,10 @@ TagManager:
   - UI
   - Ground
   - Clickable
-  - 
-  - 
-  - 
-  - 
+  - Outline
+  - OutlineCell
+  - OutlineDrone
+  - OutlinePlatform
   - 
   - 
   - 
