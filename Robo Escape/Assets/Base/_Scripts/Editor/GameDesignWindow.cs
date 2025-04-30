@@ -281,6 +281,24 @@ public class GameDesignWindow : EditorWindow
         designData.flashPowerUpDuration = EditorGUILayout.FloatField(designData.flashPowerUpDuration, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
+
+        EditorGUILayout.LabelField("Flash Outline Color", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.flashOutlineColor = EditorGUILayout.ColorField(designData.flashOutlineColor, GUILayout.Width(205f));
+
+        EditorGUILayout.Space(5);
+
+        EditorGUILayout.LabelField("Shield Outline Color", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.shieldOutlineColor = EditorGUILayout.ColorField(designData.shieldOutlineColor, GUILayout.Width(205f));
+
+        EditorGUILayout.Space(5);
+
+        EditorGUILayout.LabelField("EMP Outline Color", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.empOutlineColor = EditorGUILayout.ColorField(designData.empOutlineColor, GUILayout.Width(205f));
+
+        EditorGUILayout.Space(5);
     }
 
     #endregion

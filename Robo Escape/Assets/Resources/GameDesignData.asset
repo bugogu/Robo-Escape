@@ -25,6 +25,9 @@ MonoBehaviour:
   maxEnergyCapacity: 200
   flashSpeedMultiplier: 1.5
   flashPowerUpDuration: 10
+  flashOutlineColor: {r: 1, g: 0.9595408, b: 0, a: 1}
+  shieldOutlineColor: {r: 0, g: 0.6163962, b: 0.96981126, a: 1}
+  empOutlineColor: {r: 0.5149276, g: 0.081131995, b: 1, a: 1}
   moveDistance: 100
   moveDuration: 0.5
   returnDuration: 0.3

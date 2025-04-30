@@ -21,6 +21,9 @@ public class GameDesignData : ScriptableObject
     [Header("Player Power Ups Settings")]
     public float flashSpeedMultiplier = 2f;
     public float flashPowerUpDuration = 10f;
+    public Color flashOutlineColor;
+    public Color shieldOutlineColor;
+    public Color empOutlineColor;
 
     [Header("Energy PopUp Text")]
     public float moveDistance = 100f;
