@@ -22,7 +22,7 @@ MonoBehaviour:
   consumeAmount: 0.35
   magnetismConsumptionMultiplier: 1.5
   magnetismReplenishMultiplier: 2
-  maxEnergyCapacity: 200
+  maxEnergyCapacity: 100
   flashSpeedMultiplier: 1.5
   flashPowerUpDuration: 10
   flashOutlineColor: {r: 1, g: 0.9595408, b: 0, a: 1}

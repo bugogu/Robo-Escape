@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class EnergyBar : MonoSingleton<EnergyBar>
 {
     [HideInInspector] public float _maxEnergyCapacity;
 
     [SerializeField] private GameDesignData _gameDesignData;
     [SerializeField] private Image _energyBarFillImage;
+    [SerializeField] private TMPro.TMP_Text _energyText;
 
     void Awake()
     {
@@ -53,6 +55,7 @@ public class EnergyBar : MonoSingleton<EnergyBar>
     private void UpdateEnergyUI(float energyAmount)
     {
         _energyBarFillImage.fillAmount = energyAmount / _maxEnergyCapacity;
+        _energyText.text = energyAmount.ToString("0") + "/" + _maxEnergyCapacity.ToString();
     }
 
     private void EnoughForMagneticPulse() 
