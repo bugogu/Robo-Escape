@@ -205,6 +205,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         EMP();
 
+        CameraShake.Shake();
+
         if(Settings.Instance.Outlines == 1)
         _outlineMaterial.SetColor("_Color", _initialOutline);
         

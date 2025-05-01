@@ -10,6 +10,7 @@ public class GameDesignWindow : EditorWindow
     private bool showUIPopUpTextSettings = false;
     private bool showGeneralUISettings = false;
     private bool showPowerUpSettings = false;
+    private bool showCameraShakeSettings = false;
 
     private Vector2 scrollPosition;
     
@@ -32,6 +33,7 @@ public class GameDesignWindow : EditorWindow
          {
              DrawPlayerSettingsContainer();
              DrawUISettingsContainer();
+             DrawCameraSettingsContainer();
          }
          EditorGUILayout.EndScrollView();
         
@@ -83,6 +85,24 @@ public class GameDesignWindow : EditorWindow
             EditorGUILayout.Space(5);
 
             DrawEnergyPopTextSettings();
+
+            EditorGUILayout.Space(5);
+
+            EditorGUI.indentLevel--; 
+        }
+        
+        EditorGUILayout.EndVertical(); 
+    }
+
+    private void DrawCameraSettingsContainer()
+    {
+        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+        {
+            EditorGUILayout.LabelField("Camera Settings", EditorStyles.boldLabel);
+
+            EditorGUI.indentLevel++; 
+
+            DrawCameraShakeSettings();
 
             EditorGUILayout.Space(5);
 
@@ -299,9 +319,47 @@ public class GameDesignWindow : EditorWindow
         designData.empOutlineColor = EditorGUILayout.ColorField(designData.empOutlineColor, GUILayout.Width(205f));
 
         EditorGUILayout.Space(5);
+
+            EditorGUI.indentLevel--; 
+        
+        }
+    }
+
+    private void DrawCameraShakeSettings()
+    {
+        showCameraShakeSettings = EditorGUILayout.Foldout(
+        showCameraShakeSettings, 
+        "Camera Shake", 
+        true, 
+        EditorStyles.boldLabel
+        );
+
+        if (showCameraShakeSettings)
+        {
+        
+        EditorGUI.indentLevel++; 
+
+        EditorGUILayout.LabelField("Shake Duration", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.cameraShakeDuration = EditorGUILayout.FloatField(designData.cameraShakeDuration, EditorStyles.miniTextField);
+
+        EditorGUILayout.Space(5);
+
+        EditorGUILayout.LabelField("Shake Amplitude", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.cameraShakeAmplitude = EditorGUILayout.FloatField(designData.cameraShakeAmplitude, EditorStyles.miniTextField);
+
+        EditorGUILayout.Space(5);
+
+        EditorGUILayout.LabelField("Shake Frequency", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.cameraShakeFrequency = EditorGUILayout.FloatField(designData.cameraShakeFrequency, EditorStyles.miniTextField);
+
+        EditorGUI.indentLevel--; 
+        
+        }
     }
 
     #endregion
   
-  }
 }

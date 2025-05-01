@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -40,6 +41,7 @@ public class GameManager : MonoSingleton<GameManager>
         ChangeGameState(GameState.Intro);
         _playableDirector.stopped += OnTimeLineFinished;
         OnAlarmSetted += PlayAlarmSound;
+        OnAlarmSetted += DoShake;
         OnGameStateChanged += StopAlarmSound;
         Settings.Instance.OnOutlinesSetted += SetBasicOutlines;
     }
@@ -48,6 +50,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         _playableDirector.stopped -= OnTimeLineFinished;
         OnAlarmSetted -= PlayAlarmSound;
+        OnAlarmSetted -= DoShake;
         OnGameStateChanged -= StopAlarmSound;
         Settings.Instance.OnOutlinesSetted -= SetBasicOutlines;
     }
@@ -94,5 +97,11 @@ public class GameManager : MonoSingleton<GameManager>
 
         if(!status) 
             for (int i = 0; i < _outlines.Length; i++) _outlines[i].SetFloat("_Scale", 1);
+    }
+
+    private void DoShake(bool alarmActive)
+    {
+        if(alarmActive)
+        CameraShake.Shake();
     }
 }

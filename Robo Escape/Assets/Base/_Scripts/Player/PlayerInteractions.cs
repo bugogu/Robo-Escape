@@ -28,6 +28,8 @@ public class PlayerInteractions : MonoBehaviour
         if(other.CompareTag(Consts.Tags.MAGNETIC_AREA))
         {
             if(_playerController.GetFlashStatus()) return;
+            
+            CameraShake.Shake();
 
             GetComponent<Animator>().speed /= _gameDesignData.magnetismSpeedMultiplier;
 
