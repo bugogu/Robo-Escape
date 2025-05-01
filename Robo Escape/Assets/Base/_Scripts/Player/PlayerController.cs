@@ -17,6 +17,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     [SerializeField] private GameDesignData _gameDesignData;
     [SerializeField] private Material _outlineMaterial;
+    [SerializeField] private Color _initialOutlineColor;
     [SerializeField] private float _shieldDuration = 10f;
     [SerializeField] private GameObject _playerMovingFX;
     [SerializeField] private GameObject _passwordCanvas;
@@ -41,6 +42,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         _flashDuration = _gameDesignData.flashPowerUpDuration;
         _initialAnimatorSpeed = GetComponent<Animator>().speed;
+
+        _outlineMaterial.SetColor("_Color", _initialOutlineColor);
 
         if(Settings.Instance.Outlines == 1)
         {
