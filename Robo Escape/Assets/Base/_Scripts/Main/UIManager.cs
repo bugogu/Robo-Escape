@@ -61,6 +61,9 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void HomeButton()
     {
+        if(GameManager.Instance.isAlarmActive && Settings.Instance.Music == 1)
+        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
+
         TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
     }
 
