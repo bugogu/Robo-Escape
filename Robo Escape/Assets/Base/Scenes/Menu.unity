@@ -981,6 +981,7 @@ MonoBehaviour:
   _protocolText: {fileID: 1684378553}
   _playButton: {fileID: 1387826324}
   _escapeButton: {fileID: 430298930}
+  _settings: {fileID: 1758325022}
 --- !u!1 &545500984
 GameObject:
   m_ObjectHideFlags: 0

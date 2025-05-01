@@ -5,6 +5,9 @@ using UnityEngine.Playables;
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private PlayableDirector _playableDirector;
+
+    [SerializeField] private Material[] _outlines;
+    [SerializeField] private float[] _initialScaleValues;
  
     [HideInInspector] public bool waterLevel;
     public event Action<GameState> OnGameStateChanged;
@@ -86,9 +89,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void SetBasicOutlines(bool status) 
     {
-        Material[] materials = Resources.LoadAll<Material>("Outlines");
-        foreach (Material material in materials) 
-        if(!status)
-        material.SetFloat("_Scale", 1f);
+        if(status) 
+            for (int i = 0; i < _outlines.Length; i++) _outlines[i].SetFloat("_Scale", _initialScaleValues[i]);
+
+        if(!status) 
+            for (int i = 0; i < _outlines.Length; i++) _outlines[i].SetFloat("_Scale", 1);
     }
 }

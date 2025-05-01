@@ -62,7 +62,6 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     void OnDisable()
     {
-        // Önemsiz bir null hatası veriyor.
         GameManager.Instance.OnGameStateChanged -= CanMove;
     }
 

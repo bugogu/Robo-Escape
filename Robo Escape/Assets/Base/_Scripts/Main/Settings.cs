@@ -6,7 +6,7 @@ using System;
 public class Settings : MonoSingleton<Settings>
 {
     [SerializeField] private Button _settingsButton;
-    [SerializeField] private RectTransform _settingsPanel;
+    public RectTransform _settingsPanel;
     [SerializeField] private float _openingTime;
 
     public event Action<bool> OnOutlinesSetted;
@@ -50,7 +50,7 @@ public class Settings : MonoSingleton<Settings>
         OnOutlinesSetted?.Invoke(Outlines == 1);
     }
 
-    private void SettingsPanel()
+    public void SettingsPanel()
     {
         if(!_isOpen)
         {
