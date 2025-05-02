@@ -12,7 +12,11 @@ public class MenuUI : MonoSingleton<MenuUI>
 
     void Start()
     {
-       _levelText.text = "Lab-" + PlayerPrefs.GetInt("Level", 1);  
+        if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
+        _levelText.text = "Test-Lab";
+        else
+       _levelText.text = "Lab-" + (PlayerPrefs.GetInt("Level", 1) -1).ToString();  
+       
        _protocolText.text = $"{PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0)}";
 
        Settings.Instance.SetOutlines(Settings.Instance.Outlines == 1);

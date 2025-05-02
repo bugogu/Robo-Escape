@@ -4,10 +4,12 @@ using UnityEngine;
 public class WaterLevel : MonoBehaviour
 {
     [SerializeField] private Image _waterFill;
+    [SerializeField] private TMPro.TMP_Text _waterCounterText;
 
     private float _timeToFill;
     private float _currentFillAmount = 0f;
     private bool _canFill;
+    private float _currentTime;
 
     void Awake()
     {
@@ -27,10 +29,17 @@ public class WaterLevel : MonoBehaviour
         }
         
         _currentFillAmount += Time.deltaTime / _timeToFill;
+        _currentTime += Time.deltaTime / 1;
+        SetWaterCounter(_currentTime);
         SetWaterLevel(_currentFillAmount);
     }
 
-    public void SetWaterLevel(float value) =>  _waterFill.fillAmount = Mathf.Clamp01(value);
+    private void SetWaterLevel(float value) =>  _waterFill.fillAmount = Mathf.Clamp01(value);
+
+    private void SetWaterCounter(float value)
+    {
+        _waterCounterText.text = $"{value.ToString("0")}/{_timeToFill}";
+    }
 
     private void Fillable(GameState gameState)
     {

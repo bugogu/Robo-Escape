@@ -32,9 +32,10 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private Color _failedMissionColor;
     [SerializeField] private TMP_Text _missionChipsetsText, _missionTimeText, _missionAlarmText;
     [SerializeField] private GameObject _levelEndMissionCanvas;
+    [SerializeField] private Button _nextLevelButton, _menuButton, _tryAgainButton;
     
     [Header("UI Elements")]
-    [Tooltip("These element are goint to open when cutscene is finished")] 
+    [Tooltip("These element are going to open when cutscene is finished")] 
     [SerializeField] private GameObject[] _uiElements;
 
     private float _loadDelay;
@@ -43,7 +44,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     void Start()
     {
-        _levelText.text = PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1 ? "Test-Lab" : "Lab-" + PlayerPrefs.GetInt(Consts.Prefs.LEVEL);
+        _levelText.text = PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1 ? "Test-Lab" : "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL) - 1).ToString();
         _loadDelay = _gameDesignData.menuLoadDelay;
 
         _audioSource = GetComponent<AudioSource>();
@@ -58,9 +59,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     void OnEnable()
     {
-        _homeButton.onClick.RemoveAllListeners();
-        _homeButton.onClick.AddListener(HomeButton);
-
+        SetOnClicks();
+        
         GameManager.Instance.OnAlarmSetted += AlarmImageAlpha;
         GameManager.Instance.OnGameStateChanged += OpenUI;
         GameManager.Instance.OnGameStateChanged += PlayLevelEndAnimation;
@@ -71,6 +71,21 @@ public class UIManager : MonoSingleton<UIManager>
         GameManager.Instance.OnAlarmSetted -= AlarmImageAlpha;
         GameManager.Instance.OnGameStateChanged -= OpenUI;
         GameManager.Instance.OnGameStateChanged -= PlayLevelEndAnimation;
+    }
+
+    private void SetOnClicks()
+    {
+        _homeButton.onClick.RemoveAllListeners();
+        _homeButton.onClick.AddListener(HomeButton);
+
+        _menuButton.onClick.RemoveAllListeners();
+        _menuButton.onClick.AddListener(MenuButton);
+
+        _tryAgainButton.onClick.RemoveAllListeners();
+        _tryAgainButton.onClick.AddListener(TryAgainButton);
+
+        _nextLevelButton.onClick.RemoveAllListeners();
+        _nextLevelButton.onClick.AddListener(NextLevelButton);
     }
 
     private void HomeButton()
@@ -134,6 +149,29 @@ public class UIManager : MonoSingleton<UIManager>
             yield return new WaitForSeconds(_typingSpeed); 
         }
 
+        if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
+        {
+            _nextLevelButton.gameObject.SetActive(true);
+            _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale ,0.5f,5,10);
+            
+            yield return new WaitForSeconds(1f);
+
+            _menuButton.gameObject.SetActive(true);
+            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,0.5f,5,10);
+            
+        }
+
+        if(GameManager.Instance.GetCurrentState() == GameState.Lose)
+        {
+            _tryAgainButton.gameObject.SetActive(true);
+            _tryAgainButton.transform.DOPunchScale(_tryAgainButton.transform.localScale ,0.5f,5,10);
+
+            yield return new WaitForSeconds(1f);
+
+            _menuButton.gameObject.SetActive(true);
+            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,0.5f,5,10);
+        }
+
         if(GameManager.Instance.GetCurrentState() == GameState.Win)
         {
             if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) != 1)
@@ -187,6 +225,15 @@ public class UIManager : MonoSingleton<UIManager>
             yield return StartCoroutine(TypeText(missions[2], _missionAlarmText));
             yield return new WaitForSeconds(0.1f);
         }
+
+        _nextLevelButton.gameObject.SetActive(true);
+        _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale ,0.5f,5,10);
+
+        yield return new WaitForSeconds(1f);
+
+        _menuButton.gameObject.SetActive(true);
+        _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,0.5f,5,10);
+
     }
 
     IEnumerator TypeText(string text, TMP_Text targetText)
@@ -203,4 +250,39 @@ public class UIManager : MonoSingleton<UIManager>
             yield return new WaitForSeconds(_typingSpeed);
         }
     }
+
+    private void MenuButton()
+    {
+        if(GameManager.Instance.isAlarmActive && Settings.Instance.Music == 1)
+        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
+
+        if(GameManager.Instance.GetCurrentState() == GameState.Win)
+        {
+            PlayerPrefs.SetInt(Consts.Prefs.LEVEL, PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) + 1);
+            TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
+        }
+
+        if(GameManager.Instance.GetCurrentState() == GameState.Lose)
+        TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
+
+        _levelEndMissionCanvas.SetActive(false);
+    }
+
+    private void NextLevelButton()
+    {
+        PlayerPrefs.SetInt(Consts.Prefs.LEVEL, PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) + 1);
+        TransitionManager.Instance.PlayTransition(1f);
+        Invoke(nameof(LoadLevel), 0.3f);
+        _levelEndMissionCanvas.SetActive(false);
+    }
+
+    private void TryAgainButton()
+    {
+        TransitionManager.Instance.PlayTransition(1f);
+        Invoke(nameof(LoadLevel), 0.3f);
+        _levelEndMissionCanvas.SetActive(false);
+    }
+
+    private void LoadLevel()=>
+        UnityEngine.SceneManagement.SceneManager.LoadScene(PlayerPrefs.GetInt("Level", 1) + 1);
 }
