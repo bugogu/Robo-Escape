@@ -17,6 +17,8 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector]
     public bool isAlarmActive = false;
 
+    private GameState _gameState;
+
     public int ProtocolCount 
     { 
         get => PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0); 
@@ -32,6 +34,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void ChangeGameState(GameState gameState) 
     {
+        _gameState = gameState;
         OnGameStateChanged?.Invoke(gameState);
         Debug.Log("Game State : " + gameState);
     }
@@ -104,4 +107,9 @@ public class GameManager : MonoSingleton<GameManager>
         if(alarmActive)
         CameraShake.Shake();
     }
+
+    public GameState GetCurrentState() 
+    {
+        return _gameState;
+    } 
 }

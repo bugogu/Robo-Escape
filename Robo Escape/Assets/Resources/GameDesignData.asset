@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f980f5d7d518064438b1539c87dca041, type: 3}
   m_Name: GameDesignData
   m_EditorClassIdentifier: 
-  characterRunSpeed: 550
-  characterWalkSpeed: 400
-  characterTurnSpeed: 10
+  characterRunSpeed: 625
+  characterWalkSpeed: 450
+  characterTurnSpeed: 20
   magnetismSpeedMultiplier: 2
   movementThreshold: 0.35
-  stopThreshold: 0.25
-  replenishAmount: 0.5
-  consumeAmount: 0.35
+  stopThreshold: 0.2
+  replenishAmount: 0.45
+  consumeAmount: 0.275
   magnetismConsumptionMultiplier: 1.5
   magnetismReplenishMultiplier: 2
   maxEnergyCapacity: 100
-  flashSpeedMultiplier: 1.5
+  flashSpeedMultiplier: 1.7
   flashPowerUpDuration: 10
   flashOutlineColor: {r: 1, g: 0.9595408, b: 0, a: 1}
   shieldOutlineColor: {r: 0, g: 0.6163962, b: 0.96981126, a: 1}
@@ -34,4 +34,7 @@ MonoBehaviour:
   displayDuration: 0.2
   _positiveColor: {r: 1, g: 0.64705884, b: 0, a: 1}
   _negativeColor: {r: 0.9921569, g: 0.32941177, b: 0, a: 1}
+  cameraShakeDuration: 1
+  cameraShakeAmplitude: 3
+  cameraShakeFrequency: 3
   menuLoadDelay: 0.1

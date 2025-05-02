@@ -6,6 +6,10 @@ public class LevelManager : MonoSingleton<LevelManager>
     [HideInInspector] public int chipsetCount;
     [HideInInspector]
     [Tooltip("Seconds")] public float _timeLimit;
+    public bool timeMissionCompleted => _passedTime < _timeLimit;
+    public bool alarmMissionCompleted => !GameManager.Instance.isAlarmActive;
+    public bool chipsetMissionCompleted => IsNessaryChipsetCollected();
+    
     private int _collectedChipsetCount = 0;
     private float _passedTime;
     private bool _levelStarted = false;
@@ -14,7 +18,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private bool IsNessaryChipsetCollected() => _collectedChipsetCount >= chipsetCount;
 
-    void Start()
+    void Awake()
     {
         chipsetCount = levelData.chipsetCount;
         _timeLimit = levelData.timeLimit;

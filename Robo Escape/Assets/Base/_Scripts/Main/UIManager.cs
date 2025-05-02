@@ -3,6 +3,8 @@ using MaskTransitions;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
+using System.Collections;
 
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoSingleton<UIManager>
@@ -13,11 +15,11 @@ public class UIManager : MonoSingleton<UIManager>
 
     [Header("General")]
     [SerializeField] private Button _homeButton;
-    [SerializeField] private TMPro.TMP_Text _levelText;
+    [SerializeField] private TMP_Text _levelText;
     [SerializeField] private CanvasGroup _alarmImage;
     [SerializeField] private GameObject _waterCanvas;
     [SerializeField] private Animator _levelEndAnimation;
-    [SerializeField] private TMPro.TMP_Text _levelEndTitleText;
+    [SerializeField] private TMP_Text _levelEndTitleText;
     [SerializeField] private float _typingSpeed = 0.05f;
     [SerializeField] private AudioClip _keyboardSound;
     [SerializeField] private List<GameObject> _levelEndClosingElements;
@@ -26,13 +28,18 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private Color _shieldPowerUpColor;
     [SerializeField] private Color _flashPowerUpColor;
     [SerializeField] private ParticleSystem _levelEndConfetti;
-
+    [SerializeField] private Color _completedMissionColor;
+    [SerializeField] private Color _failedMissionColor;
+    [SerializeField] private TMP_Text _missionChipsetsText, _missionTimeText, _missionAlarmText;
+    [SerializeField] private GameObject _levelEndMissionCanvas;
+    
     [Header("UI Elements")]
     [Tooltip("These element are goint to open when cutscene is finished")] 
     [SerializeField] private GameObject[] _uiElements;
 
     private float _loadDelay;
     private AudioSource _audioSource;
+    private List<string> _missions;
 
     void Start()
     {
@@ -40,6 +47,13 @@ public class UIManager : MonoSingleton<UIManager>
         _loadDelay = _gameDesignData.menuLoadDelay;
 
         _audioSource = GetComponent<AudioSource>();
+
+        _missions = new List<string>()
+        {
+            $"Collect {LevelManager.Instance.chipsetCount} chipsets!",  
+            $"Finish under {LevelManager.Instance._timeLimit} sec!", 
+            "No alarm allowed!"                           
+        };
     }
 
     void OnEnable()
@@ -87,7 +101,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void PlayLevelEndAnimation(GameState gameState)
     {
-        if(gameState == GameState.Win) 
+        if(gameState == GameState.Win)
             SetText($"Escaped From {_levelText.text}");
         else if(gameState == GameState.Lose)
             SetText("Try Again?");
@@ -106,7 +120,7 @@ public class UIManager : MonoSingleton<UIManager>
         StartCoroutine(TypeTextForTitle(text));
     }
 
-    private System.Collections.IEnumerator TypeTextForTitle(string text)
+    private IEnumerator TypeTextForTitle(string text)
     {
         _levelEndTitleText.text = "";
 
@@ -118,6 +132,20 @@ public class UIManager : MonoSingleton<UIManager>
                 _audioSource.PlayOneShot(_keyboardSound); 
 
             yield return new WaitForSeconds(_typingSpeed); 
+        }
+
+        if(GameManager.Instance.GetCurrentState() == GameState.Win)
+        {
+            if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) != 1)
+            {
+                _levelEndMissionCanvas.SetActive(true);
+
+                _missionChipsetsText.color = LevelManager.Instance.chipsetMissionCompleted ? _completedMissionColor : _failedMissionColor;
+                _missionTimeText.color = LevelManager.Instance.timeMissionCompleted ? _completedMissionColor : _failedMissionColor;
+                _missionAlarmText.color = LevelManager.Instance.alarmMissionCompleted ? _completedMissionColor : _failedMissionColor;
+
+                StartCoroutine(ShowMissions(_missions));
+            }
         }
     }
 
@@ -135,5 +163,44 @@ public class UIManager : MonoSingleton<UIManager>
     {
         _powerUpCounter.SetActive(false);
         _powerUpFill.fillAmount = 1f;
+    }
+
+    IEnumerator ShowMissions(List<string> missions)
+    {
+        // 1. Görev (Chipsets)
+        if(missions.Count > 0 && _missionChipsetsText != null)
+        {
+            yield return StartCoroutine(TypeText(missions[0], _missionChipsetsText));
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        // 2. Görev (Time)
+        if(missions.Count > 1 && _missionTimeText != null)
+        {
+            yield return StartCoroutine(TypeText(missions[1], _missionTimeText));
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        // 3. Görev (Alarm)
+        if(missions.Count > 2 && _missionAlarmText != null)
+        {
+            yield return StartCoroutine(TypeText(missions[2], _missionAlarmText));
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    IEnumerator TypeText(string text, TMP_Text targetText)
+    {
+        targetText.text = "";
+        
+        foreach (char letter in text.ToCharArray())
+        {
+            targetText.text += letter;
+
+            if (letter != ' ' && letter != '\n' && _audioSource != null && _keyboardSound != null)
+                _audioSource.PlayOneShot(_keyboardSound);
+                
+            yield return new WaitForSeconds(_typingSpeed);
+        }
     }
 }

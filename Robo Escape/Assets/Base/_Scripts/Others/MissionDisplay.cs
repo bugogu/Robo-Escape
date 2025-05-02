@@ -5,6 +5,8 @@ using TMPro;
 
 public class MissionDisplay : MonoBehaviour
 {
+    public List<string> _missions;
+
     [SerializeField] private TMP_Text missionText;
     [Header("Sound Settings")]
     [SerializeField] private AudioSource audioSource;
@@ -13,7 +15,6 @@ public class MissionDisplay : MonoBehaviour
     private float _typingSpeed; 
     private float _delayBetweenMissions;
     private float _closeDelay; 
-
 
     private void Start()
     {
@@ -26,14 +27,14 @@ public class MissionDisplay : MonoBehaviour
 
         missionText.text = "";
         
-        List<string> missions = new List<string>()
+        _missions = new List<string>()
         {
             $"Collect {LevelManager.Instance.chipsetCount} chipsets!",  
             $"Finish under {LevelManager.Instance._timeLimit} sec!", 
             "No alarm allowed!"                           
         };
 
-        StartCoroutine(ShowMissions(missions));
+        StartCoroutine(ShowMissions(_missions));
     }
 
     IEnumerator ShowMissions(List<string> missions)
