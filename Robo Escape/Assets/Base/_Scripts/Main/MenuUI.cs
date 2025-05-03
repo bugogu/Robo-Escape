@@ -1,14 +1,22 @@
 using MaskTransitions;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class MenuUI : MonoSingleton<MenuUI>
 {
+    [SerializeField] private GameDesignData _gameDesignData;
     [SerializeField] private TMPro.TMP_Text _levelText;
     [SerializeField] private TMPro.TMP_Text _protocolText;
     [SerializeField] private Button _playButton;
     [SerializeField] private GameObject _escapeButton;
     [SerializeField] private Settings _settings;
+    [SerializeField] private RectTransform _capacityRect;
+    [SerializeField] private TMPro.TMP_Text _capacityText;
+    [SerializeField] private float _showDuration = 1f;
+    [SerializeField] private float _closeDuration = 3f;
+
+    private bool _isShowed = false;
 
     void Start()
     {
@@ -24,6 +32,15 @@ public class MenuUI : MonoSingleton<MenuUI>
        _playButton.onClick.AddListener(PlayButton);
     }
 
+    private void Update() 
+    {
+        if(!Input.GetMouseButtonDown(0)) return;
+
+        if(!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 100, LayerMask.GetMask("Player"))) return;
+
+        ShowEnergyCapacity();
+         
+    }
     private void PlayButton() 
     {
         _escapeButton.SetActive(false);
@@ -35,5 +52,20 @@ public class MenuUI : MonoSingleton<MenuUI>
 
     private void LoadLevel()=>
         UnityEngine.SceneManagement.SceneManager.LoadScene(PlayerPrefs.GetInt("Level", 1) + 1);
-        
+
+    private void ShowEnergyCapacity()
+    {
+        if(_isShowed) return;
+
+        _isShowed = true;
+
+        _capacityRect.DOScale(Vector3.one, _showDuration);
+
+        Invoke(nameof(CloseEnergyCapacity), _closeDuration);
+
+        _capacityText.text = _gameDesignData.maxEnergyCapacity.ToString();
+    }
+
+    private void CloseEnergyCapacity()=>
+        _capacityRect.DOScale(Vector3.zero, _showDuration).OnComplete(()=> _isShowed = false);
 }
