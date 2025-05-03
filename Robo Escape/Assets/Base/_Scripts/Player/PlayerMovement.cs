@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector] public bool _isMoving;
     [HideInInspector] public bool _isMagnetized = false;
+    [HideInInspector] public bool onGround;
 
     [Header("References")]
     [SerializeField] private DynamicJoystick dynamicJoystick;
@@ -42,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     {
         SetReferecnes();
 
+        onGround = true;
+
         _rbPlayer = GetComponent<Rigidbody>();
         _playerController = GetComponent<PlayerController>();
 
@@ -53,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+       if(!onGround) return;
        IsMoving();
     }
 

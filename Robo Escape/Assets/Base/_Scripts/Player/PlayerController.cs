@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
@@ -242,4 +243,14 @@ public class PlayerController : MonoSingleton<PlayerController>
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, _magneticPulseRadius);
     }
+
+    public void Jump(Transform target, float jumpPower, float jumpDuration)
+    {
+        Vector3 dir = transform.position - target.position;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(-dir), 1);
+
+        CameraShake.Shake();
+        _playerMovement.onGround = false;
+        transform.DOJump(target.position, jumpPower, 1, jumpDuration).OnComplete(() => _playerMovement.onGround = true);
+    } 
 }

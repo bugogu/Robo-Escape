@@ -71,6 +71,8 @@ public class LaserGate : MonoBehaviour
         {
             if(!other.CompareTag(Consts.Tags.PLAYER)) return;
 
+            CameraShake.Shake();
+
             if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
 
             EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount, true); 
