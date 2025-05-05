@@ -251,6 +251,6 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         CameraShake.Shake();
         _playerMovement.onGround = false;
-        transform.DOJump(target.position, jumpPower, 1, jumpDuration).OnComplete(() => _playerMovement.onGround = true);
+        transform.DOJump(target.position, jumpPower, 1, jumpDuration).SetUpdate(UpdateType.Fixed).OnComplete(() => _playerMovement.onGround = true);
     } 
 }
