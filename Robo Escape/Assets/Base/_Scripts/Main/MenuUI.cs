@@ -15,13 +15,21 @@ public class MenuUI : MonoSingleton<MenuUI>
     [SerializeField] private TMPro.TMP_Text _capacityText;
     [SerializeField] private float _showDuration = 1f;
     [SerializeField] private float _closeDuration = 3f;
+    [SerializeField] private RectTransform _handRect;
+    [SerializeField] private Vector3 _handRectYThreshold = new Vector3(-140, 160, 0);
+    [SerializeField] private float _handRectMoveDuration = 1f;
 
     private bool _isShowed = false;
 
     void Start()
     {
         if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
-        _levelText.text = "Test-Lab";
+        {
+            _levelText.text = "Test-Lab";
+            _handRect.parent.gameObject.SetActive(true);
+            _handRect.DOAnchorPos(_handRectYThreshold, _handRectMoveDuration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+        }
+        
         else
        _levelText.text = "Lab-" + (PlayerPrefs.GetInt("Level", 1) -1).ToString();  
        

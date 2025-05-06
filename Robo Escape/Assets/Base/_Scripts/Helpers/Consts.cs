@@ -20,6 +20,7 @@ public class Consts
         public const string HAPTIC = "Haptic";
         public const string PROTOCOLCOUNT = "ProtocolCount";
         public const string OUTLINES = "Outlines";
+        public const string CAPFPS = "CapFPS";
     }
 
     public struct Tags

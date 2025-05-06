@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterRunSpeed: 850
   characterWalkSpeed: 625
-  characterTurnSpeed: 50
+  characterTurnSpeed: 3
   magnetismSpeedMultiplier: 2
   movementThreshold: 0.35
   stopThreshold: 0.2
   replenishAmount: 0.45
-  consumeAmount: 0.15
+  consumeAmount: 0.225
   magnetismConsumptionMultiplier: 2
   magnetismReplenishMultiplier: 3
   maxEnergyCapacity: 100
@@ -35,6 +35,6 @@ MonoBehaviour:
   _positiveColor: {r: 1, g: 0.64705884, b: 0, a: 1}
   _negativeColor: {r: 0.9921569, g: 0.32941177, b: 0, a: 1}
   cameraShakeDuration: 1
-  cameraShakeAmplitude: 3
-  cameraShakeFrequency: 3
+  cameraShakeAmplitude: 10
+  cameraShakeFrequency: 10
   menuLoadDelay: 0.1
