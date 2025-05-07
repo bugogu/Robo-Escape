@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58f5179481003c49a7ee2ae3b114568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _checkForCameraVisibilty: {fileID: 8791374183108695477}
   viewRadius: 1.35
   visionConeSprite: {fileID: 926736739696362344}
   rotateCamera: 1
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af42dfa2806113246ba67fe90b75eb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _checkForCameraVisibilty: {fileID: 8791374183108695477}
   rotateCamera: 1
   rotationSpeed: 45
   minAngle: -70
@@ -198,6 +200,7 @@ GameObject:
   - component: {fileID: 8800791395611896260}
   - component: {fileID: 4639575507031762359}
   - component: {fileID: 8862808830668005374}
+  - component: {fileID: 8791374183108695477}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -274,6 +277,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8791374183108695477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740179511017700697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91829f7c7a603b9499e9caf3dbcf0a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3758304757251944117
 GameObject:
   m_ObjectHideFlags: 0

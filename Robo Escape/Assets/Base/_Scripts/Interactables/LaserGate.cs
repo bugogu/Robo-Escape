@@ -4,6 +4,7 @@ using DG.Tweening;
 
 public class LaserGate : MonoBehaviour
 {
+    [SerializeField] private CheckForLaserGateVisibilty _checkForLaserGateVisibilty;
     [SerializeField] private GameObject _lasersParent;
     [SerializeField] private GameObject _interactionPlate;
     [SerializeField] private float _deactiveTime = 5f;
@@ -59,6 +60,8 @@ public class LaserGate : MonoBehaviour
 
     private void Move()
     {
+        if(!_checkForLaserGateVisibilty.IsVisibleToCamera()) return;
+        
         _passedTime += Time.deltaTime * _speed;
         float lerpDegeri = Mathf.PingPong(_passedTime, 1.0f); 
 

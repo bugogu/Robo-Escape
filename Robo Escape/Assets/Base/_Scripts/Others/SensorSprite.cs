@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SensorSprite : MonoBehaviour
 {
+    [SerializeField] private CheckForCameraVisibilty _checkForCameraVisibilty;
+
     [Header("Görüş Ayarları")]
     [SerializeField] private float viewRadius = 7f;
 
@@ -38,6 +40,8 @@ public class SensorSprite : MonoBehaviour
 
     void RotateCamera()
     {
+        if(!_checkForCameraVisibilty.IsVisibleToCamera()) return;
+
         float rotationAmount = rotationSpeed * Time.deltaTime * rotationDirection;
         currentAngle += rotationAmount;
         

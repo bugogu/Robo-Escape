@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SensorCamera : MonoBehaviour
 {
+    [SerializeField] private CheckForCameraVisibilty _checkForCameraVisibilty;
+
     [Header("Dönüş Ayarları")]
     public bool rotateCamera = true;
     public float rotationSpeed = 30f;
@@ -27,6 +29,8 @@ public class SensorCamera : MonoBehaviour
 
     void RotateCamera()
     {
+        if(!_checkForCameraVisibilty.IsVisibleToCamera()) return;
+
         float rotationAmount = rotationSpeed * Time.deltaTime * rotationDirection;
         currentAngle += rotationAmount;
         

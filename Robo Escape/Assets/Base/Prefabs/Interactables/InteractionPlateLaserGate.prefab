@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 6140006706911720064}
   - component: {fileID: 1873589211045982694}
   - component: {fileID: 817123218783226852}
+  - component: {fileID: 8129458163630449769}
   m_Layer: 0
   m_Name: Beam_Start_01
   m_TagString: Untagged
@@ -407,6 +408,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.0000005, y: 1.3499999, z: 1.2}
   m_Center: {x: 2.0000002, y: -0.67499983, z: 0}
+--- !u!114 &8129458163630449769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525322109011079606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3087e9e2e6345594cb576626c35df1bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2535487211298829195
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7996d7449bdd86d46886e16e51823c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _checkForLaserGateVisibilty: {fileID: 8129458163630449769}
   _lasersParent: {fileID: 852419688209899518}
   _interactionPlate: {fileID: 6015938209106342292}
   _deactiveTime: 5
