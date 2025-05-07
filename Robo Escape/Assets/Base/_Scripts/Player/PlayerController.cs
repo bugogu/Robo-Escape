@@ -268,6 +268,8 @@ public class PlayerController : MonoSingleton<PlayerController>
         if(Settings.Instance.Outlines == 1) _outlineMaterial.SetColor("_Color", _hitVignetteColor);
         _vignette.color.Override(_hitVignetteColor);
         EnergyBar.Instance.ConsumeEnergy(energyDamage, true);
+        CameraShake.Shake();
+        // GameManager.Instance.SetAlarm(true);
         Invoke(nameof(RestartHitEffects), _hitEffectsRestartTime);
     }
 
