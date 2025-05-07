@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterRunSpeed: 850
   characterWalkSpeed: 625
-  characterTurnSpeed: 3
+  characterTurnSpeed: 50
   magnetismSpeedMultiplier: 2
   movementThreshold: 0.35
   stopThreshold: 0.2

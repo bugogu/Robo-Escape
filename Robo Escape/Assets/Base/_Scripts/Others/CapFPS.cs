@@ -5,6 +5,7 @@ public class CapFPS : MonoBehaviour
     [SerializeField] private RectTransform _checkMark;
     [SerializeField] private RectTransform _button30;
     [SerializeField] private RectTransform _button60;
+    [SerializeField] private GameObject _warningText;
 
     private int _targetFrameRate;
 
@@ -17,6 +18,7 @@ public class CapFPS : MonoBehaviour
         {
             _checkMark.SetParent(_button60);
             _checkMark.anchoredPosition = Vector2.zero;
+            _warningText.SetActive(true);
         }
     }
 
@@ -29,6 +31,8 @@ public class CapFPS : MonoBehaviour
 
         PlayerPrefs.SetInt(Consts.Prefs.CAPFPS, 30);
         Application.targetFrameRate = 30;
+
+        _warningText.SetActive(false);
     }
 
     public void Button60()
@@ -40,5 +44,7 @@ public class CapFPS : MonoBehaviour
 
         PlayerPrefs.SetInt(Consts.Prefs.CAPFPS, 60);
         Application.targetFrameRate = 60;
+
+        _warningText.SetActive(true);
     }
 }

@@ -9,6 +9,8 @@ public class LevelManager : MonoSingleton<LevelManager>
     public bool timeMissionCompleted => _passedTime < _timeLimit;
     public bool alarmMissionCompleted => !GameManager.Instance.isAlarmActive;
     public bool chipsetMissionCompleted => IsNessaryChipsetCollected();
+
+    [SerializeField] private Light _directionalLight;
     
     private int _collectedChipsetCount = 0;
     private float _passedTime;
@@ -28,12 +30,14 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         GameManager.Instance.OnGameStateChanged += IncreaseProtocolCount;
         GameManager.Instance.OnGameStateChanged += StartTimer;
+        GameManager.Instance.OnAlarmSetted += ChangeTemperature;
     }
 
     void OnDisable()
     {
         GameManager.Instance.OnGameStateChanged -= IncreaseProtocolCount;
         GameManager.Instance.OnGameStateChanged -= StartTimer;
+        GameManager.Instance.OnAlarmSetted -= ChangeTemperature;
     }
 
     private void IncreaseProtocolCount(GameState gameState)
@@ -58,5 +62,11 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         if(gameState != GameState.Intro) _levelStarted = true;
         else _levelStarted = false;
+    }
+
+    private void ChangeTemperature(bool status)
+    {
+        _directionalLight.useColorTemperature = status;
+        _directionalLight.colorTemperature = 1500f;
     }
 }
