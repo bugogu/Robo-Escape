@@ -1,5 +1,8 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using System;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
@@ -28,6 +31,9 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private GameObject _magneticPulseFX;
     [SerializeField] private GameObject _magneticPulseRadiusSprite;
     [SerializeField] private float _magneticPulseRadius;
+    [SerializeField] private Volume _globalVolume;
+    [SerializeField] private Color _hitVignetteColor = Color.red;
+    [SerializeField] private float _hitEffectsRestartTime = 0.2f;
 
     private PlayerMovement _playerMovement;
     private bool _isFlashActive = false;
@@ -38,6 +44,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private Color _empOutline;
     private Color _shieldOutline;
     private Color _initialOutline;
+    private Vignette _vignette;
 
     void Start()
     {
@@ -45,6 +52,8 @@ public class PlayerController : MonoSingleton<PlayerController>
         _initialAnimatorSpeed = GetComponent<Animator>().speed;
 
         _outlineMaterial.SetColor("_Color", _initialOutlineColor);
+
+        if(_globalVolume.profile.TryGet(out Vignette v)) _vignette = v;
 
         if(Settings.Instance.Outlines == 1)
         {
@@ -253,4 +262,18 @@ public class PlayerController : MonoSingleton<PlayerController>
         _playerMovement.onGround = false;
         transform.DOJump(target.position, jumpPower, 1, jumpDuration).SetUpdate(UpdateType.Fixed).OnComplete(() => _playerMovement.onGround = true);
     } 
+
+    public void GetHit(float energyDamage)
+    {
+        if(Settings.Instance.Outlines == 1) _outlineMaterial.SetColor("_Color", _hitVignetteColor);
+        _vignette.color.Override(_hitVignetteColor);
+        EnergyBar.Instance.ConsumeEnergy(energyDamage, true);
+        Invoke(nameof(RestartHitEffects), _hitEffectsRestartTime);
+    }
+
+    private void RestartHitEffects()
+    {
+        if(Settings.Instance.Outlines == 1) _outlineMaterial.SetColor("_Color", _initialOutlineColor);
+        _vignette.color.Override(Color.black);
+    }
 }

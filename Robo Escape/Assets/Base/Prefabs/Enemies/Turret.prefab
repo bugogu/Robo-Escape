@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41fb3e84a19124a469fcacd06eee572c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpotted: 0
   _visionType: 0
   _spottedColor: {r: 1, g: 0, b: 0, a: 0.39215687}
   _normalColor: {r: 1, g: 1, b: 1, a: 0.39215687}
@@ -144,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5882037394900841069}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.39297146, z: -0, w: 0.91955066}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -152,7 +153,7 @@ Transform:
   - {fileID: 5644871539662912675}
   - {fileID: 9216645436607555738}
   m_Father: {fileID: 6418301816358489965}
-  m_LocalEulerAnglesHint: {x: 0, y: 46.279, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9077949062852504795
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -221,9 +222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spottedRotationSpeed: 10
   _visionCone: {fileID: 7557287018350024538}
-  isSpotted: 0
-  _fireRate: 3
+  _fireRate: 2
+  _projectileEnergyConsumptionAmount: 10
   _firePoint: {fileID: 9216645436607555738}
+  _projectilePrefab: {fileID: 1735489306325569051, guid: c41e4207f507ce5488309053e2e99261, type: 3}
+  _projectileSpeed: 5
+  _projectileDestroyTime: 20
   rotateTurret: 1
   rotationSpeed: 15
   minAngle: -180
@@ -255,14 +259,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8170798896941037629}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.92152566, z: -0, w: 0.38831753}
   m_LocalPosition: {x: 0, y: -1.57, z: 0}
   m_LocalScale: {x: 2.1755002, y: 2.1755, z: 2.1755002}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1923261161492217883}
   m_Father: {fileID: 2699177313222561671}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 134.3, z: 0}
 --- !u!33 &4929552598852878936
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -5,7 +5,10 @@ public class Turret : MonoBehaviour
     [SerializeField] private float spottedRotationSpeed = 10f;
     [SerializeField] private VisionCone _visionCone;
     [SerializeField] private float _fireRate = 2f;
+    [SerializeField] private float _projectileEnergyConsumptionAmount = 10f;
     [SerializeField] private Transform _firePoint;
+    [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private float _projectileSpeed;
 
     [Header("Dönüş Ayarları")]
     public bool rotateTurret = true;
@@ -19,7 +22,6 @@ public class Turret : MonoBehaviour
     private float _nextFireTime = 0f;
     private Camera _mainCamera;
     private Renderer _renderer;
-
 
     void Start()
     {
@@ -46,7 +48,7 @@ public class Turret : MonoBehaviour
         if (Time.time >= _nextFireTime)
         {
             _nextFireTime = Time.time + _fireRate;
-            Fire(); 
+            Fire(player); 
         }
 
         Vector3 direction = player.position - transform.position;
@@ -82,9 +84,22 @@ public class Turret : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, currentAngle, 0);
     }
 
-    private void Fire()
+    // Projectile lar burdan spawnlanıcak
+    private void Fire(Transform target)
     {
-        
+        GameObject projectile = Instantiate(_projectilePrefab, _firePoint.position, _firePoint.rotation);
+
+        projectile.GetComponent<Projectile>().damage = _projectileEnergyConsumptionAmount;
+    
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+
+        if (rb != null && target != null)
+        {
+            Vector3 direction = (target.position - _firePoint.position).normalized;
+            rb.AddForce(direction * _projectileSpeed, ForceMode.Impulse);
+
+            projectile.transform.SetParent(null);
+        }
     }
 
     bool IsVisibleToCamera()
