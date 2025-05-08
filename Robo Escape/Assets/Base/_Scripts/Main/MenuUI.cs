@@ -19,6 +19,7 @@ public class MenuUI : MonoSingleton<MenuUI>
     [SerializeField] private Vector3 _handRectYThreshold = new Vector3(-140, 160, 0);
     [SerializeField] private float _handRectMoveDuration = 1f;
     [SerializeField] private GameObject _upgradesCanvas;
+    [SerializeField] private GameObject _settingsPanel;
 
     private bool _isShowed = false;
 
@@ -46,6 +47,8 @@ public class MenuUI : MonoSingleton<MenuUI>
         if(!Input.GetMouseButtonDown(0)) return;
 
         if(!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 100, LayerMask.GetMask("Player"))) return;
+
+        if(_settingsPanel.transform.localScale == Vector3.one || _upgradesCanvas.activeSelf) return;
 
         ShowEnergyCapacity();
          
