@@ -18,6 +18,7 @@ public class MenuUI : MonoSingleton<MenuUI>
     [SerializeField] private RectTransform _handRect;
     [SerializeField] private Vector3 _handRectYThreshold = new Vector3(-140, 160, 0);
     [SerializeField] private float _handRectMoveDuration = 1f;
+    [SerializeField] private GameObject _upgradesCanvas;
 
     private bool _isShowed = false;
 
@@ -76,4 +77,6 @@ public class MenuUI : MonoSingleton<MenuUI>
 
     private void CloseEnergyCapacity()=>
         _capacityRect.DOScale(Vector3.zero, _showDuration).OnComplete(()=> _isShowed = false);
+
+    public void UpgradesCanvasEnabled(bool status) => _upgradesCanvas.SetActive(status);
 }

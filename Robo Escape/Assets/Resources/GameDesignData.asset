@@ -35,6 +35,6 @@ MonoBehaviour:
   _positiveColor: {r: 1, g: 0.64705884, b: 0, a: 1}
   _negativeColor: {r: 0.9921569, g: 0.32941177, b: 0, a: 1}
   cameraShakeDuration: 1
-  cameraShakeAmplitude: 10
-  cameraShakeFrequency: 10
+  cameraShakeAmplitude: 50
+  cameraShakeFrequency: 50
   menuLoadDelay: 0.1

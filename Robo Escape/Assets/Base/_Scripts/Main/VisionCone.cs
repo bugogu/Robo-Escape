@@ -8,6 +8,8 @@ public class VisionCone : MonoBehaviour
     [SerializeField] private VisionType _visionType;
     [SerializeField] private Color _spottedColor;
     [SerializeField] private Color _normalColor;
+
+    public float initialRange;
     public Material VisionConeMaterial;
     public float VisionRange;
     public float VisionAngle;
@@ -18,7 +20,7 @@ public class VisionCone : MonoBehaviour
 
     private Turret _turret;
     private Drone _drone;
-
+    
     //Create all of these variables, most of them are self explanatory, but for the ones that aren't i've added a comment to clue you in on what they do
     //for the ones that you dont understand dont worry, just follow along
     void Start()
@@ -27,6 +29,8 @@ public class VisionCone : MonoBehaviour
         MeshFilter_ = transform.AddComponent<MeshFilter>();
         VisionConeMesh = new Mesh();
         VisionAngle *= Mathf.Deg2Rad;
+
+        initialRange = VisionRange;
 
         if (_visionType == VisionType.Turret)
             _turret = transform.parent.GetComponent<Turret>();

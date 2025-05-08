@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class Turret : MonoBehaviour, IEffectableFromEMP
 {
@@ -11,6 +12,9 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private float _projectileSpeed;
     [SerializeField] private ParticleSystem _projectileFireEffect;
+    [SerializeField] private float _empEffectDuration = 3f;
+    [SerializeField] private Image _empDurationFillImage;
+    [SerializeField] private Material _turretActiveMaterial, _turretInactiveMaterial;
 
     [Header("Recoil Settings")]
     [SerializeField] private float recoilDistance = -0.5f; // Geri tepme mesafesi
@@ -34,6 +38,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
     private Vector3 _originalPosition;
     private Sequence _recoilSequence;
     private AudioSource _audioSource;
+    private bool _isEffected = false;
 
     private void Awake()
     {
@@ -52,6 +57,9 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
     void Update()
     {
         if(!IsVisibleToCamera()) _visionCone.enabled = false;
+
+        if(_isEffected) return;
+
         if(rotateTurret && IsVisibleToCamera())
         {
             _visionCone.enabled = true;
@@ -102,7 +110,6 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
         transform.rotation = Quaternion.Euler(0, currentAngle, 0);
     }
 
-    // Projectile lar burdan spawnlanıcak
     private void Fire(Transform target)
     {
         GameObject projectile = Instantiate(_projectilePrefab, _firePoint.position, _firePoint.rotation);
@@ -137,26 +144,20 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
 
     public void FireRecoil()
     {
-        // Önceki animasyon varsa durdur
         if (_recoilSequence != null && _recoilSequence.IsActive())
         {
             _recoilSequence.Kill();
         }
 
-        // GÜNCEL YÖNE GÖRE GERİ TEPME VEKTÖRÜ
-        // Nesnenin kendi ileri yönünün tersi yönünde geri tepme
         Vector3 recoilDirection = transform.forward;
         
-        // Eğer parent varsa, local space'e çevir
         if (transform.parent != null)
         {
             recoilDirection = transform.parent.InverseTransformDirection(recoilDirection);
         }
 
-        // DOTween Sequence oluştur
         _recoilSequence = DOTween.Sequence();
         
-        // 1. GERİ TEPME AŞAMASI
         _recoilSequence.Append(
             transform.DOLocalMove(
                 _originalPosition + recoilDirection * recoilDistance,
@@ -165,7 +166,6 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
             .SetEase(recoilEase)
         );
         
-        // 2. BAŞLANGIÇ POZİSYONUNA DÖNÜŞ
         _recoilSequence.Append(
             transform.DOLocalMove(
                 _originalPosition,
@@ -177,6 +177,23 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
 
     public void EffectFromEMP()
     {
-        
+        _isEffected = true;
+        transform.parent.GetComponent<Renderer>().material = _turretInactiveMaterial;
+        _visionCone.VisionRange = 0;
+        Invoke(nameof(DeactivateVision), 0.2f);
+        _empDurationFillImage.transform.parent.gameObject.SetActive(true);
+        _empDurationFillImage.FillImageAnimation(0, 1, _empEffectDuration).SetEase(Ease.Linear);
+        Invoke(nameof(RemoveEmpEffects), _empEffectDuration);
     }
+
+    private void RemoveEmpEffects()
+    {
+        _visionCone.VisionRange = _visionCone.initialRange;
+        transform.parent.GetComponent<Renderer>().material = _turretActiveMaterial;
+        _empDurationFillImage.transform.parent.gameObject.SetActive(false);
+        _isEffected = false;
+        _visionCone.enabled = true;
+    }
+
+    private void DeactivateVision() => _visionCone.enabled = false;
 }
