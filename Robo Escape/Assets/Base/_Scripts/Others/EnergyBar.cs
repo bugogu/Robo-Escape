@@ -12,7 +12,7 @@ public class EnergyBar : MonoSingleton<EnergyBar>
 
     void Awake()
     {
-        _maxEnergyCapacity = _gameDesignData.maxEnergyCapacity;
+        _maxEnergyCapacity = _gameDesignData.maxEnergyCapacity + (PlayerPrefs.GetInt(Consts.Prefs.CAPACITY, 0) * _gameDesignData.energyCapacityUpgradeAmount);
     }
 
     public void ConsumeEnergy(float amount, bool burst = false)

@@ -448,6 +448,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306203462}
   m_CullTransparentMesh: 1
+--- !u!224 &331755125 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 46145630796423576, guid: 4a3ec19f0ffec7b46806a9b93341d57f, type: 3}
+  m_PrefabInstance: {fileID: 7209509258472184629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &399193870
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,6 +2011,7 @@ GameObject:
   - component: {fileID: 751044727}
   - component: {fileID: 751044726}
   - component: {fileID: 751044730}
+  - component: {fileID: 751044731}
   m_Layer: 5
   m_Name: UpgradesCanvas
   m_TagString: Untagged
@@ -2112,6 +2118,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _upgradeEnergyCapacity: {fileID: 11400000, guid: 2da50664344182e4ea2e75ea2d71ea67, type: 2}
+  _progressEnergyParent: {fileID: 331755125}
+  _progressEnergyCapacityPrefab: {fileID: 4951017235256841687, guid: cc94fe64a30a7f042a9a9e516331c03e, type: 3}
+  _energyCapacityPriceText: {fileID: 7209509258472184630}
+--- !u!114 &751044731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751044725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ce5866bbb57a5499c0aa3dccca0d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &796361578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2495,7 +2516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.87100005, y: 0.75352085}
   m_AnchorMax: {x: 0.87100005, y: 0.75352085}
-  m_AnchoredPosition: {x: -0.099975586, y: -0.2999878}
+  m_AnchoredPosition: {x: -0.099975586, y: -0.30004883}
   m_SizeDelta: {x: 92, y: 92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &875854705
@@ -8752,11 +8773,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7698005509596604459, guid: 4a3ec19f0ffec7b46806a9b93341d57f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 751044730}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a3ec19f0ffec7b46806a9b93341d57f, type: 3}
+--- !u!114 &7209509258472184630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8436692901474166343, guid: 4a3ec19f0ffec7b46806a9b93341d57f, type: 3}
+  m_PrefabInstance: {fileID: 7209509258472184629}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7352946764105188668
 Transform:
   m_ObjectHideFlags: 0

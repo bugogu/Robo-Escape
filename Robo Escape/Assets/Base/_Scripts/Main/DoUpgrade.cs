@@ -2,16 +2,43 @@ using UnityEngine;
 
 public class DoUpgrade : MonoBehaviour
 {
-    [SerializeField] private UpgradeElementData _upgradeEnergyCapacity;
+    [Header("Energy Capacity")]
+    public UpgradeElementData _upgradeEnergyCapacity;
+    [SerializeField] private RectTransform _progressEnergyParent;
+    [SerializeField] private GameObject _progressEnergyCapacityPrefab;
+    [SerializeField] private TMPro.TMP_Text _energyCapacityPriceText;
 
-    void OnEnable()
+    private UpgradeManager _upgradeManager;
+
+    void Awake()
     {
-        _upgradeEnergyCapacity.onBuy.AddListener(UpgradeEnergyCapacity);
+        _upgradeManager = GetComponent<UpgradeManager>();
     }
 
     public void UpgradeEnergyCapacity()
     {
+        if (_upgradeManager.EnergyCapacity >= _upgradeEnergyCapacity.maxIncreaseCount) return;
+
+        if(PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0) < _upgradeEnergyCapacity.price) return;
+
+        PlayerPrefs.SetInt(Consts.Prefs.PROTOCOLCOUNT, PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0) - _upgradeEnergyCapacity.price);
+
         Settings.Instance.PlayButtonSound();
-        Debug.Log("Upgrade Energy Capacity");
+
+        MenuUI.Instance.SetProtocolText();
+
+        _upgradeManager.EnergyCapacity++;
+
+        if(_upgradeManager.EnergyCapacity == _upgradeEnergyCapacity.maxIncreaseCount) 
+            SetEnergyPriceTextToMax();
+
+        GenerateProgressEnergyCapacity();
+    }
+
+    public void GenerateProgressEnergyCapacity() => Instantiate(_progressEnergyCapacityPrefab, _progressEnergyParent);
+    public void SetEnergyPriceTextToMax()
+    {
+        _energyCapacityPriceText.text = "MAX";
+        _energyCapacityPriceText.fontSize = 20;
     }
 }

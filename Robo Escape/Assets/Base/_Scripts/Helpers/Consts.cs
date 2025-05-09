@@ -21,6 +21,7 @@ public class Consts
         public const string PROTOCOLCOUNT = "ProtocolCount";
         public const string OUTLINES = "Outlines";
         public const string CAPFPS = "CapFPS";
+        public const string CAPACITY = "Capacity"; 
     }
 
     public struct Tags

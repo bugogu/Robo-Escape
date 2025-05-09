@@ -2,6 +2,7 @@ using MaskTransitions;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class MenuUI : MonoSingleton<MenuUI>
 {
@@ -89,5 +90,11 @@ public class MenuUI : MonoSingleton<MenuUI>
     {
         Settings.Instance.PlayButtonSound();
         _upgradesCanvas.SetActive(status);
-    } 
+    }
+
+    public void SetProtocolText()
+    {
+        _protocolText.text = $"{PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0)}";
+    }
+
 }

@@ -40,6 +40,9 @@ public class GameDesignData : ScriptableObject
     [Header("UI General Settings")]
     public float menuLoadDelay = 0.1f;
 
+    [Header("Upgrade Settings")]
+    public float energyCapacityUpgradeAmount = 5f;
+
 
 
 }

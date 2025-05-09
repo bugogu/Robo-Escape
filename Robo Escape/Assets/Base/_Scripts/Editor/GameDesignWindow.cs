@@ -11,6 +11,7 @@ public class GameDesignWindow : EditorWindow
     private bool showGeneralUISettings = false;
     private bool showPowerUpSettings = false;
     private bool showCameraShakeSettings = false;
+    private bool showMaxCapacitySettings = false;
 
     private Vector2 scrollPosition;
     
@@ -34,6 +35,7 @@ public class GameDesignWindow : EditorWindow
              DrawPlayerSettingsContainer();
              DrawUISettingsContainer();
              DrawCameraSettingsContainer();
+             DrawUpgradeSettingsContainer();
          }
          EditorGUILayout.EndScrollView();
         
@@ -103,6 +105,24 @@ public class GameDesignWindow : EditorWindow
             EditorGUI.indentLevel++; 
 
             DrawCameraShakeSettings();
+
+            EditorGUILayout.Space(5);
+
+            EditorGUI.indentLevel--; 
+        }
+        
+        EditorGUILayout.EndVertical(); 
+    }
+
+    private void DrawUpgradeSettingsContainer()
+    {
+        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+        {
+            EditorGUILayout.LabelField("Upgrade Settings", EditorStyles.boldLabel);
+
+            EditorGUI.indentLevel++; 
+
+            DrawMaxCapacitySettings();
 
             EditorGUILayout.Space(5);
 
@@ -354,6 +374,29 @@ public class GameDesignWindow : EditorWindow
         EditorGUILayout.LabelField("Shake Frequency", EditorStyles.label);
         EditorGUILayout.Space(2);
         designData.cameraShakeFrequency = EditorGUILayout.FloatField(designData.cameraShakeFrequency, EditorStyles.miniTextField);
+
+        EditorGUI.indentLevel--; 
+        
+        }
+    }
+
+    private void DrawMaxCapacitySettings()
+    {
+        showMaxCapacitySettings = EditorGUILayout.Foldout(
+        showMaxCapacitySettings, 
+        "Energy Capacity", 
+        true, 
+        EditorStyles.boldLabel
+        );
+
+        if (showMaxCapacitySettings)
+        {
+        
+        EditorGUI.indentLevel++; 
+
+        EditorGUILayout.LabelField("Increase Amount", EditorStyles.label);
+        EditorGUILayout.Space(2);
+        designData.energyCapacityUpgradeAmount = EditorGUILayout.FloatField(designData.energyCapacityUpgradeAmount, EditorStyles.miniTextField);
 
         EditorGUI.indentLevel--; 
         
