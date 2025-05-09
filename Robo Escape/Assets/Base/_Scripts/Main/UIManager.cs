@@ -90,6 +90,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void HomeButton()
     {
+        Settings.Instance.PlayButtonSound();
+
         if(GameManager.Instance.isAlarmActive && Settings.Instance.Music == 1)
         GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
 
@@ -253,6 +255,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void MenuButton()
     {
+        Settings.Instance.PlayButtonSound();
+        
         if(GameManager.Instance.isAlarmActive && Settings.Instance.Music == 1)
         GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
 
@@ -270,6 +274,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void NextLevelButton()
     {
+        Settings.Instance.PlayButtonSound();
+
         PlayerPrefs.SetInt(Consts.Prefs.LEVEL, PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) + 1);
         TransitionManager.Instance.PlayTransition(1f);
         Invoke(nameof(LoadLevel), 0.3f);
@@ -278,6 +284,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void TryAgainButton()
     {
+        Settings.Instance.PlayButtonSound();
+
         TransitionManager.Instance.PlayTransition(1f);
         Invoke(nameof(LoadLevel), 0.3f);
         _levelEndMissionCanvas.SetActive(false);

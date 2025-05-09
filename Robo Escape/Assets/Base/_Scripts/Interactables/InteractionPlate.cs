@@ -45,6 +45,9 @@ public class InteractionPlate : MonoBehaviour, IInteractable
                 FindAnyObjectByType<PlayerController>().HackFxActive(_interactionType, false);
                 _action.RemoveAllListeners();
                 _action?.Invoke();
+                
+                if(Settings.Instance.Sound == 1)
+                    LevelManager.Instance.PlayHackSFX();
 
                 if(oneTimeUseable)
                 {

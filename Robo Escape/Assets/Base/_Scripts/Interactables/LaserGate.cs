@@ -76,6 +76,8 @@ public class LaserGate : MonoBehaviour
 
             CameraShake.Shake();
 
+            if(Settings.Instance.Sound == 1) SoundManager.Instance.PlaySFX(SoundManager.Instance.electricSfx);
+
             if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
 
             EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount, true); 

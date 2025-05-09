@@ -55,6 +55,8 @@ public class MenuUI : MonoSingleton<MenuUI>
     }
     private void PlayButton() 
     {
+        Settings.Instance.PlayButtonSound();
+
         _escapeButton.SetActive(false);
         _settings._settingsPanel.gameObject.SetActive(false);
         TransitionManager.Instance.PlayTransition(1f);
@@ -69,6 +71,8 @@ public class MenuUI : MonoSingleton<MenuUI>
     {
         if(_isShowed) return;
 
+        Settings.Instance.PlayButtonSound();
+
         _isShowed = true;
 
         _capacityRect.DOScale(Vector3.one, _showDuration);
@@ -81,5 +85,9 @@ public class MenuUI : MonoSingleton<MenuUI>
     private void CloseEnergyCapacity()=>
         _capacityRect.DOScale(Vector3.zero, _showDuration).OnComplete(()=> _isShowed = false);
 
-    public void UpgradesCanvasEnabled(bool status) => _upgradesCanvas.SetActive(status);
+    public void UpgradesCanvasEnabled(bool status) 
+    {
+        Settings.Instance.PlayButtonSound();
+        _upgradesCanvas.SetActive(status);
+    } 
 }

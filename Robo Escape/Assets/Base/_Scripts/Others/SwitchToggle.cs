@@ -54,6 +54,8 @@ public class SwitchToggle : MonoBehaviour {
 
    void OnSwitch (bool on) {
 
+      Settings.Instance.PlayButtonSound();
+
       if (!_firstLoad)
       switch (_switchType) {
          case SwitchType.Music:

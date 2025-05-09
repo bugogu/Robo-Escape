@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using Unity.VisualScripting;
 
 public class Settings : MonoSingleton<Settings>
 {
@@ -13,7 +14,7 @@ public class Settings : MonoSingleton<Settings>
 
     public int Music 
     {
-        get => PlayerPrefs.GetInt(Consts.Prefs.MUSIC, 1);
+        get => PlayerPrefs.GetInt(Consts.Prefs.MUSIC, 0);
         set => PlayerPrefs.SetInt(Consts.Prefs.MUSIC, value);
     } 
 
@@ -36,11 +37,14 @@ public class Settings : MonoSingleton<Settings>
     }
 
     private bool _isOpen;
+    private AudioSource _audioSource;
 
     void Awake()
     {
         _settingsButton.onClick.RemoveAllListeners();
         _settingsButton.onClick.AddListener(SettingsPanel);
+
+        _audioSource = GetComponent<AudioSource>();
 
         DontDestroyOnLoad(this.gameObject);
     }
@@ -52,6 +56,8 @@ public class Settings : MonoSingleton<Settings>
 
     public void SettingsPanel()
     {
+        PlayButtonSound();
+
         if(!_isOpen)
         {
             _isOpen = true;
@@ -71,4 +77,10 @@ public class Settings : MonoSingleton<Settings>
     {
         OnOutlinesSetted?.Invoke(status);   
     }
+
+    public void PlayButtonSound() 
+    {
+        if(Sound == 1)
+            _audioSource?.Play();
+    } 
 }

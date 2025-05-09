@@ -26,6 +26,8 @@ public class CapFPS : MonoBehaviour
     {
         if(PlayerPrefs.GetInt(Consts.Prefs.CAPFPS, 30) == 30) return;
 
+        Settings.Instance.PlayButtonSound();
+
         _checkMark.SetParent(_button30);
         _checkMark.anchoredPosition = Vector2.zero;
 
@@ -38,6 +40,8 @@ public class CapFPS : MonoBehaviour
     public void Button60()
     {
         if(PlayerPrefs.GetInt(Consts.Prefs.CAPFPS, 30) == 60) return;
+
+        Settings.Instance.PlayButtonSound();
 
         _checkMark.SetParent(_button60);
         _checkMark.anchoredPosition = Vector2.zero;

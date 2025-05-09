@@ -15,6 +15,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     private int _collectedChipsetCount = 0;
     private float _passedTime;
     private bool _levelStarted = false;
+    private AudioSource _audioSource;
 
     public void CollectChipset() => _collectedChipsetCount++;
 
@@ -24,6 +25,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         chipsetCount = levelData.chipsetCount;
         _timeLimit = levelData.timeLimit;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void OnEnable()
@@ -68,5 +70,11 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         _directionalLight.useColorTemperature = status;
         _directionalLight.colorTemperature = 1500f;
+    }
+
+    public void PlayHackSFX()
+    {
+        if(Settings.Instance.Sound == 1)
+        _audioSource.Play();
     }
 }
