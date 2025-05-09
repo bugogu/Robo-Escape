@@ -9,7 +9,7 @@ public class TestScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab)) 
         {
-            
+            GameManager.Instance.ChangeGameState(GameState.Lose);
         }
     }
 #endif

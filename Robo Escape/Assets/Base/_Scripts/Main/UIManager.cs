@@ -270,6 +270,7 @@ public class UIManager : MonoSingleton<UIManager>
         TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
 
         _levelEndMissionCanvas.SetActive(false);
+        _levelEndAnimation.gameObject.SetActive(false);
     }
 
     private void NextLevelButton()
@@ -280,6 +281,7 @@ public class UIManager : MonoSingleton<UIManager>
         TransitionManager.Instance.PlayTransition(1f);
         Invoke(nameof(LoadLevel), 0.3f);
         _levelEndMissionCanvas.SetActive(false);
+        _levelEndAnimation.gameObject.SetActive(false);
     }
 
     private void TryAgainButton()
@@ -289,6 +291,7 @@ public class UIManager : MonoSingleton<UIManager>
         TransitionManager.Instance.PlayTransition(1f);
         Invoke(nameof(LoadLevel), 0.3f);
         _levelEndMissionCanvas.SetActive(false);
+        _levelEndAnimation.gameObject.SetActive(false);
     }
 
     private void LoadLevel()=>
