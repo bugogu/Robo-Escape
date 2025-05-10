@@ -80,7 +80,7 @@ public class MenuUI : MonoSingleton<MenuUI>
 
         Invoke(nameof(CloseEnergyCapacity), _closeDuration);
 
-        _capacityText.text = _gameDesignData.maxEnergyCapacity.ToString();
+        _capacityText.text = (_gameDesignData.maxEnergyCapacity + (PlayerPrefs.GetInt(Consts.Prefs.CAPACITY, 0) * _gameDesignData.energyCapacityUpgradeAmount)).ToString();
     }
 
     private void CloseEnergyCapacity()=>

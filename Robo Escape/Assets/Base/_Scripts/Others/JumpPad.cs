@@ -18,6 +18,8 @@ public class JumpPad : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(!other.CompareTag(Consts.Tags.PLAYER)) return;
+
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.jumpPadSfx);
         
         _animator.enabled = true;
 

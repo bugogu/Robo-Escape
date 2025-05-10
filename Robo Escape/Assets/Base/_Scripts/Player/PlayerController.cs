@@ -216,6 +216,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         EMP();
 
         CameraShake.Shake();
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.electricSfx);
 
         if(Settings.Instance.Outlines == 1)
         _outlineMaterial.SetColor("_Color", _initialOutline);

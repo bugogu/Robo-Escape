@@ -14,7 +14,7 @@ public class Settings : MonoSingleton<Settings>
 
     public int Music 
     {
-        get => PlayerPrefs.GetInt(Consts.Prefs.MUSIC, 0);
+        get => PlayerPrefs.GetInt(Consts.Prefs.MUSIC, 1);
         set => PlayerPrefs.SetInt(Consts.Prefs.MUSIC, value);
     } 
 
