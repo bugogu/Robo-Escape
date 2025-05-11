@@ -13,6 +13,11 @@ public class TrapGate : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag(Consts.Tags.PLAYER) && _isOpen)
-        _animator.SetTrigger(Consts.AnimationParameters.CLOSE);
+        {
+            _isOpen = false;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.gateClosingSfx);
+            _animator.SetTrigger(Consts.AnimationParameters.CLOSE);
+        }
+        
     }
 }

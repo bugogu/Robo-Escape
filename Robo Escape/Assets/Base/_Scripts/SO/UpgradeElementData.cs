@@ -5,6 +5,5 @@ public class UpgradeElementData : ScriptableObject
 {
     public int price;
     public int maxIncreaseCount;
-    public Sprite icon;
     public string title;
 }

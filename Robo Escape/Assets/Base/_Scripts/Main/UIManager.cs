@@ -284,14 +284,19 @@ public class UIManager : MonoSingleton<UIManager>
         _levelEndAnimation.gameObject.SetActive(false);
     }
 
-    private void TryAgainButton()
+    public void TryAgainButton()
     {
+        if(GameManager.Instance.isAlarmActive && Settings.Instance.Music == 1)
+        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
+
         Settings.Instance.PlayButtonSound();
 
         TransitionManager.Instance.PlayTransition(1f);
         Invoke(nameof(LoadLevel), 0.3f);
         _levelEndMissionCanvas.SetActive(false);
         _levelEndAnimation.gameObject.SetActive(false);
+
+        if(_homeButton.transform.parent.gameObject.activeInHierarchy) _homeButton.transform.parent.gameObject.SetActive(false);
     }
 
     private void LoadLevel()=>
