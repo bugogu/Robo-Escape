@@ -2,7 +2,6 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using System;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
@@ -19,21 +18,21 @@ public class PlayerController : MonoSingleton<PlayerController>
     public ParticleSystem _purpleHackFX;
     public GameObject teleportFX;
 
-    [SerializeField] private GameDesignData _gameDesignData;
-    [SerializeField] private Material _outlineMaterial;
-    [SerializeField] private Color _initialOutlineColor;
-    [SerializeField] private float _shieldDuration = 10f;
-    [SerializeField] private GameObject _playerMovingFX;
-    [SerializeField] private GameObject _passwordCanvas;
-    [SerializeField] private ParticleSystem _antiAlarmShieldFX;
-    [SerializeField] private GameObject _flashTrailFX;
-    [SerializeField] private GameObject _magneticPulseAuraFX;
-    [SerializeField] private GameObject _magneticPulseFX;
-    [SerializeField] private GameObject _magneticPulseRadiusSprite;
-    [SerializeField] private float _magneticPulseRadius;
-    [SerializeField] private Volume _globalVolume;
-    [SerializeField] private Color _hitVignetteColor = Color.red;
-    [SerializeField] private float _hitEffectsRestartTime = 0.2f;
+    [SerializeField] private GameDesignData gameDesignData;
+    [SerializeField] private Material outlineMaterial;
+    [SerializeField] private Color initialOutlineColor;
+    [SerializeField] private float shieldDuration = 10f;
+    [SerializeField] private GameObject playerMovingFX;
+    [SerializeField] private GameObject passwordCanvas;
+    [SerializeField] private ParticleSystem antiAlarmShieldFX;
+    [SerializeField] private GameObject flashTrailFX;
+    [SerializeField] private GameObject magneticPulseAuraFX;
+    [SerializeField] private GameObject magneticPulseFX;
+    [SerializeField] private GameObject magneticPulseRadiusSprite;
+    [SerializeField] private float magneticPulseRadius;
+    [SerializeField] private Volume globalVolume;
+    [SerializeField] private Color hitVignetteColor = Color.red;
+    [SerializeField] private float hitEffectsRestartTime = 0.2f;
 
     private PlayerMovement _playerMovement;
     private bool _isFlashActive = false;
@@ -48,19 +47,19 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     void Start()
     {
-        _flashDuration = _gameDesignData.flashPowerUpDuration;
+        _flashDuration = gameDesignData.flashPowerUpDuration;
         _initialAnimatorSpeed = GetComponent<Animator>().speed;
 
-        _outlineMaterial.SetColor("_Color", _initialOutlineColor);
+        outlineMaterial.SetColor("_Color", initialOutlineColor);
 
-        if(_globalVolume.profile.TryGet(out Vignette v)) _vignette = v;
+        if(globalVolume.profile.TryGet(out Vignette v)) _vignette = v;
 
         if(Settings.Instance.Outlines == 1)
         {
-            _initialOutline = _outlineMaterial.GetColor("_Color");
-            _flashOutline = _gameDesignData.flashOutlineColor;
-            _empOutline = _gameDesignData.empOutlineColor;
-            _shieldOutline = _gameDesignData.shieldOutlineColor;
+            _initialOutline = outlineMaterial.GetColor("_Color");
+            _flashOutline = gameDesignData.flashOutlineColor;
+            _empOutline = gameDesignData.empOutlineColor;
+            _shieldOutline = gameDesignData.shieldOutlineColor;
         }
     }
 
@@ -75,7 +74,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     void OnDisable()
     {
-        GameManager.Instance.OnGameStateChanged -= CanMove;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnGameStateChanged -= CanMove;
     }
 
     private void CanMove(GameState gameState)
@@ -87,10 +87,10 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void MovingFX(bool status)
     {
         if(!_isFlashActive)
-        _playerMovingFX.SetActive(status);
+            playerMovingFX.SetActive(status);
 
         if(_isFlashActive)
-        _flashTrailFX.SetActive(status);
+            flashTrailFX.SetActive(status);
     }
         
 
@@ -133,16 +133,16 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         if(_isProtectionActive) return;
 
-        UIManager.Instance.ActivatePowerCounter(_shieldDuration, true);
+        UIManager.Instance.ActivatePowerCounter(shieldDuration, true);
 
         if(Settings.Instance.Outlines == 1)
-        _outlineMaterial.SetColor("_Color", _shieldOutline);
+            outlineMaterial.SetColor("_Color", _shieldOutline);
 
         _hasAnyPowerUp = true;
         _isProtectionActive = true;
-        _antiAlarmShieldFX.gameObject.SetActive(true);
+        antiAlarmShieldFX.gameObject.SetActive(true);
 
-        Invoke("RemoveProtection", _shieldDuration);
+        Invoke("RemoveProtection", shieldDuration);
     }
 
     private void GainFlash()
@@ -152,17 +152,17 @@ public class PlayerController : MonoSingleton<PlayerController>
         UIManager.Instance.ActivatePowerCounter(_flashDuration, false);
 
         if(Settings.Instance.Outlines == 1)
-        _outlineMaterial.SetColor("_Color", _flashOutline);
+            outlineMaterial.SetColor("_Color", _flashOutline);
 
-        GetComponent<Animator>().speed = _gameDesignData.flashSpeedMultiplier;
+        GetComponent<Animator>().speed = gameDesignData.flashSpeedMultiplier;
 
         _playerMovement.SetSpeed(true);
 
         _hasAnyPowerUp = true;
         _isFlashActive = true;
 
-        _flashTrailFX.SetActive(true);
-        _playerMovingFX.SetActive(false);
+        flashTrailFX.SetActive(true);
+        playerMovingFX.SetActive(false);
 
         Invoke(nameof(RemoveFlash), _flashDuration);
     }
@@ -172,10 +172,10 @@ public class PlayerController : MonoSingleton<PlayerController>
         if(!_isProtectionActive) return;
 
         if(Settings.Instance.Outlines == 1)
-        _outlineMaterial.SetColor("_Color", _initialOutline);
+            outlineMaterial.SetColor("_Color", _initialOutline);
 
         _isProtectionActive = false;
-        _antiAlarmShieldFX.gameObject.SetActive(false);
+        antiAlarmShieldFX.gameObject.SetActive(false);
         _hasAnyPowerUp = false;
     }
 
@@ -184,15 +184,15 @@ public class PlayerController : MonoSingleton<PlayerController>
         GetComponent<Animator>().speed = _initialAnimatorSpeed;
 
         if(Settings.Instance.Outlines == 1)
-        _outlineMaterial.SetColor("_Color", _initialOutline);
+            outlineMaterial.SetColor("_Color", _initialOutline);
 
         _playerMovement.SetSpeed(false);
 
         _hasAnyPowerUp = false;
         _isFlashActive = false;
 
-        _flashTrailFX.SetActive(false);
-        _playerMovingFX.SetActive(true);
+        flashTrailFX.SetActive(false);
+        playerMovingFX.SetActive(true);
     }
 
     public bool GetFlashStatus() => _isFlashActive;
@@ -202,41 +202,40 @@ public class PlayerController : MonoSingleton<PlayerController>
         if(_hasAnyPowerUp) return;
 
         if(Settings.Instance.Outlines == 1)
-        _outlineMaterial.SetColor("_Color", _empOutline);
+            outlineMaterial.SetColor("_Color", _empOutline);
 
-        _magneticPulseRadiusSprite.SetActive(true);
+        magneticPulseRadiusSprite.SetActive(true);
         UIManager.Instance.magneticPulseButton.transform.parent.gameObject.SetActive(true);
         _hasAnyPowerUp = true;
-        _magneticPulseAuraFX.SetActive(true);
+        magneticPulseAuraFX.SetActive(true);
         _hasMagneticCharge = true;
     }
 
     public void UseMagneticPulse()
     {
-        EMP();
+        Emp();
 
         CameraShake.Shake();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.electricSfx);
 
         if(Settings.Instance.Outlines == 1)
-        _outlineMaterial.SetColor("_Color", _initialOutline);
+            outlineMaterial.SetColor("_Color", _initialOutline);
         
-        _magneticPulseRadiusSprite.SetActive(false);
+        magneticPulseRadiusSprite.SetActive(false);
         UIManager.Instance.magneticPulseButton.transform.parent.gameObject.SetActive(false);
         _hasAnyPowerUp = false;
-        _magneticPulseAuraFX.SetActive(false);
+        magneticPulseAuraFX.SetActive(false);
         _hasMagneticCharge = false;
-        _magneticPulseFX.SetActive(true);
+        magneticPulseFX.SetActive(true);
         Invoke(nameof(CloseMagneticPulseFX), 2f);
-        // TODO: EMP sesi oynatılabilir.
     }
 
-    private void EMP()
+    private void Emp()
     {
         EnergyBar.Instance.ConsumeEnergy(EnergyBar.Instance._maxEnergyCapacity/2, true);
-        Collider[] _hitColliders = Physics.OverlapSphere(transform.position, _magneticPulseRadius);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, magneticPulseRadius);
 
-        foreach (Collider col in _hitColliders)
+        foreach (Collider col in hitColliders)
         {
             IEffectableFromEMP empTarget = col.GetComponent<IEffectableFromEMP>();
             
@@ -246,12 +245,12 @@ public class PlayerController : MonoSingleton<PlayerController>
     }
 
     private void CloseMagneticPulseFX()=>
-        _magneticPulseFX.SetActive(false);
+        magneticPulseFX.SetActive(false);
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, _magneticPulseRadius);
+        Gizmos.DrawWireSphere(transform.position, magneticPulseRadius);
     }
 
     public void Jump(Transform target, float jumpPower, float jumpDuration)
@@ -266,17 +265,17 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void GetHit(float energyDamage)
     {
-        if(Settings.Instance.Outlines == 1) _outlineMaterial.SetColor("_Color", _hitVignetteColor);
-        _vignette.color.Override(_hitVignetteColor);
+        if(Settings.Instance.Outlines == 1) outlineMaterial.SetColor("_Color", hitVignetteColor);
+        _vignette.color.Override(hitVignetteColor);
         EnergyBar.Instance.ConsumeEnergy(energyDamage, true);
         CameraShake.Shake();
         // GameManager.Instance.SetAlarm(true);
-        Invoke(nameof(RestartHitEffects), _hitEffectsRestartTime);
+        Invoke(nameof(RestartHitEffects), hitEffectsRestartTime);
     }
 
     private void RestartHitEffects()
     {
-        if(Settings.Instance.Outlines == 1) _outlineMaterial.SetColor("_Color", _initialOutlineColor);
+        if(Settings.Instance.Outlines == 1) outlineMaterial.SetColor("_Color", initialOutlineColor);
         _vignette.color.Override(Color.black);
     }
 }

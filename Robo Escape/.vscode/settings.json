@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Robo Escape.sln"
+    "dotnet.defaultSolution": "Robo Escape.sln",
+    "dotnet.preferCSharpExtension": true
 }

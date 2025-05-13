@@ -5,7 +5,7 @@ public class Drone : MonoBehaviour
     [SerializeField] private VisionCone _visionCone;
     private bool _isPatroling = true;
     private CheckForDroneVisibilty _checkForDroneVisibilty;
-
+    
     void Awake()
     {
         _checkForDroneVisibilty = transform.GetChild(0).GetComponent<CheckForDroneVisibilty>();
@@ -41,6 +41,7 @@ public class Drone : MonoBehaviour
 
     void OnDisable()
     {
-        GameManager.Instance.OnAlarmSetted -= StopPatroling;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnAlarmSetted -= StopPatroling;
     }
 }

@@ -10,7 +10,8 @@ public class SetOutlines : MonoBehaviour
 
     void OnDisable()
     {
-         Settings.Instance.OnOutlinesSetted -= OutlineEnabled;
+        if (Settings.Instance != null)
+            Settings.Instance.OnOutlinesSetted -= OutlineEnabled;
     }
 
     private void OutlineEnabled(bool status)

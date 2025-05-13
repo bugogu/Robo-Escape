@@ -21,7 +21,8 @@ public class AlarmLights : MonoBehaviour
 
     void OnDisable()
     {
-        GameManager.Instance.OnAlarmSetted -= AlarmLightsEnabled;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnAlarmSetted -= AlarmLightsEnabled;
     }
 
     private void AlarmLightsEnabled(bool status)
