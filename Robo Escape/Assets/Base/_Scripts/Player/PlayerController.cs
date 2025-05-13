@@ -23,7 +23,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private Color initialOutlineColor;
     [SerializeField] private float shieldDuration = 10f;
     [SerializeField] private GameObject playerMovingFX;
-    [SerializeField] private GameObject passwordCanvas;
+    //[SerializeField] private GameObject passwordCanvas;
     [SerializeField] private ParticleSystem antiAlarmShieldFX;
     [SerializeField] private GameObject flashTrailFX;
     [SerializeField] private GameObject magneticPulseAuraFX;
@@ -32,7 +32,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] private float magneticPulseRadius;
     [SerializeField] private Volume globalVolume;
     [SerializeField] private Color hitVignetteColor = Color.red;
-    [SerializeField] private float hitEffectsRestartTime = 0.2f;
+    [Range(0f, 1f), SerializeField] private float hitEffectsRestartTime = 0.2f;
 
     private PlayerMovement _playerMovement;
     private bool _isFlashActive = false;
@@ -44,17 +44,18 @@ public class PlayerController : MonoSingleton<PlayerController>
     private Color _shieldOutline;
     private Color _initialOutline;
     private Vignette _vignette;
+    private int _outlineColor = Shader.PropertyToID("_Color");
 
     void Start()
     {
         _flashDuration = gameDesignData.flashPowerUpDuration;
         _initialAnimatorSpeed = GetComponent<Animator>().speed;
 
-        outlineMaterial.SetColor("_Color", initialOutlineColor);
+        outlineMaterial.SetColor(_outlineColor, initialOutlineColor);
 
         if(globalVolume.profile.TryGet(out Vignette v)) _vignette = v;
 
-        if(Settings.Instance.Outlines == 1)
+        if(Settings.Instance != null && Settings.Instance.Outlines == 1)
         {
             _initialOutline = outlineMaterial.GetColor("_Color");
             _flashOutline = gameDesignData.flashOutlineColor;

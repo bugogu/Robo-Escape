@@ -5,7 +5,8 @@ public class SetOutlines : MonoBehaviour
     [SerializeField] private string layerName = "";
     void OnEnable()
     {
-        Settings.Instance.OnOutlinesSetted += OutlineEnabled;
+        if (Settings.Instance != null)
+            Settings.Instance.OnOutlinesSetted += OutlineEnabled;
     }
 
     void OnDisable()

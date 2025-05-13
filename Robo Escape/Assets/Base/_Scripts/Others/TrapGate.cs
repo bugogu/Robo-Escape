@@ -4,6 +4,7 @@ public class TrapGate : MonoBehaviour
 {
     private Animator _animator;
     private bool _isOpen = true;
+    private int _closeTriggerHash = Animator.StringToHash(Consts.AnimationParameters.CLOSE);
 
     void Start()
     {
@@ -16,7 +17,7 @@ public class TrapGate : MonoBehaviour
         {
             _isOpen = false;
             SoundManager.Instance.PlaySFX(SoundManager.Instance.gateClosingSfx);
-            _animator.SetTrigger(Consts.AnimationParameters.CLOSE);
+            _animator.SetTrigger(_closeTriggerHash);
         }
         
     }
