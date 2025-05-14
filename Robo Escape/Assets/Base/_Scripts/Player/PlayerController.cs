@@ -259,7 +259,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         Vector3 dir = transform.position - target.position;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(-dir), 1);
 
-        CameraShake.Shake();
+        //CameraShake.Shake();
         _playerMovement.onGround = false;
         transform.DOJump(target.position, jumpPower, 1, jumpDuration).SetUpdate(UpdateType.Fixed).OnComplete(() => _playerMovement.onGround = true);
     } 

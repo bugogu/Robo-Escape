@@ -98,7 +98,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
             currentAngle = transform.eulerAngles.y;
         if (currentAngle > 180f) currentAngle -= 360f;
 
-        float rotationAmount = rotationSpeed * Time.deltaTime * rotationDirection;
+        float rotationAmount = rotationSpeed * rotationDirection * Time.deltaTime;
         currentAngle += rotationAmount;
     
         if (currentAngle >= maxAngle || currentAngle <= minAngle)
@@ -127,7 +127,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
         if (rb != null && target != null)
         {
             Vector3 direction = (target.position - _firePoint.position).normalized;
-            rb.AddForce((direction + Vector3.up / 10)  * _projectileSpeed, ForceMode.Impulse);
+            rb.AddForce(_projectileSpeed * (direction + Vector3.up / 10), ForceMode.Impulse);
 
             projectile.transform.SetParent(null);
         }
@@ -160,7 +160,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
         
         _recoilSequence.Append(
             transform.DOLocalMove(
-                _originalPosition + recoilDirection * recoilDistance,
+                recoilDistance * recoilDirection + _originalPosition,
                 recoilDuration
             )
             .SetEase(recoilEase)

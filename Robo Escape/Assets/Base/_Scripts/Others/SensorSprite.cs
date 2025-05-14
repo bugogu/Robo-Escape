@@ -42,7 +42,7 @@ public class SensorSprite : MonoBehaviour
     {
         if(!_checkForCameraVisibilty.IsVisibleToCamera()) return;
 
-        float rotationAmount = rotationSpeed * Time.deltaTime * rotationDirection;
+        float rotationAmount = rotationSpeed * rotationDirection * Time.deltaTime;
         currentAngle += rotationAmount;
         
         // Açı limit kontrolü

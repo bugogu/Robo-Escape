@@ -62,9 +62,8 @@ public class LaserGate : MonoBehaviour
     {
         if(!_checkForLaserGateVisibilty.IsVisibleToCamera()) return;
         
-        _passedTime += Time.deltaTime * _speed;
+        _passedTime += _speed * Time.deltaTime;
         float lerpDegeri = Mathf.PingPong(_passedTime, 1.0f); 
-
         transform.position = Vector3.Lerp(_startPoint.position, _endPoint.position, lerpDegeri);
     }
 
