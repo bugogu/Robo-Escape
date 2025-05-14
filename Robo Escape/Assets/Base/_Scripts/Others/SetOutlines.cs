@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SetOutlines : MonoBehaviour
 {
-    [SerializeField] private string layerName = "";
+    [FormerlySerializedAs("layerName")] [ SerializeField] private string _layerName = "";
+
     void OnEnable()
     {
         if (Settings.Instance != null)
@@ -17,6 +19,6 @@ public class SetOutlines : MonoBehaviour
 
     private void OutlineEnabled(bool status)
     {
-        gameObject.layer = status ? LayerMask.NameToLayer(layerName) : LayerMask.NameToLayer("Default");
+        gameObject.layer = status ? LayerMask.NameToLayer(_layerName) : LayerMask.NameToLayer("Default");
     }
 }

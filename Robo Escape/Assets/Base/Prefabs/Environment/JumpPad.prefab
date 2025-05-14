@@ -251,8 +251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20edddb0d09333244ac17a6b2fa55256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 3748726679838475616}
-  inArea: 0
+  Target: {fileID: 3748726679838475616}
+  InArea: 0
 --- !u!1 &6228033915111998372
 GameObject:
   m_ObjectHideFlags: 0

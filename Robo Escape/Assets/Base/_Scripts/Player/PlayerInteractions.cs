@@ -21,7 +21,7 @@ public class PlayerInteractions : MonoBehaviour
     {
         if(other.TryGetComponent(out ICollectable collectable)) 
         {
-            var fxPlay = collectable.Collect() ? _playerController._energyCellFX : _playerController._drainCellFX;
+            var fxPlay = collectable.Collect() ? _playerController.EnergyCellFX : _playerController.DrainCellFX;
             fxPlay.Play();
         }
 
@@ -31,10 +31,10 @@ public class PlayerInteractions : MonoBehaviour
             
             CameraShake.Shake();
 
-            GetComponent<Animator>().speed /= _gameDesignData.magnetismSpeedMultiplier;
+            GetComponent<Animator>().speed /= _gameDesignData.MagnetismSpeedMultiplier;
 
             if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
-            _playerMovement._isMagnetized = true;
+            _playerMovement.IsMagnetized = true;
         } 
 
         if(other.CompareTag(Consts.Tags.ELEVATOR))
@@ -67,7 +67,7 @@ public class PlayerInteractions : MonoBehaviour
     {
         if(other.CompareTag(Consts.Tags.MAGNETIC_AREA)) 
         {
-            _playerMovement._isMagnetized = false;
+            _playerMovement.IsMagnetized = false;
             GetComponent<Animator>().speed = _initialAnimatorSpeed;
         }
         

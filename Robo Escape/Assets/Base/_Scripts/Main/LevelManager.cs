@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
-    public LevelDesignData levelData;
-    [HideInInspector] public int chipsetCount;
-    [HideInInspector]
-    [Tooltip("Seconds")] public float _timeLimit;
-    public bool timeMissionCompleted => _passedTime < _timeLimit;
-    public bool alarmMissionCompleted => !GameManager.Instance.isAlarmActive;
-    public bool chipsetMissionCompleted => IsNessaryChipsetCollected();
+    public LevelDesignData LevelData;
+    public bool TimeMissionCompleted => _passedTime < TimeLimit;
+    public bool AlarmMissionCompleted => !GameManager.Instance.IsAlarmActive;
+    public bool ChipsetMissionCompleted => IsNessaryChipsetCollected();
+
+    [HideInInspector] public int ChipsetCount;
+    [HideInInspector, Tooltip("Seconds")] public float TimeLimit;
 
     [SerializeField] private Light _directionalLight;
     
@@ -19,12 +19,12 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void CollectChipset() => _collectedChipsetCount++;
 
-    private bool IsNessaryChipsetCollected() => _collectedChipsetCount >= chipsetCount;
+    private bool IsNessaryChipsetCollected() => _collectedChipsetCount >= ChipsetCount;
 
     void Awake()
     {
-        chipsetCount = levelData.chipsetCount;
-        _timeLimit = levelData.timeLimit;
+        ChipsetCount = LevelData.ChipsetCount;
+        TimeLimit = LevelData.TimeLimit;
         _audioSource = GetComponent<AudioSource>();
     }
 
@@ -48,16 +48,16 @@ public class LevelManager : MonoSingleton<LevelManager>
 
         if(IsNessaryChipsetCollected()) GameManager.Instance.ProtocolCount++;
 
-        if(!GameManager.Instance.isAlarmActive) GameManager.Instance.ProtocolCount++;
+        if(!GameManager.Instance.IsAlarmActive) GameManager.Instance.ProtocolCount++;
 
-        if(_passedTime < _timeLimit) GameManager.Instance.ProtocolCount++;
+        if(_passedTime < TimeLimit) GameManager.Instance.ProtocolCount++;
     }
 
     void Update()
     {
         if(!_levelStarted) return;
 
-        _passedTime += Time.deltaTime / _timeLimit;
+        _passedTime += Time.deltaTime / TimeLimit;
     }
 
     private void StartTimer(GameState gameState)

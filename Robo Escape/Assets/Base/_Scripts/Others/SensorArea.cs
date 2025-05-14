@@ -13,11 +13,11 @@ public class SensorArea : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         
-        if(!PlayerController.Instance._isProtectionActive)
+        if(!PlayerController.Instance.IsProtectionActive)
         {
             if(other.CompareTag(Consts.Tags.PLAYER))
             {
-                if(GameManager.Instance.isAlarmActive) return;
+                if(GameManager.Instance.IsAlarmActive) return;
                 
                 if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
                 SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);

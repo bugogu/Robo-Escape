@@ -178,18 +178,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41fb3e84a19124a469fcacd06eee572c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpotted: 0
-  _visionType: 0
-  _spottedColor: {r: 1, g: 0, b: 0, a: 0.39215687}
-  _normalColor: {r: 1, g: 1, b: 1, a: 0.39215687}
-  initialRange: 0
-  VisionConeMaterial: {fileID: 2100000, guid: 46c8bc6dff5c94f4b85e0e4cc86ef9c6, type: 2}
   VisionRange: 20
-  VisionAngle: 20
-  VisionObstructingLayer:
+  PlayerSpotted: 0
+  InitialRange: 0
+  _visionType: 0
+  _visionConeMaterial: {fileID: 2100000, guid: 46c8bc6dff5c94f4b85e0e4cc86ef9c6, type: 2}
+  _visionAngle: 20
+  _visionObstructingLayer:
     serializedVersion: 2
     m_Bits: 8200
   VisionConeResolution: 200
+  _spottedColor: {r: 1, g: 0, b: 0, a: 0.39215687}
+  _normalColor: {r: 1, g: 1, b: 1, a: 0.39215687}
 --- !u!1 &3602199214457732155
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac109bbd3bc437d439b5cdaeb8a0a715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spottedRotationSpeed: 10
+  _spottedRotationSpeed: 10
   _visionCone: {fileID: 7557287018350024538}
   _fireRate: 1.5
   _projectileEnergyConsumptionAmount: 20
@@ -339,15 +339,15 @@ MonoBehaviour:
   _empDurationFillImage: {fileID: 6939516886285659840}
   _turretActiveMaterial: {fileID: 2100000, guid: a85712b22ad692b42b5b2abc52c2e7c0, type: 2}
   _turretInactiveMaterial: {fileID: 2100000, guid: 91b68ccea8f8d434f90acae5e6b88601, type: 2}
-  recoilDistance: -0.5
-  recoilDuration: 0.1
-  returnDuration: 1.5
-  recoilEase: 6
-  returnEase: 24
-  rotateTurret: 1
-  rotationSpeed: 15
-  minAngle: -45
-  maxAngle: 45
+  _recoilDistance: -0.5
+  _recoilDuration: 0.1
+  _returnDuration: 0.3
+  _recoilEase: 6
+  _returnEase: 24
+  _rotateTurret: 1
+  _rotationSpeed: 15
+  _minAngle: -45
+  _maxAngle: 45
 --- !u!82 &8299989991898942936
 AudioSource:
   m_ObjectHideFlags: 0

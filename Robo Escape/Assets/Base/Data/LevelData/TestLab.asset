@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b0e80944f73c4459282fc4bfbfcd92, type: 3}
   m_Name: TestLab
   m_EditorClassIdentifier: 
-  chipsetCount: 100
-  timeLimit: 0
-  waterLevel: 0
-  waterFillTime: 60
-  password: 4283
-  typingSpeed: 0.03
-  delayBetweenMissions: 0.1
-  closeDelay: 2
+  ChipsetCount: 100
+  TimeLimit: 0
+  WaterLevel: 0
+  WaterFillTime: 60
+  Password: 4283
+  TypingSpeed: 0.03
+  DelayBetweenMissions: 0.1
+  CloseDelay: 2

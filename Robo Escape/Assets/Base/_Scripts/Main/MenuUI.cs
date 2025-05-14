@@ -2,7 +2,6 @@ using MaskTransitions;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using System;
 
 public class MenuUI : MonoSingleton<MenuUI>
 {
@@ -59,7 +58,7 @@ public class MenuUI : MonoSingleton<MenuUI>
         Settings.Instance.PlayButtonSound();
 
         _escapeButton.SetActive(false);
-        _settings._settingsPanel.gameObject.SetActive(false);
+        _settings.SettingsPanel.gameObject.SetActive(false);
         TransitionManager.Instance.PlayTransition(1f);
         Invoke(nameof(LoadLevel), 0.3f);
         
@@ -80,7 +79,7 @@ public class MenuUI : MonoSingleton<MenuUI>
 
         Invoke(nameof(CloseEnergyCapacity), _closeDuration);
 
-        _capacityText.text = (_gameDesignData.maxEnergyCapacity + (PlayerPrefs.GetInt(Consts.Prefs.CAPACITY, 0) * _gameDesignData.energyCapacityUpgradeAmount)).ToString();
+        _capacityText.text = (_gameDesignData.MaxEnergyCapacity + (PlayerPrefs.GetInt(Consts.Prefs.CAPACITY, 0) * _gameDesignData.EnergyCapacityUpgradeAmount)).ToString();
     }
 
     private void CloseEnergyCapacity()=>

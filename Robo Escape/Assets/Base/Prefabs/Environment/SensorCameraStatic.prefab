@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58f5179481003c49a7ee2ae3b114568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 2
-  visionConeSprite: {fileID: 2043270212089642530}
-  rotateCamera: 0
-  rotationSpeed: 45
-  minAngle: -70
-  maxAngle: 70
+  _rotateSprite: 0
+  _rotationSpeed: 45
+  _minAngle: -70
+  _maxAngle: 70
+  _checkForCameraVisibilty: {fileID: 0}
+  _viewRadius: 2
+  _visionConeSprite: {fileID: 2043270212089642530}
 --- !u!1 &796125122716026898
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,10 +432,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af42dfa2806113246ba67fe90b75eb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateCamera: 0
-  rotationSpeed: 45
-  minAngle: -70
-  maxAngle: 70
+  _rotateCamera: 0
+  _rotationSpeed: 45
+  _minAngle: -70
+  _maxAngle: 70
+  _checkForCameraVisibilty: {fileID: 0}
 --- !u!1 &3509062040173904925
 GameObject:
   m_ObjectHideFlags: 0

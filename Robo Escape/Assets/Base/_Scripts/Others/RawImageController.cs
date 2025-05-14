@@ -3,28 +3,28 @@ using UnityEngine.UI;
 
 public class RawImageController : MonoBehaviour
 {
-    [SerializeField] RawImage rawImage; // Raw Image bileşeni
-    public float scrollSpeedX = 0.1f; // X ekseninde kayma hızı
-    public float scrollSpeedY = 0.1f; // Y ekseninde kayma hızı
+    [SerializeField] float _scrollSpeedX = -0.1f; 
+    [SerializeField] float _scrollSpeedY = -0.1f; 
 
-    private Material material;
+    private Material _material;
+    private RawImage _rawImage;
 
     void Start()
     {
-        if (rawImage != null)
-        {
-            material = rawImage.material;
-        }
+        _rawImage = GetComponent<RawImage>();
+
+        if (_rawImage != null)
+            _material = _rawImage.material;
     }
 
     void Update()
     {
-        if (material != null)
+        if (_material != null)
         {
-            Vector2 offset = material.mainTextureOffset;
-            offset.x += scrollSpeedX * Time.deltaTime;
-            offset.y += scrollSpeedY * Time.deltaTime;
-            material.mainTextureOffset = offset;
+            Vector2 offset = _material.mainTextureOffset;
+            offset.x += _scrollSpeedX * Time.deltaTime;
+            offset.y += _scrollSpeedY * Time.deltaTime;
+            _material.mainTextureOffset = offset;
         }
     }
 }

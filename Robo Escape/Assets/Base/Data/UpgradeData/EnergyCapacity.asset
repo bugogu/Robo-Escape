@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87e3e373f0f94f4ba2c4ad853af7fdd, type: 3}
   m_Name: EnergyCapacity
   m_EditorClassIdentifier: 
-  price: 3
-  maxIncreaseCount: 10
-  icon: {fileID: 21300000, guid: 3dbed6b5f8077db448724b3a7a980516, type: 3}
-  title: Energy Capacity
+  Price: 3
+  MaxIncreaseCount: 10
+  Title: Energy Capacity

@@ -1,10 +1,17 @@
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InteractionPlate : MonoBehaviour, IInteractable
 {
-    public bool isPowerUpPlate = false;
-    public bool oneTimeUseable = true;
+    public bool IsPowerUpPlate = false;
+    public bool OneTimeUseable = true;
+
+    [FormerlySerializedAs("_plateFillImage")] public Image PlateFillImage;
+    public InteractionType InteractionType => _interactionType;
+
+    [HideInInspector]
+    public bool IsInteractionComplete = false;
 
     [SerializeField] private UnityEngine.Events.UnityEvent _action;
     [Space(10)]
@@ -12,12 +19,6 @@ public class InteractionPlate : MonoBehaviour, IInteractable
     [SerializeField] private GameObject _plateVisualObject;
     [SerializeField] private InteractionType _interactionType ;
     [SerializeField] private float _interactionDuration = 5f;
-
-    public Image _plateFillImage;
-    public InteractionType InteractionType => _interactionType;
-
-    [HideInInspector]
-    public bool _isInteractionComplete = false;
 
     void Awake()
     {
@@ -33,12 +34,12 @@ public class InteractionPlate : MonoBehaviour, IInteractable
 
     public void OnInteractionStay(float duration)
     {
-        if(isPowerUpPlate)
-            if(PlayerController.Instance._hasAnyPowerUp) return;
+        if(IsPowerUpPlate)
+            if(PlayerController.Instance.HasAnyPowerUp) return;
 
-            if(_isInteractionComplete) return;
+            if(IsInteractionComplete) return;
 
-            _plateFillImage.fillAmount = Mathf.Clamp01(duration / Mathf.Max(0.001f, _interactionDuration));
+            PlateFillImage.fillAmount = Mathf.Clamp01(duration / Mathf.Max(0.001f, _interactionDuration));
 
              if (duration >= _interactionDuration) 
             {
@@ -49,10 +50,10 @@ public class InteractionPlate : MonoBehaviour, IInteractable
                 if(Settings.Instance.Sound == 1)
                     LevelManager.Instance.PlayHackSFX();
 
-                if(oneTimeUseable)
+                if(OneTimeUseable)
                 {
                     gameObject.SetActive(false);
-                    _isInteractionComplete = true;  
+                    IsInteractionComplete = true;  
                 }
             }
     }
@@ -62,7 +63,7 @@ public class InteractionPlate : MonoBehaviour, IInteractable
         if(_visualCanHide)
         _plateVisualObject.SetActive(false);
 
-        _plateFillImage.fillAmount = 0f;
+        PlateFillImage.fillAmount = 0f;
     }
 }
 

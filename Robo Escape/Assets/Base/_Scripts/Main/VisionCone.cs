@@ -4,19 +4,21 @@ using UnityEngine;
 public class VisionCone : MonoBehaviour
 {
     public enum VisionType {Turret, Drone}
-    [HideInInspector] public bool playerSpotted;
+    public float VisionRange;
+    
+    [HideInInspector] public bool PlayerSpotted;
+    [HideInInspector] public float InitialRange;
+
     [SerializeField] private VisionType _visionType;
+    [SerializeField] Material _visionConeMaterial;
+    [SerializeField] float _visionAngle = 20f;
+    [SerializeField] LayerMask _visionObstructingLayer;//layer with objects that obstruct the enemy view, like walls, for example
+    [SerializeField] int _visionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the pretier the vision cone will be
     [SerializeField] private Color _spottedColor;
     [SerializeField] private Color _normalColor;
 
-    public float initialRange;
-    public Material VisionConeMaterial;
-    public float VisionRange;
-    public float VisionAngle;
-    public LayerMask VisionObstructingLayer;//layer with objects that obstruct the enemy view, like walls, for example
-    public int VisionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the pretier the vision cone will be
-    Mesh VisionConeMesh;
-    MeshFilter MeshFilter_;
+    private Mesh _visionConeMesh;
+    private MeshFilter _meshFilter;
 
     private Turret _turret;
     private Drone _drone;
@@ -25,12 +27,12 @@ public class VisionCone : MonoBehaviour
     //for the ones that you dont understand dont worry, just follow along
     void Start()
     {
-        transform.AddComponent<MeshRenderer>().material = VisionConeMaterial;
-        MeshFilter_ = transform.AddComponent<MeshFilter>();
-        VisionConeMesh = new Mesh();
-        VisionAngle *= Mathf.Deg2Rad;
+        transform.AddComponent<MeshRenderer>().material = _visionConeMaterial;
+        _meshFilter = transform.AddComponent<MeshFilter>();
+        _visionConeMesh = new Mesh();
+        _visionAngle *= Mathf.Deg2Rad;
 
-        initialRange = VisionRange;
+        InitialRange = VisionRange;
 
         if (_visionType == VisionType.Turret)
             _turret = transform.parent.GetComponent<Turret>();
@@ -41,38 +43,41 @@ public class VisionCone : MonoBehaviour
     
     void Update()
     {
-        playerSpotted = false;
+        PlayerSpotted = false;
         DrawVisionCone();
-        ChangeVisionColor(playerSpotted);
+        ChangeVisionColor(PlayerSpotted);
     }
 
     void DrawVisionCone()
     {
-        int[] triangles = new int[(VisionConeResolution - 1) * 3];
-        Vector3[] Vertices = new Vector3[VisionConeResolution + 1];
-        Vertices[0] = Vector3.zero;
-        float Currentangle = -VisionAngle / 2;
-        float angleIcrement = VisionAngle / (VisionConeResolution - 1);
-        float Sine;
-        float Cosine;
+        int[] triangles = new int[(_visionConeResolution - 1) * 3];
+        Vector3[] vertices = new Vector3[_visionConeResolution + 1];
+        
+        vertices[0] = Vector3.zero;
+        var currentAngle = -_visionAngle / 2;
+        var angleIcrement = _visionAngle / (_visionConeResolution - 1);
+
+        float sine;
+        float cosine;
     
-        for (int i = 0; i < VisionConeResolution; i++)
+        for (int i = 0; i < _visionConeResolution; i++)
         {
-            Sine = Mathf.Sin(Currentangle);
-            Cosine = Mathf.Cos(Currentangle);
-            Vector3 RaycastDirection = (transform.forward * Cosine) + (transform.right * Sine);
-            Vector3 VertForward = (Vector3.forward * Cosine) + (Vector3.right * Sine);
+            sine = Mathf.Sin(currentAngle);
+            cosine = Mathf.Cos(currentAngle);
+
+            var raycastDirection = (transform.forward * cosine) + (transform.right * sine);
+            var vertForward = (Vector3.forward * cosine) + (Vector3.right * sine);
     
-            // Önce duvar var mı diye kontrol et Önemli!: VisionObstructingLayer da player ve obstacle seçili hata varsa player ı çıkart.
-            if (Physics.Raycast(transform.position, RaycastDirection, out RaycastHit hit, VisionRange, VisionObstructingLayer))
+            // Önce duvar var mı diye kontrol et Önemli!: _visionObstructingLayer da player ve obstacle seçili hata varsa player ı çıkart.
+            if (Physics.Raycast(transform.position, raycastDirection, out RaycastHit hit, VisionRange, _visionObstructingLayer))
             {
                 // Duvar varsa, bu mesafede bir şey göremez
-                Vertices[i + 1] = VertForward * hit.distance;
+                vertices[i + 1] = vertForward * hit.distance;
     
                 // Duvarın arkasında oyuncu var mı diye kontrol et
-                if (Physics.Raycast(transform.position, RaycastDirection, out RaycastHit playerHit, hit.distance, LayerMask.GetMask("Player")))
+                if (Physics.Raycast(transform.position, raycastDirection, out RaycastHit playerHit, hit.distance, LayerMask.GetMask("Player")))
                 {
-                    playerSpotted = true;
+                    PlayerSpotted = true;
     
                     DoSomething(playerHit.transform);
                 }
@@ -80,20 +85,20 @@ public class VisionCone : MonoBehaviour
             else
             {
                 // Duvar yoksa, direkt oyuncu var mı diye kontrol et
-                if (Physics.Raycast(transform.position, RaycastDirection, out RaycastHit playerHit, VisionRange, LayerMask.GetMask("Player")))
+                if (Physics.Raycast(transform.position, raycastDirection, out RaycastHit playerHit, VisionRange, LayerMask.GetMask("Player")))
                 {
-                    playerSpotted = true;
-                    Vertices[i + 1] = VertForward * playerHit.distance;
+                    PlayerSpotted = true;
+                    vertices[i + 1] = vertForward * playerHit.distance;
     
                     DoSomething(playerHit.transform);
                 }
                 else
                 {
-                    Vertices[i + 1] = VertForward * VisionRange;
+                    vertices[i + 1] = vertForward * VisionRange;
                 }
             }
     
-            Currentangle += angleIcrement;
+            currentAngle += angleIcrement;
         }
     
         for (int i = 0, j = 0; i < triangles.Length; i += 3, j++)
@@ -103,18 +108,18 @@ public class VisionCone : MonoBehaviour
             triangles[i + 2] = j + 2;
         }
     
-        VisionConeMesh.Clear();
-        VisionConeMesh.vertices = Vertices;
-        VisionConeMesh.triangles = triangles;
-        MeshFilter_.mesh = VisionConeMesh;
+        _visionConeMesh.Clear();
+        _visionConeMesh.vertices = vertices;
+        _visionConeMesh.triangles = triangles;
+        _meshFilter.mesh = _visionConeMesh;
     }
 
-    public void ChangeVisionColor(bool playerSpotted)
+    public void ChangeVisionColor(bool PlayerSpotted)
     {
-        if (playerSpotted)
-            VisionConeMaterial.color = _spottedColor;
+        if (PlayerSpotted)
+            _visionConeMaterial.color = _spottedColor;
         else
-            VisionConeMaterial.color = _normalColor;
+            _visionConeMaterial.color = _normalColor;
     }
 
     private void DoSomething(Transform info)

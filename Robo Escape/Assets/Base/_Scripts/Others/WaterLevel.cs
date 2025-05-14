@@ -13,8 +13,8 @@ public class WaterLevel : MonoBehaviour
 
     void Awake()
     {
-        _canFill = GameManager.Instance.waterLevel;
-        _timeToFill = LevelManager.Instance.levelData.waterFillTime;
+        _canFill = GameManager.Instance.WaterLevel;
+        _timeToFill = LevelManager.Instance.LevelData.WaterFillTime;
     }
 
     void Update()

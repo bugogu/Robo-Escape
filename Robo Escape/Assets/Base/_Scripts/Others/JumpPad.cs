@@ -12,14 +12,14 @@ public class JumpPad : MonoBehaviour
     {
         _jumpPadArea = transform.parent.GetComponent<JumpPadArea>();
         _animator = _jumpPadArea.GetComponent<Animator>();
-        _target = _jumpPadArea.target;
+        _target = _jumpPadArea.Target;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if(!other.CompareTag(Consts.Tags.PLAYER)) return;
 
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.jumpPadSfx);
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.JumpPadSfx);
         
         _animator.enabled = true;
 

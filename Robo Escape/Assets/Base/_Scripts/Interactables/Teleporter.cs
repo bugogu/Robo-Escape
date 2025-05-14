@@ -15,9 +15,9 @@ public class Teleporter : MonoBehaviour
     {
         CameraShake.Shake();
         _player.transform.position = _targetPosition.position;
-        _player.GetComponent<PlayerController>().teleportFX.SetActive(true);
+        _player.GetComponent<PlayerController>().TeleportFX.SetActive(true);
         Invoke(nameof(StopTeleportFX), 1.5f);
     }
 
-    private void StopTeleportFX() => _player.GetComponent<PlayerController>().teleportFX.SetActive(false); 
+    private void StopTeleportFX() => _player.GetComponent<PlayerController>().TeleportFX.SetActive(false); 
 }

@@ -4,6 +4,7 @@ using DG.Tweening;
 
 public class LaserGate : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField] private CheckForLaserGateVisibilty _checkForLaserGateVisibilty;
     [SerializeField] private GameObject _lasersParent;
     [SerializeField] private GameObject _interactionPlate;
@@ -53,8 +54,8 @@ public class LaserGate : MonoBehaviour
         _lasersParent.SetActive(true);
         transform.SetParent(_interactionPlate.transform);
         _interactionPlate.SetActive(true);
-        _interactionPlateScript._isInteractionComplete = false;
-        _interactionPlateScript._plateFillImage.fillAmount = 0f;
+        _interactionPlateScript.IsInteractionComplete = false;
+        _interactionPlateScript.PlateFillImage.fillAmount = 0f;
         _boxCollider.enabled = true;
     }
 
@@ -69,13 +70,13 @@ public class LaserGate : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(!PlayerController.Instance._isProtectionActive)
+        if(!PlayerController.Instance.IsProtectionActive)
         {
             if(!other.CompareTag(Consts.Tags.PLAYER)) return;
 
             CameraShake.Shake();
 
-            if(Settings.Instance.Sound == 1) SoundManager.Instance.PlaySFX(SoundManager.Instance.electricSfx);
+            if(Settings.Instance.Sound == 1) SoundManager.Instance.PlaySFX(SoundManager.Instance.ElectricSfx);
 
             if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
 

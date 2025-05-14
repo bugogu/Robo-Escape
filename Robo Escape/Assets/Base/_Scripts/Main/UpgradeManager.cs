@@ -17,7 +17,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         for (int i = 0; i < EnergyCapacity; i++)
             _doUpgrade.GenerateProgressEnergyCapacity();
 
-        if(_doUpgrade._upgradeEnergyCapacity.maxIncreaseCount == EnergyCapacity)
+        if(_doUpgrade._upgradeEnergyCapacity.MaxIncreaseCount == EnergyCapacity)
             Invoke(nameof(SetTextWithDelay), 0.0001f);
     }
 

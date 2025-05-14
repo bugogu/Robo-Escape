@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Turret : MonoBehaviour, IEffectableFromEMP
 {
-    [SerializeField] private float spottedRotationSpeed = 10f;
+    [SerializeField] private float _spottedRotationSpeed = 10f;
     [SerializeField] private VisionCone _visionCone;
     [SerializeField] private float _fireRate = 2f;
     [SerializeField] private float _projectileEnergyConsumptionAmount = 10f;
@@ -17,21 +17,21 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
     [SerializeField] private Material _turretActiveMaterial, _turretInactiveMaterial;
 
     [Header("Recoil Settings")]
-    [SerializeField] private float recoilDistance = -0.5f; // Geri tepme mesafesi
-    [SerializeField] private float recoilDuration = 0.1f; // Geri tepme süresi
-    [SerializeField] private float returnDuration = 0.3f; // Başlangıç pozisyonuna dönüş süresi
-    [SerializeField] private Ease recoilEase = Ease.OutQuad; // Geri tepme eğrisi
-    [SerializeField] private Ease returnEase = Ease.OutElastic; // Geri dönüş eğrisi
+    [SerializeField] private float _recoilDistance = -0.5f; // Geri tepme mesafesi
+    [SerializeField] private float _recoilDuration = 0.1f; // Geri tepme süresi
+    [SerializeField] private float _returnDuration = 0.3f; // Başlangıç pozisyonuna dönüş süresi
+    [SerializeField] private Ease _recoilEase = Ease.OutQuad; // Geri tepme eğrisi
+    [SerializeField] private Ease _returnEase = Ease.OutElastic; // Geri dönüş eğrisi
 
     [Header("Dönüş Ayarları")]
-    public bool rotateTurret = true;
-    public float rotationSpeed = 30f;
-    public float minAngle = -90f; 
-    public float maxAngle = 90f; 
+    [SerializeField] bool _rotateTurret = true;
+    [SerializeField] float _rotationSpeed = 15f;
+    [SerializeField] float _minAngle = -45f; 
+    [SerializeField] float _maxAngle = 45f; 
 
-    private float currentAngle = 0f;
-    private int rotationDirection = 1;
-    private Quaternion startRotation;
+    private float _currentAngle = 0f;
+    private int _rotationDirection = 1;
+    private Quaternion _startRotation;
     private float _nextFireTime = 0f;
     private Camera _mainCamera;
     private Renderer _renderer;
@@ -48,8 +48,8 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
 
     void Start()
     {
-        startRotation = transform.rotation;
-        currentAngle = startRotation.eulerAngles.y; 
+        _startRotation = transform.rotation;
+        _currentAngle = _startRotation.eulerAngles.y; 
         _mainCamera = Camera.main;
         _renderer = GetComponent<Renderer>();
     }
@@ -60,7 +60,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
 
         if(_isEffected) return;
 
-        if(rotateTurret && IsVisibleToCamera())
+        if(_rotateTurret && IsVisibleToCamera())
         {
             _visionCone.enabled = true;
             RotateTurret();
@@ -69,7 +69,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
 
     public void PlayerSpotted(Transform player) 
     {
-        if(!_visionCone.playerSpotted) return;
+        if(!_visionCone.PlayerSpotted) return;
 
         if (Time.time >= _nextFireTime)
         {
@@ -77,7 +77,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
             Fire(player); 
         }
 
-        Vector3 direction = player.position - transform.position;
+        var direction = player.position - transform.position;
         direction.y = 0;
 
         if (direction != Vector3.zero)
@@ -85,38 +85,38 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
             float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
             Quaternion targetRotation = Quaternion.Euler(0, angle, 0);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * spottedRotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _spottedRotationSpeed);
 
-            currentAngle = angle;
+            _currentAngle = angle;
         }
     }
 
     void RotateTurret()
     {   
-        if(_visionCone.playerSpotted) return;
+        if(_visionCone.PlayerSpotted) return;
 
-            currentAngle = transform.eulerAngles.y;
-        if (currentAngle > 180f) currentAngle -= 360f;
+            _currentAngle = transform.eulerAngles.y;
+        if (_currentAngle > 180f) _currentAngle -= 360f;
 
-        float rotationAmount = rotationSpeed * rotationDirection * Time.deltaTime;
-        currentAngle += rotationAmount;
+        float rotationAmount = _rotationSpeed * _rotationDirection * Time.deltaTime;
+        _currentAngle += rotationAmount;
     
-        if (currentAngle >= maxAngle || currentAngle <= minAngle)
+        if (_currentAngle >= _maxAngle || _currentAngle <= _minAngle)
         {
-            rotationDirection *= -1;
-            currentAngle = Mathf.Clamp(currentAngle, minAngle, maxAngle);
+            _rotationDirection *= -1;
+            _currentAngle = Mathf.Clamp(_currentAngle, _minAngle, _maxAngle);
         }
     
-        transform.rotation = Quaternion.Euler(0, currentAngle, 0);
+        transform.rotation = Quaternion.Euler(0, _currentAngle, 0);
     }
 
     private void Fire(Transform target)
     {
         GameObject projectile = Instantiate(_projectilePrefab, _firePoint.position, _firePoint.rotation);
 
-        projectile.GetComponent<Projectile>().damage = _projectileEnergyConsumptionAmount;
+        projectile.GetComponent<Projectile>().Damage = _projectileEnergyConsumptionAmount;
     
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        var rb = projectile.GetComponent<Rigidbody>();
 
         _projectileFireEffect?.Play();
 
@@ -149,7 +149,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
             _recoilSequence.Kill();
         }
 
-        Vector3 recoilDirection = transform.forward;
+        var recoilDirection = transform.forward;
         
         if (transform.parent != null)
         {
@@ -160,18 +160,18 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
         
         _recoilSequence.Append(
             transform.DOLocalMove(
-                recoilDistance * recoilDirection + _originalPosition,
-                recoilDuration
+                _recoilDistance * recoilDirection + _originalPosition,
+                _recoilDuration
             )
-            .SetEase(recoilEase)
+            .SetEase(_recoilEase)
         );
         
         _recoilSequence.Append(
             transform.DOLocalMove(
                 _originalPosition,
-                returnDuration
+                _returnDuration
             )
-            .SetEase(returnEase)
+            .SetEase(_returnEase)
         );
     }
 
@@ -188,7 +188,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
 
     private void RemoveEmpEffects()
     {
-        _visionCone.VisionRange = _visionCone.initialRange;
+        _visionCone.VisionRange = _visionCone.InitialRange;
         transform.parent.GetComponent<Renderer>().material = _turretActiveMaterial;
         _empDurationFillImage.transform.parent.gameObject.SetActive(false);
         _isEffected = false;

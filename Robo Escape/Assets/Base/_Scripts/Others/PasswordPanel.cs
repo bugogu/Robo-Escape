@@ -1,9 +1,8 @@
-using TMPro;
 using UnityEngine;
 
 public class PasswordPanel : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _passwordText;
+    [SerializeField] private TMPro.TMP_Text _passwordText;
     [SerializeField] private PasswordGate _passwordGate;
 
     private string _password;
@@ -12,7 +11,7 @@ public class PasswordPanel : MonoBehaviour
 
     void Start()
     {
-        _password = LevelManager.Instance.levelData.password;
+        _password = LevelManager.Instance.LevelData.Password;
     }
 
     void Update()

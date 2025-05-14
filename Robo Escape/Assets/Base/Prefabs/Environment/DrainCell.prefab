@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae91551be1f14d45b0a981d7ae92b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 150
+  rotationSpeed: 100
   x: 0
   y: 1
   z: 0
@@ -153,4 +153,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cd2c4de61daf443b00befe92add13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerName: OutlineCell
+  _layerName: OutlineCell

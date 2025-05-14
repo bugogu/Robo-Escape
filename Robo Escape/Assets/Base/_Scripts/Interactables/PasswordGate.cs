@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PasswordGate : MonoBehaviour
 {
-    private Animator _animator;
     [SerializeField] private PasswordPanel _passwordPanel;
+    private Animator _animator;
 
     void Start()
     {

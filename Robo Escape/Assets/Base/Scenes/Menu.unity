@@ -4799,8 +4799,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1e070eb633c7b744bd3fd5574d2b26b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SettingsPanel: {fileID: 484940941}
   _settingsButton: {fileID: 430298934}
-  _settingsPanel: {fileID: 484940941}
   _openingTime: 0.2
 --- !u!82 &1758325023
 AudioSource:

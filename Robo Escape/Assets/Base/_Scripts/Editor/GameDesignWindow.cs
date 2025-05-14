@@ -1,19 +1,18 @@
-using System;
 using UnityEditor;
 using UnityEngine;
 
 public class GameDesignWindow : EditorWindow
 {
-    private GameDesignData designData;
-    private bool showCharacterMovementSettings = false;
-    private bool showCharacterEnergySettings = false;
-    private bool showUIPopUpTextSettings = false;
-    private bool showGeneralUISettings = false;
-    private bool showPowerUpSettings = false;
-    private bool showCameraShakeSettings = false;
-    private bool showMaxCapacitySettings = false;
+    private GameDesignData _designData;
+    private bool _showCharacterMovementSettings = false;
+    private bool _showCharacterEnergySettings = false;
+    private bool _showUIPopUpTextSettings = false;
+    private bool _showGeneralUISettings = false;
+    private bool _showPowerUpSettings = false;
+    private bool _showCameraShakeSettings = false;
+    private bool _showMaxCapacitySettings = false;
 
-    private Vector2 scrollPosition;
+    private Vector2 _scrollPosition;
     
     [MenuItem("Design/Game Design Window")]
     public static void ShowWindow()
@@ -23,14 +22,14 @@ public class GameDesignWindow : EditorWindow
 
     private void OnEnable()
     {
-        designData = Resources.Load<GameDesignData>("GameDesignData");
+        _designData = Resources.Load<GameDesignData>("GameDesignData");
     }
 
     private void OnGUI()
     {
-         if (designData == null) return;
+         if (_designData == null) return;
 
-         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+         _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
          {
              DrawPlayerSettingsContainer();
              DrawUISettingsContainer();
@@ -41,7 +40,7 @@ public class GameDesignWindow : EditorWindow
         
         if (GUILayout.Button("Save"))
         {
-            EditorUtility.SetDirty(designData);
+            EditorUtility.SetDirty(_designData);
             AssetDatabase.SaveAssets();
         }
     }
@@ -138,50 +137,50 @@ public class GameDesignWindow : EditorWindow
 
     private void DrawCharacterMovementSettings()
     {
-        showCharacterMovementSettings = EditorGUILayout.Foldout(
-        showCharacterMovementSettings, 
+        _showCharacterMovementSettings = EditorGUILayout.Foldout(
+        _showCharacterMovementSettings, 
         "Movement Settings", 
         true, 
         EditorStyles.boldLabel
         );
 
-        if (showCharacterMovementSettings)
+        if (_showCharacterMovementSettings)
         {
             EditorGUI.indentLevel++; 
 
         EditorGUILayout.LabelField("Run Speed", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.characterRunSpeed = EditorGUILayout.FloatField(designData.characterRunSpeed, EditorStyles.miniTextField);
+        _designData.CharacterRunSpeed = EditorGUILayout.FloatField(_designData.CharacterRunSpeed, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Walk Speed", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.characterWalkSpeed = EditorGUILayout.FloatField(designData.characterWalkSpeed, EditorStyles.miniTextField);
+        _designData.CharacterWalkSpeed = EditorGUILayout.FloatField(_designData.CharacterWalkSpeed, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Turn Speed", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.characterTurnSpeed = EditorGUILayout.FloatField(designData.characterTurnSpeed, EditorStyles.miniTextField);
+        _designData.CharacterTurnSpeed = EditorGUILayout.FloatField(_designData.CharacterTurnSpeed, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Magnetism Speed Multiplier", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.magnetismSpeedMultiplier = EditorGUILayout.FloatField(designData.magnetismSpeedMultiplier, EditorStyles.miniTextField);
+        _designData.MagnetismSpeedMultiplier = EditorGUILayout.FloatField(_designData.MagnetismSpeedMultiplier, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Movement Threshold", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.movementThreshold = EditorGUILayout.FloatField(designData.movementThreshold, EditorStyles.miniTextField);
+        _designData.MovementThreshold = EditorGUILayout.FloatField(_designData.MovementThreshold, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Stop Threshold", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.stopThreshold = EditorGUILayout.FloatField(designData.stopThreshold, EditorStyles.miniTextField);
+        _designData.StopThreshold = EditorGUILayout.FloatField(_designData.StopThreshold, EditorStyles.miniTextField);
 
         EditorGUI.indentLevel--; 
 
@@ -190,44 +189,44 @@ public class GameDesignWindow : EditorWindow
 
     private void DrawCharacterEnergySettings()
      {
-        showCharacterEnergySettings = EditorGUILayout.Foldout(
-        showCharacterEnergySettings, 
+        _showCharacterEnergySettings = EditorGUILayout.Foldout(
+        _showCharacterEnergySettings, 
         "Energy Settings", 
         true, 
         EditorStyles.boldLabel
         );
 
-        if (showCharacterEnergySettings)
+        if (_showCharacterEnergySettings)
         {
             EditorGUI.indentLevel++; 
 
         EditorGUILayout.LabelField("Max Energy Capacity", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.maxEnergyCapacity = EditorGUILayout.FloatField(designData.maxEnergyCapacity, EditorStyles.miniTextField);
+        _designData.MaxEnergyCapacity = EditorGUILayout.FloatField(_designData.MaxEnergyCapacity, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Replenish Amount", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.replenishAmount = EditorGUILayout.FloatField(designData.replenishAmount, EditorStyles.miniTextField);
+        _designData.ReplenishAmount = EditorGUILayout.FloatField(_designData.ReplenishAmount, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
         
         EditorGUILayout.LabelField("Consume Amount", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.consumeAmount = EditorGUILayout.FloatField(designData.consumeAmount, EditorStyles.miniTextField);
+        _designData.ConsumeAmount = EditorGUILayout.FloatField(_designData.ConsumeAmount, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Magnetism Consumption Multiplier", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.magnetismConsumptionMultiplier = EditorGUILayout.FloatField(designData.magnetismConsumptionMultiplier, EditorStyles.miniTextField);
+        _designData.MagnetismConsumptionMultiplier = EditorGUILayout.FloatField(_designData.MagnetismConsumptionMultiplier, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Magnetism Replenish Multiplier", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.magnetismReplenishMultiplier = EditorGUILayout.FloatField(designData.magnetismReplenishMultiplier, EditorStyles.miniTextField);
+        _designData.MagnetismReplenishMultiplier = EditorGUILayout.FloatField(_designData.MagnetismReplenishMultiplier, EditorStyles.miniTextField);
 
             EditorGUI.indentLevel--;
         }
@@ -235,46 +234,46 @@ public class GameDesignWindow : EditorWindow
 
     private void DrawEnergyPopTextSettings()
     {
-        showUIPopUpTextSettings = EditorGUILayout.Foldout(
-        showUIPopUpTextSettings, 
+        _showUIPopUpTextSettings = EditorGUILayout.Foldout(
+        _showUIPopUpTextSettings, 
         "Energy PopUp Text", 
         true, 
         EditorStyles.boldLabel
         );
 
-        if (showUIPopUpTextSettings)
+        if (_showUIPopUpTextSettings)
         {
             EditorGUI.indentLevel++; 
 
         EditorGUILayout.LabelField("Move Distance", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.moveDistance = EditorGUILayout.FloatField(designData.moveDistance, EditorStyles.miniTextField);
+        _designData.MoveDistance = EditorGUILayout.FloatField(_designData.MoveDistance, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Move Duration", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.moveDuration = EditorGUILayout.FloatField(designData.moveDuration, EditorStyles.miniTextField);
+        _designData.MoveDuration = EditorGUILayout.FloatField(_designData.MoveDuration, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Return Duration", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.returnDuration = EditorGUILayout.FloatField(designData.returnDuration, EditorStyles.miniTextField);
+        _designData.ReturnDuration = EditorGUILayout.FloatField(_designData.ReturnDuration, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Display Duration", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.displayDuration = EditorGUILayout.FloatField(designData.displayDuration, EditorStyles.miniTextField);
+        _designData.DisplayDuration = EditorGUILayout.FloatField(_designData.DisplayDuration, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
-        designData._positiveColor = EditorGUILayout.ColorField(new GUIContent("Positive Color", "Energy Replenish"),designData._positiveColor, GUILayout.Width(205f));
+        _designData.PositiveColor = EditorGUILayout.ColorField(new GUIContent("Positive Color", "Energy Replenish"),_designData.PositiveColor, GUILayout.Width(205f));
 
         EditorGUILayout.Space(5);
 
-        designData._negativeColor = EditorGUILayout.ColorField(new GUIContent("Negative Color", "Energy Consumption"),designData._negativeColor, GUILayout.Width(205f));
+        _designData.NegativeColor = EditorGUILayout.ColorField(new GUIContent("Negative Color", "Energy Consumption"),_designData.NegativeColor, GUILayout.Width(205f));
 
         EditorGUI.indentLevel--; 
     } 
@@ -282,61 +281,61 @@ public class GameDesignWindow : EditorWindow
     
     private void DrawGeneralUISettings()
     {
-        showGeneralUISettings = EditorGUILayout.Foldout(
-        showGeneralUISettings, 
+        _showGeneralUISettings = EditorGUILayout.Foldout(
+        _showGeneralUISettings, 
         "General", 
         true, 
         EditorStyles.boldLabel
         );
 
-        if (showGeneralUISettings)
+        if (_showGeneralUISettings)
         {
             EditorGUI.indentLevel++; 
 
         EditorGUILayout.LabelField("Home Button Delay", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.menuLoadDelay = EditorGUILayout.FloatField(designData.menuLoadDelay, EditorStyles.miniTextField);
+        _designData.MenuLoadDelay = EditorGUILayout.FloatField(_designData.MenuLoadDelay, EditorStyles.miniTextField);
         }
     }
 
     private void DrawCharacterPowerUpSettings()
     {
-        showPowerUpSettings = EditorGUILayout.Foldout(
-        showPowerUpSettings, 
+        _showPowerUpSettings = EditorGUILayout.Foldout(
+        _showPowerUpSettings, 
         "Power Ups", 
         true, 
         EditorStyles.boldLabel
         );
 
-        if (showPowerUpSettings)
+        if (_showPowerUpSettings)
         {
             EditorGUI.indentLevel++; 
 
         EditorGUILayout.LabelField("Flash Speed Multiplier", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.flashSpeedMultiplier = EditorGUILayout.FloatField(designData.flashSpeedMultiplier, EditorStyles.miniTextField);
+        _designData.FlashSpeedMultiplier = EditorGUILayout.FloatField(_designData.FlashSpeedMultiplier, EditorStyles.miniTextField);
 
         EditorGUILayout.LabelField("Flash Power Up Duration", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.flashPowerUpDuration = EditorGUILayout.FloatField(designData.flashPowerUpDuration, EditorStyles.miniTextField);
+        _designData.FlashPowerUpDuration = EditorGUILayout.FloatField(_designData.FlashPowerUpDuration, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Flash Outline Color", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.flashOutlineColor = EditorGUILayout.ColorField(designData.flashOutlineColor, GUILayout.Width(205f));
+        _designData.FlashOutlineColor = EditorGUILayout.ColorField(_designData.FlashOutlineColor, GUILayout.Width(205f));
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Shield Outline Color", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.shieldOutlineColor = EditorGUILayout.ColorField(designData.shieldOutlineColor, GUILayout.Width(205f));
+        _designData.ShieldOutlineColor = EditorGUILayout.ColorField(_designData.ShieldOutlineColor, GUILayout.Width(205f));
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("EMP Outline Color", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.empOutlineColor = EditorGUILayout.ColorField(designData.empOutlineColor, GUILayout.Width(205f));
+        _designData.EmpOutlineColor = EditorGUILayout.ColorField(_designData.EmpOutlineColor, GUILayout.Width(205f));
 
         EditorGUILayout.Space(5);
 
@@ -347,33 +346,33 @@ public class GameDesignWindow : EditorWindow
 
     private void DrawCameraShakeSettings()
     {
-        showCameraShakeSettings = EditorGUILayout.Foldout(
-        showCameraShakeSettings, 
+        _showCameraShakeSettings = EditorGUILayout.Foldout(
+        _showCameraShakeSettings, 
         "Camera Shake", 
         true, 
         EditorStyles.boldLabel
         );
 
-        if (showCameraShakeSettings)
+        if (_showCameraShakeSettings)
         {
         
         EditorGUI.indentLevel++; 
 
         EditorGUILayout.LabelField("Shake Duration", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.cameraShakeDuration = EditorGUILayout.FloatField(designData.cameraShakeDuration, EditorStyles.miniTextField);
+        _designData.CameraShakeDuration = EditorGUILayout.FloatField(_designData.CameraShakeDuration, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Shake Amplitude", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.cameraShakeAmplitude = EditorGUILayout.FloatField(designData.cameraShakeAmplitude, EditorStyles.miniTextField);
+        _designData.CameraShakeAmplitude = EditorGUILayout.FloatField(_designData.CameraShakeAmplitude, EditorStyles.miniTextField);
 
         EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Shake Frequency", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.cameraShakeFrequency = EditorGUILayout.FloatField(designData.cameraShakeFrequency, EditorStyles.miniTextField);
+        _designData.CameraShakeFrequency = EditorGUILayout.FloatField(_designData.CameraShakeFrequency, EditorStyles.miniTextField);
 
         EditorGUI.indentLevel--; 
         
@@ -382,21 +381,21 @@ public class GameDesignWindow : EditorWindow
 
     private void DrawMaxCapacitySettings()
     {
-        showMaxCapacitySettings = EditorGUILayout.Foldout(
-        showMaxCapacitySettings, 
+        _showMaxCapacitySettings = EditorGUILayout.Foldout(
+        _showMaxCapacitySettings, 
         "Energy Capacity", 
         true, 
         EditorStyles.boldLabel
         );
 
-        if (showMaxCapacitySettings)
+        if (_showMaxCapacitySettings)
         {
         
         EditorGUI.indentLevel++; 
 
         EditorGUILayout.LabelField("Increase Amount", EditorStyles.label);
         EditorGUILayout.Space(2);
-        designData.energyCapacityUpgradeAmount = EditorGUILayout.FloatField(designData.energyCapacityUpgradeAmount, EditorStyles.miniTextField);
+        _designData.EnergyCapacityUpgradeAmount = EditorGUILayout.FloatField(_designData.EnergyCapacityUpgradeAmount, EditorStyles.miniTextField);
 
         EditorGUI.indentLevel--; 
         

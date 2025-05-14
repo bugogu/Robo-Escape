@@ -2,29 +2,25 @@ using UnityEngine;
 
 public class SensorSprite : MonoBehaviour
 {
-    [SerializeField] private CheckForCameraVisibilty _checkForCameraVisibilty;
-
-    [Header("Görüş Ayarları")]
-    [SerializeField] private float viewRadius = 7f;
-
-    [Header("Sprite Ayarları")]
-    [SerializeField] private SpriteRenderer visionConeSprite;
-
     [Header("Dönüş Ayarları")]
-    public bool rotateCamera = true;
-    public float rotationSpeed = 30f;
-    public float minAngle = -90f; // Sol dönüş açısı
-    public float maxAngle = 90f; // Sağ dönüş açısı
+    [SerializeField] bool _rotateSprite = true;
+    [SerializeField] float _rotationSpeed = 45f;
+    [SerializeField] float _minAngle = -70f;
+    [SerializeField] float _maxAngle = 70f;
 
-    private int rotationDirection = -1;
-    private float currentAngle = 0f;
-    private Quaternion startRotation;
+    [SerializeField] private CheckForCameraVisibilty _checkForCameraVisibilty;
+    [SerializeField] private float _viewRadius = 1.35f;
+    [SerializeField] private SpriteRenderer _visionConeSprite;
+
+    private int _rotationDirection = -1;
+    private float _currentAngle = 0f;
+    private Quaternion _startRotation;
 
     void Start()
     {
-        startRotation = transform.rotation;
+        _startRotation = transform.rotation;
 
-        if (visionConeSprite != null)
+        if (_visionConeSprite != null)
         {
             UpdateSpriteSize();
         }
@@ -32,7 +28,7 @@ public class SensorSprite : MonoBehaviour
 
     void Update()
     {
-        if (rotateCamera && !GameManager.Instance.isAlarmActive)
+        if (_rotateSprite && !GameManager.Instance.IsAlarmActive)
         {
             RotateCamera();
         }
@@ -42,24 +38,23 @@ public class SensorSprite : MonoBehaviour
     {
         if(!_checkForCameraVisibilty.IsVisibleToCamera()) return;
 
-        float rotationAmount = rotationSpeed * rotationDirection * Time.deltaTime;
-        currentAngle += rotationAmount;
+        float rotationAmount = _rotationSpeed * _rotationDirection * Time.deltaTime;
+        _currentAngle += rotationAmount;
         
-        // Açı limit kontrolü
-        if (currentAngle >= maxAngle || currentAngle <= minAngle)
+        if (_currentAngle >= _maxAngle || _currentAngle <= _minAngle)
         {
-            rotationDirection *= -1;
-            currentAngle = Mathf.Clamp(currentAngle, minAngle, maxAngle);
+            _rotationDirection *= -1;
+            _currentAngle = Mathf.Clamp(_currentAngle, _minAngle, _maxAngle);
         }
         
-        transform.rotation = startRotation * Quaternion.Euler(0, currentAngle, 0);
+        transform.rotation = _startRotation * Quaternion.Euler(0, _currentAngle, 0);
     }
 
     void UpdateSpriteSize()
     {
-        if (visionConeSprite != null)
+        if (_visionConeSprite != null)
         {
-            visionConeSprite.transform.localScale = new Vector3(viewRadius * 2, viewRadius * 2, 1);
+            _visionConeSprite.transform.localScale = new Vector3(_viewRadius * 2, _viewRadius * 2, 1);
         }
     }
 

@@ -16,7 +16,7 @@ public class TrapGate : MonoBehaviour
         if(other.CompareTag(Consts.Tags.PLAYER) && _isOpen)
         {
             _isOpen = false;
-            SoundManager.Instance.PlaySFX(SoundManager.Instance.gateClosingSfx);
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.GateClosingSfx);
             _animator.SetTrigger(_closeTriggerHash);
         }
         

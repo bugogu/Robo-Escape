@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AlarmLights : MonoBehaviour
 {
-    [SerializeField] private float alarmLightIntensity = -30f;
+    [SerializeField] private float _alarmLightIntensity = -30f;
     
     private Material _material;
     private float _initialValue = -3f;
@@ -30,6 +30,6 @@ public class AlarmLights : MonoBehaviour
         if(_isAlarmActive == status) return;
         
         _isAlarmActive = status;
-        _material.SetFloat("_Shades", status ? alarmLightIntensity : _initialValue);
+        _material.SetFloat("_Shades", status ? _alarmLightIntensity : _initialValue);
     }
 }

@@ -2,15 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
-using Unity.VisualScripting;
 
 public class Settings : MonoSingleton<Settings>
-{
-    [SerializeField] private Button _settingsButton;
-    public RectTransform _settingsPanel;
-    [SerializeField] private float _openingTime;
-
+{   
     public event Action<bool> OnOutlinesSetted;
+
+    public RectTransform SettingsPanel;
+
+    #region Properties
 
     public int Music 
     {
@@ -36,13 +35,18 @@ public class Settings : MonoSingleton<Settings>
         set => PlayerPrefs.SetInt(Consts.Prefs.OUTLINES, value);
     }
 
+    #endregion
+
+    [SerializeField] private Button _settingsButton;
+    [SerializeField] private float _openingTime;
+
     private bool _isOpen;
     private AudioSource _audioSource;
 
     void Awake()
     {
         _settingsButton.onClick.RemoveAllListeners();
-        _settingsButton.onClick.AddListener(SettingsPanel);
+        _settingsButton.onClick.AddListener(SettingsPanelEnabled);
 
         _audioSource = GetComponent<AudioSource>();
 
@@ -54,7 +58,7 @@ public class Settings : MonoSingleton<Settings>
         OnOutlinesSetted?.Invoke(Outlines == 1);
     }
 
-    public void SettingsPanel()
+    public void SettingsPanelEnabled()
     {
         PlayButtonSound();
 
@@ -62,14 +66,14 @@ public class Settings : MonoSingleton<Settings>
         {
             _isOpen = true;
             _settingsButton.interactable = false;
-            _settingsPanel.gameObject.SetActive(_isOpen);
-            _settingsPanel.DOScale(Vector3.one, _openingTime).SetEase(Ease.OutBack).OnComplete(()=> _settingsButton.interactable = true);
+            SettingsPanel.gameObject.SetActive(_isOpen);
+            SettingsPanel.DOScale(Vector3.one, _openingTime).SetEase(Ease.OutBack).OnComplete(()=> _settingsButton.interactable = true);
         }
         else
         {
             _isOpen = false;
             _settingsButton.interactable = false;
-            _settingsPanel.DOScale(Vector3.zero, _openingTime).OnComplete(()=> _settingsPanel.gameObject.SetActive(_isOpen)).OnComplete(()=> _settingsButton.interactable = true);
+            SettingsPanel.DOScale(Vector3.zero, _openingTime).OnComplete(()=> SettingsPanel.gameObject.SetActive(_isOpen)).OnComplete(()=> _settingsButton.interactable = true);
         }
     }
 

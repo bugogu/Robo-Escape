@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UpgradeElement : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class UpgradeElement : MonoBehaviour
 
     void Awake()
     {
-        _priceText.text = _upgradeElementData.price.ToString();
-        _titleText.text = _upgradeElementData.title;
+        _priceText.text = _upgradeElementData.Price.ToString();
+        _titleText.text = _upgradeElementData.Title;
     }
 }

@@ -1,35 +1,34 @@
 using UnityEngine;
-using TMPro;
 
 public class FPSDisplay : MonoBehaviour
 {
-    public TMP_Text fpsText; 
-    public float updateInterval = 0.5f; 
+    public TMPro.TMP_Text FpsText; 
+    public float UpdateInterval = 0.5f; 
     
-    private float accum = 0f; 
-    private int frames = 0; 
-    private float timeLeft; 
-    private float fps = 0f; 
+    private float _accum = 0f; 
+    private int _frames = 0; 
+    private float _timeLeft; 
+    private float _fps = 0f; 
 
     void Start()
     {
-        timeLeft = updateInterval;
+        _timeLeft = UpdateInterval;
     }
 
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        accum += Time.timeScale / Time.deltaTime;
-        frames++;
+        _timeLeft -= Time.deltaTime;
+        _accum += Time.timeScale / Time.deltaTime;
+        _frames++;
         
-        if (timeLeft <= 0f)
+        if (_timeLeft <= 0f)
         {
-            fps = accum / frames;
-            fpsText.text = Mathf.Round(fps).ToString();
+            _fps = _accum / _frames;
+            FpsText.text = Mathf.Round(_fps).ToString();
             
-            timeLeft = updateInterval;
-            accum = 0f;
-            frames = 0;
+            _timeLeft = UpdateInterval;
+            _accum = 0f;
+            _frames = 0;
         }
     }
 }

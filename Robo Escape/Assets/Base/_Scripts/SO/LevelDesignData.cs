@@ -4,14 +4,14 @@ using UnityEngine;
 public class LevelDesignData : ScriptableObject
 {
     [Header("General Settings")]
-    public int chipsetCount = 4;
-    [Tooltip("Seconds")] public float timeLimit = 90f;
-    public bool waterLevel = false;
-    [Tooltip("Seconds")] public float waterFillTime = 60;
-    public string password;
+    public int ChipsetCount = 4;
+    [Tooltip("Seconds")] public float TimeLimit = 90f;
+    public bool WaterLevel = false;
+    [Tooltip("Seconds")] public float WaterFillTime = 60;
+    public string Password;
 
     [Header("Mission Display")]
-    public float typingSpeed = 0.035f; 
-    public float delayBetweenMissions = 0.1f;
-    public float closeDelay = 2f; 
+    public float TypingSpeed = 0.035f; 
+    public float DelayBetweenMissions = 0.1f;
+    public float CloseDelay = 2f; 
 }

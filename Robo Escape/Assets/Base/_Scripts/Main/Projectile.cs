@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [HideInInspector] public float damage;
+    [HideInInspector] public float Damage;
 
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag(Consts.Tags.PLAYER)) 
         {
-            other.GetComponent<PlayerController>().GetHit(damage);
+            other.GetComponent<PlayerController>().GetHit(Damage);
             gameObject.SetActive(false);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))

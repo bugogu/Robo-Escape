@@ -1,18 +1,16 @@
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class EnergyBar : MonoSingleton<EnergyBar>
 {
-    [HideInInspector] public float _maxEnergyCapacity;
+    [HideInInspector] public float MaxEnergyCapacity;
 
     [SerializeField] private GameDesignData _gameDesignData;
-    [SerializeField] private Image _energyBarFillImage;
+    [SerializeField] private UnityEngine.UI.Image _energyBarFillImage;
     [SerializeField] private TMPro.TMP_Text _energyText;
 
     void Awake()
     {
-        _maxEnergyCapacity = _gameDesignData.maxEnergyCapacity + (PlayerPrefs.GetInt(Consts.Prefs.CAPACITY, 0) * _gameDesignData.energyCapacityUpgradeAmount);
+        MaxEnergyCapacity = _gameDesignData.MaxEnergyCapacity + (PlayerPrefs.GetInt(Consts.Prefs.CAPACITY, 0) * _gameDesignData.EnergyCapacityUpgradeAmount);
     }
 
     public void ConsumeEnergy(float amount, bool burst = false)
@@ -43,28 +41,28 @@ public class EnergyBar : MonoSingleton<EnergyBar>
 
     public float GetCurrentEnergy()
     {
-        return _energyBarFillImage.fillAmount * _maxEnergyCapacity;
+        return _energyBarFillImage.fillAmount * MaxEnergyCapacity;
     }
 
     private void SetEnergy(float newEnergy)
     {
-        float clampedEnergy = Mathf.Clamp(newEnergy, 0f, _maxEnergyCapacity);
+        float clampedEnergy = Mathf.Clamp(newEnergy, 0f, MaxEnergyCapacity);
         UpdateEnergyUI(clampedEnergy);
     }
 
     private void UpdateEnergyUI(float energyAmount)
     {
-        _energyBarFillImage.fillAmount = energyAmount / _maxEnergyCapacity;
-        _energyText.text = energyAmount.ToString("0") + "/" + _maxEnergyCapacity.ToString();
+        _energyBarFillImage.fillAmount = energyAmount / MaxEnergyCapacity;
+        _energyText.text = energyAmount.ToString("0") + "/" + MaxEnergyCapacity.ToString();
     }
 
     private void EnoughForMagneticPulse() 
     {
-        if(!PlayerController.Instance._hasMagneticCharge) return;
+        if(!PlayerController.Instance.HasMagneticCharge) return;
 
-        if(GetCurrentEnergy() >= _maxEnergyCapacity/2)
-        UIManager.Instance.magneticPulseButton.interactable = true;
+        if(GetCurrentEnergy() >= MaxEnergyCapacity/2)
+        UIManager.Instance.MagneticPulseButton.interactable = true;
         else
-        UIManager.Instance.magneticPulseButton.interactable = false;
+        UIManager.Instance.MagneticPulseButton.interactable = false;
     }
 }

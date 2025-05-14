@@ -5,11 +5,12 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 using System.Collections;
+using UnityEngine.Serialization;
 
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoSingleton<UIManager>
 {
-    public Button magneticPulseButton;
+    [FormerlySerializedAs("magneticPulseButton")] public Button MagneticPulseButton;
 
     [SerializeField] private GameDesignData _gameDesignData;
 
@@ -45,14 +46,14 @@ public class UIManager : MonoSingleton<UIManager>
     void Start()
     {
         _levelText.text = PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1 ? "Test-Lab" : "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL) - 1).ToString();
-        _loadDelay = _gameDesignData.menuLoadDelay;
+        _loadDelay = _gameDesignData.MenuLoadDelay;
 
         _audioSource = GetComponent<AudioSource>();
 
         _missions = new List<string>()
         {
-            $"Collect {LevelManager.Instance.chipsetCount} chipsets!",  
-            $"Finish under {LevelManager.Instance._timeLimit} sec!", 
+            $"Collect {LevelManager.Instance.ChipsetCount} chipsets!",  
+            $"Finish under {LevelManager.Instance.TimeLimit} sec!", 
             "No alarm allowed!"                           
         };
     }
@@ -92,18 +93,18 @@ public class UIManager : MonoSingleton<UIManager>
     {
         Settings.Instance.PlayButtonSound();
 
-        if(GameManager.Instance.isAlarmActive && Settings.Instance.Music == 1)
+        if(GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
         GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
 
         TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
     }
 
-    private void AlarmImageAlpha(bool isAlarmActive)
+    private void AlarmImageAlpha(bool IsAlarmActive)
     {
-        if(isAlarmActive)
+        if(IsAlarmActive)
         _alarmImage.alpha = 1f;
 
-        if(!isAlarmActive)
+        if(!IsAlarmActive)
         _alarmImage.alpha = 0.3f;
     }
 
@@ -113,7 +114,7 @@ public class UIManager : MonoSingleton<UIManager>
 
         foreach (GameObject uiElement in _uiElements) uiElement.SetActive(true); 
 
-        if(GameManager.Instance.waterLevel) _waterCanvas.SetActive(true);
+        if(GameManager.Instance.WaterLevel) _waterCanvas.SetActive(true);
     }
 
     private void PlayLevelEndAnimation(GameState gameState)
@@ -180,9 +181,9 @@ public class UIManager : MonoSingleton<UIManager>
             {
                 _levelEndMissionCanvas.SetActive(true);
 
-                _missionChipsetsText.color = LevelManager.Instance.chipsetMissionCompleted ? _completedMissionColor : _failedMissionColor;
-                _missionTimeText.color = LevelManager.Instance.timeMissionCompleted ? _completedMissionColor : _failedMissionColor;
-                _missionAlarmText.color = LevelManager.Instance.alarmMissionCompleted ? _completedMissionColor : _failedMissionColor;
+                _missionChipsetsText.color = LevelManager.Instance.ChipsetMissionCompleted ? _completedMissionColor : _failedMissionColor;
+                _missionTimeText.color = LevelManager.Instance.TimeMissionCompleted ? _completedMissionColor : _failedMissionColor;
+                _missionAlarmText.color = LevelManager.Instance.AlarmMissionCompleted ? _completedMissionColor : _failedMissionColor;
 
                 StartCoroutine(ShowMissions(_missions));
             }
@@ -257,7 +258,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         Settings.Instance.PlayButtonSound();
         
-        if(GameManager.Instance.isAlarmActive && Settings.Instance.Music == 1)
+        if(GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
         GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
 
         if(GameManager.Instance.GetCurrentState() == GameState.Win)
@@ -286,7 +287,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void TryAgainButton()
     {
-        if(GameManager.Instance.isAlarmActive && Settings.Instance.Music == 1)
+        if(GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
         GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
 
         Settings.Instance.PlayButtonSound();

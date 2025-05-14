@@ -16,7 +16,7 @@ public class EasterEgg : MonoBehaviour
     public void Clicked()
     {
         _confetti.Play();
-        GameManager.Instance.ProtocolCount +=100;
+        GameManager.Instance.ProtocolCount +=1000;
         gameObject.SetActive(false);
     }
 }

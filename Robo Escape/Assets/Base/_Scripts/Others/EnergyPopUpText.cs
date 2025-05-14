@@ -1,66 +1,66 @@
 using UnityEngine;
-using TMPro;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class EnergyPopUpText : MonoSingleton<EnergyPopUpText>
 {
     [Header("References")]
-    [SerializeField] private TextMeshProUGUI popupText;
-    [SerializeField] private RectTransform textRectTransform;
+    [FormerlySerializedAs("popupText"), SerializeField] private TMPro.TextMeshProUGUI _popupText;
+    [FormerlySerializedAs("textRectTransform"), SerializeField] private RectTransform _textRectTransform;
     [SerializeField] private GameDesignData _gameDesignData;
 
-    private float moveDistance = 100f;
-    private float moveDuration = 0.8f;
-    private float returnDuration = 0.3f;
-    private float displayDuration = 1f;
+    private float _moveDistance = 100f;
+    private float _moveDuration = 0.8f;
+    private float _returnDuration = 0.3f;
+    private float _displayDuration = 1f;
     private Color _positiveColor, _negativeColor;
 
-    private Vector2 originalPosition;
-    private bool isAvailable = true;
+    private Vector2 _originalPosition;
+    private bool _isAvailable = true;
 
     private void Awake()
     {
-        originalPosition = textRectTransform.anchoredPosition;
-        popupText.text = ""; 
+        _originalPosition = _textRectTransform.anchoredPosition;
+        _popupText.text = ""; 
 
-        moveDistance = _gameDesignData.moveDistance;
-        moveDuration = _gameDesignData.moveDuration;
-        returnDuration = _gameDesignData.returnDuration;
-        displayDuration = _gameDesignData.displayDuration;
-        _positiveColor = _gameDesignData._positiveColor;
-        _negativeColor = _gameDesignData._negativeColor;
+        _moveDistance = _gameDesignData.MoveDistance;
+        _moveDuration = _gameDesignData.MoveDuration;
+        _returnDuration = _gameDesignData.ReturnDuration;
+        _displayDuration = _gameDesignData.DisplayDuration;
+        _positiveColor = _gameDesignData.PositiveColor;
+        _negativeColor = _gameDesignData.NegativeColor;
     }
 
     public void ShowEnergyPopup(int energyAmount, bool positive)
     {
-        if (!isAvailable) return;
+        if (!_isAvailable) return;
 
-        isAvailable = false;
+        _isAvailable = false;
         
         if(positive)
         {
-            popupText.text = $"+{energyAmount}";
-            popupText.color = _positiveColor;
+            _popupText.text = $"+{energyAmount}";
+            _popupText.color = _positiveColor;
         }
         else
         {
-            popupText.text = $"-{energyAmount}";
-            popupText.color = _negativeColor;
+            _popupText.text = $"-{energyAmount}";
+            _popupText.color = _negativeColor;
         }
         
         Sequence sequence = DOTween.Sequence();
         
-        sequence.Append(textRectTransform.DOAnchorPosY(originalPosition.y + moveDistance, moveDuration)
+        sequence.Append(_textRectTransform.DOAnchorPosY(_originalPosition.y + _moveDistance, _moveDuration)
             .SetEase(Ease.OutQuad));
         
-        sequence.AppendInterval(displayDuration);
+        sequence.AppendInterval(_displayDuration);
         
-        sequence.Append(textRectTransform.DOAnchorPosY(originalPosition.y, returnDuration)
+        sequence.Append(_textRectTransform.DOAnchorPosY(_originalPosition.y, _returnDuration)
             .SetEase(Ease.InQuad));
         
         sequence.OnComplete(() => {
-            popupText.text = "";
-            isAvailable = true;
+            _popupText.text = "";
+            _isAvailable = true;
         });
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RotateY : MonoBehaviour
 {
-    [SerializeField] float rotationSpeed = 300f; 
+    [SerializeField] float _rotationSpeed = 100f; 
     [SerializeField] bool x = false;
     [SerializeField] bool y = true;
     [SerializeField] bool z = false;
@@ -21,11 +21,11 @@ public class RotateY : MonoBehaviour
         if (IsVisibleToCamera())
         {
             if (x)
-                transform.Rotate(rotationSpeed * Time.deltaTime, 0, 0);
+                transform.Rotate(_rotationSpeed * Time.deltaTime, 0, 0);
             if (y)
-                transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+                transform.Rotate(0, _rotationSpeed * Time.deltaTime, 0);
             if (z)
-                transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+                transform.Rotate(0, 0, _rotationSpeed * Time.deltaTime);
         }
     }
 

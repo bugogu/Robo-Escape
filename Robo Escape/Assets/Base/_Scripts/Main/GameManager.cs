@@ -4,19 +4,17 @@ using UnityEngine.Playables;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    
+    public event Action<GameState> OnGameStateChanged;
+    public event Action<bool> OnAlarmSetted;
+
+    [HideInInspector] public bool WaterLevel;
+    [HideInInspector] public bool IsAlarmActive = false;
+
     [SerializeField] private PlayableDirector _playableDirector;
 
     [SerializeField] private Material[] _outlines;
     [SerializeField] private float[] _initialScaleValues;
- 
-    [HideInInspector] public bool waterLevel;
-    public event Action<GameState> OnGameStateChanged;
-    public event Action<bool> OnAlarmSetted;
-
-    [HideInInspector]
-    public bool isAlarmActive = false;
-
-    private GameState _gameState;
 
     public int ProtocolCount 
     { 
@@ -24,9 +22,11 @@ public class GameManager : MonoSingleton<GameManager>
         set => PlayerPrefs.SetInt(Consts.Prefs.PROTOCOLCOUNT, value);
     }
 
+    private GameState _gameState;
+
     void Start()
     {
-        waterLevel = LevelManager.Instance.levelData.waterLevel;
+        WaterLevel = LevelManager.Instance.LevelData.WaterLevel;
 
         Settings.Instance?.SetOutlines(Settings.Instance.Outlines == 1);
     }
@@ -66,14 +66,14 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void SetAlarm(bool status)
     {
-        if(PlayerController.Instance._isProtectionActive)
+        if(PlayerController.Instance.IsProtectionActive)
         {
             PlayerController.Instance.RemoveProtection();
             return;
         }
 
         OnAlarmSetted?.Invoke(status);
-        isAlarmActive = status;
+        IsAlarmActive = status;
     }
 
     public void SetAlarm(bool status, bool passwordTriggered = false)
@@ -81,7 +81,7 @@ public class GameManager : MonoSingleton<GameManager>
         if(!passwordTriggered) return;
         
         OnAlarmSetted?.Invoke(status);
-        isAlarmActive = status;
+        IsAlarmActive = status;
     }
 
     private void PlayAlarmSound(bool alarmActive)

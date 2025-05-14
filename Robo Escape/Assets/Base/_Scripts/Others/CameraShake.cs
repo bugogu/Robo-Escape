@@ -18,9 +18,9 @@ public class CameraShake : MonoBehaviour
         _shakeSource = GetComponent<CinemachineImpulseSource>();
         _cinemachineImpulseListener = GetComponent<CinemachineImpulseListener>();
 
-        _duration = _gameDesignData.cameraShakeDuration;
-        _amplitude = _gameDesignData.cameraShakeAmplitude;
-        _frequency = _gameDesignData.cameraShakeFrequency;
+        _duration = _gameDesignData.CameraShakeDuration;
+        _amplitude = _gameDesignData.CameraShakeAmplitude;
+        _frequency = _gameDesignData.CameraShakeFrequency;
 
         _cinemachineImpulseListener.ReactionSettings.AmplitudeGain = _amplitude;
         _cinemachineImpulseListener.ReactionSettings.Duration = _duration;

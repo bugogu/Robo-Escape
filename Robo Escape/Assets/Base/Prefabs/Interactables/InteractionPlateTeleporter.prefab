@@ -218,6 +218,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
+      propertyPath: OneTimeUseable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590080079165963149, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: oneTimeUseable
       value: 0
       objectReference: {fileID: 0}

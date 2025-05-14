@@ -6,7 +6,7 @@ public class DrainCell : MonoBehaviour, ICollectable
     public bool Collect()
     {
         if(Settings.Instance.Haptic == 1) Handheld.Vibrate(); 
-        if(Settings.Instance.Sound == 1) SoundManager.Instance.PlaySFX(SoundManager.Instance.electricSfx);
+        if(Settings.Instance.Sound == 1) SoundManager.Instance.PlaySFX(SoundManager.Instance.ElectricSfx);
         CameraShake.Shake();
         EnergyBar.Instance.ConsumeEnergy(_consumeAmount, true);
         gameObject.SetActive(false);

@@ -17,11 +17,11 @@ public class DoUpgrade : MonoBehaviour
 
     public void UpgradeEnergyCapacity()
     {
-        if (_upgradeManager.EnergyCapacity >= _upgradeEnergyCapacity.maxIncreaseCount) return;
+        if (_upgradeManager.EnergyCapacity >= _upgradeEnergyCapacity.MaxIncreaseCount) return;
 
-        if(PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0) < _upgradeEnergyCapacity.price) return;
+        if(PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0) < _upgradeEnergyCapacity.Price) return;
 
-        PlayerPrefs.SetInt(Consts.Prefs.PROTOCOLCOUNT, PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0) - _upgradeEnergyCapacity.price);
+        PlayerPrefs.SetInt(Consts.Prefs.PROTOCOLCOUNT, PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0) - _upgradeEnergyCapacity.Price);
 
         Settings.Instance.PlayButtonSound();
 
@@ -29,7 +29,7 @@ public class DoUpgrade : MonoBehaviour
 
         _upgradeManager.EnergyCapacity++;
 
-        if(_upgradeManager.EnergyCapacity == _upgradeEnergyCapacity.maxIncreaseCount) 
+        if(_upgradeManager.EnergyCapacity == _upgradeEnergyCapacity.MaxIncreaseCount) 
             SetEnergyPriceTextToMax();
 
         GenerateProgressEnergyCapacity();

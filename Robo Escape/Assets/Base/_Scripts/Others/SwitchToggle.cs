@@ -1,54 +1,57 @@
 using UnityEngine ;
 using UnityEngine.UI ;
 using DG.Tweening ;
+using UnityEngine.Serialization;
 
-public class SwitchToggle : MonoBehaviour {
-   [SerializeField] RectTransform uiHandleRectTransform ;
-   [SerializeField] Color backgroundActiveColor ;
-   [SerializeField] Color handleActiveColor ;
+public class SwitchToggle : MonoBehaviour 
+{
+   [FormerlySerializedAs("uiHandleRectTransform")] [ SerializeField] RectTransform _uiHandleRectTransform ;
+   [FormerlySerializedAs("backgroundActiveColor")] [ SerializeField] Color _backgroundActiveColor ;
+   [FormerlySerializedAs("handleActiveColor")] [ SerializeField] Color _handleActiveColor ;
    [SerializeField] SwitchType _switchType ;
+
    private enum SwitchType { Music, Sound, Haptic, Outlines }
 
-   Image backgroundImage, handleImage ;
+   Image _backgroundImage, _handleImage ;
 
-   Color backgroundDefaultColor, handleDefaultColor ;
+   Color _backgroundDefaultColor, _handleDefaultColor ;
 
-   Toggle toggle ;
+   Toggle _toggle ;
 
-   Vector2 handlePosition ;
+   Vector2 _handlePosition ;
 
    private bool _firstLoad = true;
 
    void Awake ( ) {
-      toggle = GetComponent <Toggle> ( ) ;
+      _toggle = GetComponent <Toggle> ( ) ;
 
-      handlePosition = uiHandleRectTransform.anchoredPosition ;
+      _handlePosition = _uiHandleRectTransform.anchoredPosition ;
 
-      backgroundImage = uiHandleRectTransform.parent.GetComponent <Image> ( ) ;
-      handleImage = uiHandleRectTransform.GetComponent <Image> ( ) ;
+      _backgroundImage = _uiHandleRectTransform.parent.GetComponent <Image> ( ) ;
+      _handleImage = _uiHandleRectTransform.GetComponent <Image> ( ) ;
 
-      backgroundDefaultColor = backgroundImage.color ;
-      handleDefaultColor = handleImage.color ;
+      _backgroundDefaultColor = _backgroundImage.color ;
+      _handleDefaultColor = _handleImage.color ;
 
-      toggle.onValueChanged.AddListener (OnSwitch) ;
+      _toggle.onValueChanged.AddListener (OnSwitch) ;
 
       switch(_switchType)
       {
          case SwitchType.Music:
-            toggle.isOn = Settings.Instance.Music == 1 ? true : false;
+            _toggle.isOn = Settings.Instance.Music == 1 ? true : false;
             break;
          case SwitchType.Sound:
-            toggle.isOn = Settings.Instance.Sound == 1 ? true : false;
+            _toggle.isOn = Settings.Instance.Sound == 1 ? true : false;
             break;
          case SwitchType.Haptic:
-            toggle.isOn = Settings.Instance.Haptic == 1 ? true : false;
+            _toggle.isOn = Settings.Instance.Haptic == 1 ? true : false;
             break;
          case SwitchType.Outlines:
-            toggle.isOn = Settings.Instance.Outlines == 1 ? true : false;
+            _toggle.isOn = Settings.Instance.Outlines == 1 ? true : false;
             break;
       }
 
-      if (toggle.isOn)
+      if (_toggle.isOn)
          OnSwitch (true) ;
    }
 
@@ -72,20 +75,20 @@ public class SwitchToggle : MonoBehaviour {
             break ;
       }
 
-      //uiHandleRectTransform.anchoredPosition = on ? handlePosition * -1 : handlePosition ; // no anim
-      uiHandleRectTransform.DOAnchorPos (on ? handlePosition * -1 : handlePosition, .4f).SetEase (Ease.InOutBack) ;
+      //_uiHandleRectTransform.anchoredPosition = on ? _handlePosition * -1 : _handlePosition ; // no anim
+      _uiHandleRectTransform.DOAnchorPos (on ? _handlePosition * -1 : _handlePosition, .4f).SetEase (Ease.InOutBack) ;
 
-      //backgroundImage.color = on ? backgroundActiveColor : backgroundDefaultColor ; // no anim
-      backgroundImage.DOColor (on ? backgroundActiveColor : backgroundDefaultColor, .6f) ;
+      //_backgroundImage.color = on ? _backgroundActiveColor : _backgroundDefaultColor ; // no anim
+      _backgroundImage.DOColor (on ? _backgroundActiveColor : _backgroundDefaultColor, .6f) ;
 
-      //handleImage.color = on ? handleActiveColor : handleDefaultColor ; // no anim
-      handleImage.DOColor (on ? handleActiveColor : handleDefaultColor, .4f);
+      //_handleImage.color = on ? _handleActiveColor : _handleDefaultColor ; // no anim
+      _handleImage.DOColor (on ? _handleActiveColor : _handleDefaultColor, .4f);
 
       _firstLoad = false;
    }
 
    void OnDestroy ( ) {
-      toggle.onValueChanged.RemoveListener (OnSwitch) ;
+      _toggle.onValueChanged.RemoveListener (OnSwitch) ;
    }
 
    private void MusicToggle()

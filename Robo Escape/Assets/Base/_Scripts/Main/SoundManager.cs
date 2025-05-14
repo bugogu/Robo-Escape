@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
-    public AudioClip electricSfx, jumpPadSfx, gateClosingSfx;
+    public AudioClip ElectricSfx, JumpPadSfx, GateClosingSfx;
 
     private AudioSource _audioSource;
 

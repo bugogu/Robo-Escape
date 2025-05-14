@@ -1,17 +1,14 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+using UnityEngine.Serialization;
 
 public class MissionDisplay : MonoBehaviour
 {
-    public List<string> _missions;
-
-    [SerializeField] private TMP_Text missionText;
+    [FormerlySerializedAs("missionText")] [ SerializeField] private TMPro.TMP_Text _missionText;
     [Header("Sound Settings")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip keyboardSound;
+    [FormerlySerializedAs("audioSource"), SerializeField] private AudioSource _audioSource;
+    [FormerlySerializedAs("keyboardSound"), SerializeField] private AudioClip _keyboardSound;
 
+    private System.Collections.Generic.List<string> _missions;
     private float _typingSpeed; 
     private float _delayBetweenMissions;
     private float _closeDelay; 
@@ -23,25 +20,25 @@ public class MissionDisplay : MonoBehaviour
 			gameObject.SetActive(false);
 			return;
         }
-        _typingSpeed = LevelManager.Instance.levelData.typingSpeed;
-        _delayBetweenMissions = LevelManager.Instance.levelData.delayBetweenMissions;
-        _closeDelay = LevelManager.Instance.levelData.closeDelay;
+        _typingSpeed = LevelManager.Instance.LevelData.TypingSpeed;
+        _delayBetweenMissions = LevelManager.Instance.LevelData.DelayBetweenMissions;
+        _closeDelay = LevelManager.Instance.LevelData.CloseDelay;
 
-        missionText.text = "";
+        _missionText.text = "";
         
-        _missions = new List<string>()
+        _missions = new System.Collections.Generic.List<string>()
         {
-            $"Collect {LevelManager.Instance.chipsetCount} chipsets!",  
-            $"Finish under {LevelManager.Instance._timeLimit} sec!", 
+            $"Collect {LevelManager.Instance.ChipsetCount} chipsets!",  
+            $"Finish under {LevelManager.Instance.TimeLimit} sec!", 
             "No alarm allowed!"                           
         };
 
         StartCoroutine(ShowMissions(_missions));
     }
 
-    IEnumerator ShowMissions(List<string> missions)
+    System.Collections.IEnumerator ShowMissions(System.Collections.Generic.List<string> missions)
     {
-        missionText.transform.parent.gameObject.SetActive(true); 
+        _missionText.transform.parent.gameObject.SetActive(true); 
 
         foreach (string mission in missions)
         {
@@ -51,17 +48,17 @@ public class MissionDisplay : MonoBehaviour
         }
 
         yield return new WaitForSeconds(_closeDelay);
-        missionText.transform.parent.gameObject.SetActive(false);
+        _missionText.transform.parent.gameObject.SetActive(false);
     }
 
-    IEnumerator TypeText(string text)
+    System.Collections.IEnumerator TypeText(string text)
     {
         foreach (char letter in text.ToCharArray())
         {
-            missionText.text += letter; 
+            _missionText.text += letter; 
 
-            if (letter != ' ' && letter != '\n' && audioSource != null && keyboardSound != null)
-                audioSource.PlayOneShot(keyboardSound); 
+            if (letter != ' ' && letter != '\n' && _audioSource != null && _keyboardSound != null)
+                _audioSource.PlayOneShot(_keyboardSound); 
                 
             yield return new WaitForSeconds(_typingSpeed); 
         }
