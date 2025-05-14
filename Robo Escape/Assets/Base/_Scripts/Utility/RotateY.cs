@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class RotateY : MonoBehaviour
 {
+    #region References
+    
     [SerializeField] float _rotationSpeed = 100f; 
     [SerializeField] bool x = false;
     [SerializeField] bool y = true;
     [SerializeField] bool z = false;
+
+    #endregion
 
     private Camera _mainCamera;
     private Renderer _renderer;

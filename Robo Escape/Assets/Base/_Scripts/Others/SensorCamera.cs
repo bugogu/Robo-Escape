@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class SensorCamera : MonoBehaviour
 {
-    [Header("Dönüş Ayarları")]
-    [SerializeField] bool _rotateCamera = true;
-    [SerializeField] float _rotationSpeed = 45f;
-    [SerializeField] float _minAngle = -70f;
-    [SerializeField] float _maxAngle = 70f;
+    #region References
 
     [SerializeField] private CheckForCameraVisibilty _checkForCameraVisibilty;
+
+    [Header("Rotation Settings")]
+    [SerializeField] bool _rotateCamera = true;
+    [SerializeField] float _rotationSpeed = 45f, _minAngle = -70f, _maxAngle = 70f;
+    
+    #endregion
 
     private float _currentAngle = 0f;
     private int _rotationDirection = 1;

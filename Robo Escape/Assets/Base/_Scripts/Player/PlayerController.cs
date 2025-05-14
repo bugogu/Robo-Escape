@@ -10,6 +10,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     [HideInInspector] public bool HasAnyPowerUp = false;
     [HideInInspector] public bool HasMagneticCharge = false;
 
+    #region References
+
     [FormerlySerializedAs("_energyCellFX")] public ParticleSystem EnergyCellFX;
     [FormerlySerializedAs("_drainCellFX")] public ParticleSystem DrainCellFX;
     
@@ -35,6 +37,10 @@ public class PlayerController : MonoSingleton<PlayerController>
     [Range(0f, 1f), SerializeField] private float _hitEffectsRestartTime = 0.2f;
     // [SerializeField] private GameObject passwordCanvas;
 
+    #endregion
+
+    #region Private Fields
+
     private PlayerMovement _playerMovement;
     private bool _isFlashActive = false;
     private float _flashDuration = 10f;
@@ -46,6 +52,10 @@ public class PlayerController : MonoSingleton<PlayerController>
     private Color _initialOutline;
     private Vignette _vignette;
     private int _outlineColor = Shader.PropertyToID("_Color");
+
+    #endregion
+
+    #region Unity Events
 
     void Start()
     {
@@ -80,10 +90,28 @@ public class PlayerController : MonoSingleton<PlayerController>
             GameManager.Instance.OnGameStateChanged -= CanMove;
     }
 
-    private void CanMove(GameState gameState)
+    #endregion
+
+    #region Public Methods
+
+    public void Jump(Transform target, float jumpPower, float jumpDuration)
     {
-        if(gameState == GameState.Play) _playerMovement.enabled = true;
-        else _playerMovement.enabled = false;
+        Vector3 dir = transform.position - target.position;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(-dir), 1);
+
+        //CameraShake.Shake();
+        _playerMovement.OnGround = false;
+        transform.DOJump(target.position, jumpPower, 1, jumpDuration).SetUpdate(UpdateType.Fixed).OnComplete(() => _playerMovement.OnGround = true);
+    } 
+
+    public void GetHit(float energyDamage)
+    {
+        if(Settings.Instance.Outlines == 1) _outlineMaterial.SetColor("_Color", _hitVignetteColor);
+        _vignette.color.Override(_hitVignetteColor);
+        EnergyBar.Instance.ConsumeEnergy(energyDamage, true);
+        CameraShake.Shake();
+        // GameManager.Instance.SetAlarm(true);
+        Invoke(nameof(RestartHitEffects), _hitEffectsRestartTime);
     }
 
     public void MovingFX(bool status)
@@ -95,7 +123,6 @@ public class PlayerController : MonoSingleton<PlayerController>
             _flashTrailFX.SetActive(status);
     }
         
-
     public void HackFxActive(InteractionType interactionType, bool status)
     {
         switch (interactionType)
@@ -131,6 +158,43 @@ public class PlayerController : MonoSingleton<PlayerController>
         }
     }
     
+    public void UseMagneticPulse()
+    {
+        Emp();
+
+        CameraShake.Shake();
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.ElectricSfx);
+
+        if(Settings.Instance.Outlines == 1)
+            _outlineMaterial.SetColor("_Color", _initialOutline);
+        
+        _magneticPulseRadiusSprite.SetActive(false);
+        UIManager.Instance.MagneticPulseButton.transform.parent.gameObject.SetActive(false);
+        HasAnyPowerUp = false;
+        _magneticPulseAuraFX.SetActive(false);
+        HasMagneticCharge = false;
+        _magneticPulseFX.SetActive(true);
+        Invoke(nameof(CloseMagneticPulseFX), 2f);
+    }
+
+    public bool GetFlashStatus() => _isFlashActive;
+
+    public void RemoveProtection()
+    {
+        if(!IsProtectionActive) return;
+
+        if(Settings.Instance.Outlines == 1)
+            _outlineMaterial.SetColor("_Color", _initialOutline);
+
+        IsProtectionActive = false;
+        _antiAlarmShieldFX.gameObject.SetActive(false);
+        HasAnyPowerUp = false;
+    }
+
+    #endregion
+
+    #region Private Methods
+
     private void GainAntiAlarmShield()
     {
         if(IsProtectionActive) return;
@@ -169,18 +233,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         Invoke(nameof(RemoveFlash), _flashDuration);
     }
 
-    public void RemoveProtection()
-    {
-        if(!IsProtectionActive) return;
-
-        if(Settings.Instance.Outlines == 1)
-            _outlineMaterial.SetColor("_Color", _initialOutline);
-
-        IsProtectionActive = false;
-        _antiAlarmShieldFX.gameObject.SetActive(false);
-        HasAnyPowerUp = false;
-    }
-
     private void RemoveFlash()
     {
         GetComponent<Animator>().speed = _initialAnimatorSpeed;
@@ -197,8 +249,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         _playerMovingFX.SetActive(true);
     }
 
-    public bool GetFlashStatus() => _isFlashActive;
-
     private void GainMagneticPulse()
     {
         if(HasAnyPowerUp) return;
@@ -211,25 +261,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         HasAnyPowerUp = true;
         _magneticPulseAuraFX.SetActive(true);
         HasMagneticCharge = true;
-    }
-
-    public void UseMagneticPulse()
-    {
-        Emp();
-
-        CameraShake.Shake();
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.ElectricSfx);
-
-        if(Settings.Instance.Outlines == 1)
-            _outlineMaterial.SetColor("_Color", _initialOutline);
-        
-        _magneticPulseRadiusSprite.SetActive(false);
-        UIManager.Instance.MagneticPulseButton.transform.parent.gameObject.SetActive(false);
-        HasAnyPowerUp = false;
-        _magneticPulseAuraFX.SetActive(false);
-        HasMagneticCharge = false;
-        _magneticPulseFX.SetActive(true);
-        Invoke(nameof(CloseMagneticPulseFX), 2f);
     }
 
     private void Emp()
@@ -255,29 +286,17 @@ public class PlayerController : MonoSingleton<PlayerController>
         Gizmos.DrawWireSphere(transform.position, _magneticPulseRadius);
     }
 
-    public void Jump(Transform target, float jumpPower, float jumpDuration)
-    {
-        Vector3 dir = transform.position - target.position;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(-dir), 1);
-
-        //CameraShake.Shake();
-        _playerMovement.OnGround = false;
-        transform.DOJump(target.position, jumpPower, 1, jumpDuration).SetUpdate(UpdateType.Fixed).OnComplete(() => _playerMovement.OnGround = true);
-    } 
-
-    public void GetHit(float energyDamage)
-    {
-        if(Settings.Instance.Outlines == 1) _outlineMaterial.SetColor("_Color", _hitVignetteColor);
-        _vignette.color.Override(_hitVignetteColor);
-        EnergyBar.Instance.ConsumeEnergy(energyDamage, true);
-        CameraShake.Shake();
-        // GameManager.Instance.SetAlarm(true);
-        Invoke(nameof(RestartHitEffects), _hitEffectsRestartTime);
-    }
-
     private void RestartHitEffects()
     {
         if(Settings.Instance.Outlines == 1) _outlineMaterial.SetColor("_Color", _initialOutlineColor);
         _vignette.color.Override(Color.black);
     }
+
+    private void CanMove(GameState gameState)
+    {
+        if(gameState == GameState.Play) _playerMovement.enabled = true;
+        else _playerMovement.enabled = false;
+    }
+
+    #endregion
 }

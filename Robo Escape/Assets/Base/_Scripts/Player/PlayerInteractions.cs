@@ -3,12 +3,17 @@ using UnityEngine;
 public class PlayerInteractions : MonoBehaviour
 {
     [SerializeField] private GameDesignData _gameDesignData;
+
+    #region Private Fields
+
     private PlayerMovement _playerMovement;
     private PlayerController _playerController;
-
     private IInteractable _currentInteractable;
-    private float _interactionTimer;
-    private float _initialAnimatorSpeed;
+    private float _interactionTimer, _initialAnimatorSpeed;
+
+    #endregion
+
+    #region Unity Events
 
     void Start()
     {
@@ -80,4 +85,6 @@ public class PlayerInteractions : MonoBehaviour
             _interactionTimer = 0f;
         }
     }
+
+    #endregion
 }

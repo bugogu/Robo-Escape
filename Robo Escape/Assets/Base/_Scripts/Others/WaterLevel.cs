@@ -11,6 +11,8 @@ public class WaterLevel : MonoBehaviour
     private bool _canFill;
     private float _currentTime;
 
+    #region Unity Events
+
     void Awake()
     {
         _canFill = GameManager.Instance.WaterLevel;
@@ -34,6 +36,18 @@ public class WaterLevel : MonoBehaviour
         SetWaterLevel(_currentFillAmount);
     }
 
+    void OnEnable()
+    {
+        GameManager.Instance.OnGameStateChanged += Fillable;
+    }
+
+    void OnDisable()
+    {
+        GameManager.Instance.OnGameStateChanged -= Fillable;
+    }
+
+    #endregion
+
     private void SetWaterLevel(float value) =>  _waterFill.fillAmount = Mathf.Clamp01(value);
 
     private void SetWaterCounter(float value)
@@ -46,14 +60,5 @@ public class WaterLevel : MonoBehaviour
         if(gameState != GameState.Intro) _canFill = true;
         else _canFill = false;
     }
-
-    void OnEnable()
-    {
-        GameManager.Instance.OnGameStateChanged += Fillable;
-    }
-
-    void OnDisable()
-    {
-        GameManager.Instance.OnGameStateChanged -= Fillable;
-    }
+    
 }

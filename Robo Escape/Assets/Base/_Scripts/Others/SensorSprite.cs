@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class SensorSprite : MonoBehaviour
 {
-    [Header("Dönüş Ayarları")]
-    [SerializeField] bool _rotateSprite = true;
-    [SerializeField] float _rotationSpeed = 45f;
-    [SerializeField] float _minAngle = -70f;
-    [SerializeField] float _maxAngle = 70f;
+    #region References
 
+    [Header("Rotation Settings")]
+    [SerializeField] bool _rotateSprite = true;
+    [SerializeField] float _rotationSpeed = 45f, _minAngle = -70f, _maxAngle = 70f;
+
+    [Header("Others")]
     [SerializeField] private CheckForCameraVisibilty _checkForCameraVisibilty;
     [SerializeField] private float _viewRadius = 1.35f;
     [SerializeField] private SpriteRenderer _visionConeSprite;
+
+    #endregion
 
     private int _rotationDirection = -1;
     private float _currentAngle = 0f;

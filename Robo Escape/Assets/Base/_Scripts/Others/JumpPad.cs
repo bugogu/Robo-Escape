@@ -4,6 +4,7 @@ public class JumpPad : MonoBehaviour
 {
     [SerializeField] private float _jumpPower;
     [SerializeField] private float _jumpDuration;
+    
     private Animator _animator;
     private JumpPadArea _jumpPadArea;
     private Transform _target;

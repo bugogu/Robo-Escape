@@ -4,14 +4,20 @@ public class EnergyBar : MonoSingleton<EnergyBar>
 {
     [HideInInspector] public float MaxEnergyCapacity;
 
+    #region References
+
     [SerializeField] private GameDesignData _gameDesignData;
     [SerializeField] private UnityEngine.UI.Image _energyBarFillImage;
     [SerializeField] private TMPro.TMP_Text _energyText;
+
+    #endregion
 
     void Awake()
     {
         MaxEnergyCapacity = _gameDesignData.MaxEnergyCapacity + (PlayerPrefs.GetInt(Consts.Prefs.CAPACITY, 0) * _gameDesignData.EnergyCapacityUpgradeAmount);
     }
+
+    #region Public Methods
 
     public void ConsumeEnergy(float amount, bool burst = false)
     {
@@ -44,6 +50,10 @@ public class EnergyBar : MonoSingleton<EnergyBar>
         return _energyBarFillImage.fillAmount * MaxEnergyCapacity;
     }
 
+    #endregion
+
+    #region Private Methods
+
     private void SetEnergy(float newEnergy)
     {
         float clampedEnergy = Mathf.Clamp(newEnergy, 0f, MaxEnergyCapacity);
@@ -65,4 +75,6 @@ public class EnergyBar : MonoSingleton<EnergyBar>
         else
         UIManager.Instance.MagneticPulseButton.interactable = false;
     }
+
+    #endregion
 }

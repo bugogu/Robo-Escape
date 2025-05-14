@@ -9,14 +9,14 @@ public class EnergyPopUpText : MonoSingleton<EnergyPopUpText>
     [FormerlySerializedAs("textRectTransform"), SerializeField] private RectTransform _textRectTransform;
     [SerializeField] private GameDesignData _gameDesignData;
 
-    private float _moveDistance = 100f;
-    private float _moveDuration = 0.8f;
-    private float _returnDuration = 0.3f;
-    private float _displayDuration = 1f;
-    private Color _positiveColor, _negativeColor;
+    #region Private Fields
 
+    private float _moveDistance = 100f, _moveDuration = 0.8f, _returnDuration = 0.3f, _displayDuration = 1f;
+    private Color _positiveColor, _negativeColor;
     private Vector2 _originalPosition;
     private bool _isAvailable = true;
+
+    #endregion
 
     private void Awake()
     {

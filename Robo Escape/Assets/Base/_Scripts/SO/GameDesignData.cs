@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameDesignData", menuName = "Scriptable Objects/Game Design Data")]
 public class GameDesignData : ScriptableObject
 {
+    #region Player References
+
     [Header("Player Movement Settings"), Space(20)]
     public float CharacterRunSpeed;
     public float CharacterWalkSpeed;
@@ -23,6 +25,8 @@ public class GameDesignData : ScriptableObject
     public float FlashPowerUpDuration = 10f;
     public Color FlashOutlineColor, ShieldOutlineColor, EmpOutlineColor;
 
+    #endregion
+
     [Header("Energy PopUp Text Settings"), Space(20)]
     public float MoveDistance = 100f;
     public float MoveDuration = 0.5f;
@@ -40,7 +44,4 @@ public class GameDesignData : ScriptableObject
 
     [Header("Upgrade Settings"), Space(20)]
     public float EnergyCapacityUpgradeAmount = 5f;
-
-
-
 }

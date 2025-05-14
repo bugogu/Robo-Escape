@@ -6,12 +6,8 @@ public class CameraShake : MonoBehaviour
     [SerializeField] private GameDesignData _gameDesignData;
 
     private static CinemachineImpulseSource _shakeSource;
-
     private static CinemachineImpulseListener _cinemachineImpulseListener;
-
-    private float _duration;
-    private float _amplitude;
-    private float _frequency;
+    private float _duration, _amplitude, _frequency;
 
     void Start()
     {

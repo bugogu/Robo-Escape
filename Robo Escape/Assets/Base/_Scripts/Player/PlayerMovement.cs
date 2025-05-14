@@ -7,10 +7,14 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool IsMagnetized = false;
     [HideInInspector] public bool OnGround;
 
+    #region References
+
     [Header("References")]
     [SerializeField] private DynamicJoystick _dynamicJoystick;
     [SerializeField] private Animator _animator;
     [SerializeField] private GameDesignData _gameDesignData;
+
+    #endregion
 
     #region Private Fields
 
@@ -27,6 +31,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake() => Initial();
 
+    private void FixedUpdate()
+    {
+       if(!OnGround) return;
+       PlayerMoving();
+    }
+
+    public void SetSpeed(bool isFlashed)
+    {
+        if(isFlashed)
+        {
+            _runSpeed *= _flashSpeedMultiplier;
+            _walkSpeed *= _flashSpeedMultiplier;
+        } 
+
+        else
+        {
+            _walkSpeed = _initialWalkSpeed;
+            _runSpeed = _initialRunSpeed;
+        } 
+    }
+
+    public void StopMovement()
+    {
+        _rbPlayer.linearVelocity = Vector3.zero;
+        IsMoving = false;
+    }
+
+    #region Private Methods
+
     private void Initial() 
     {
         SetReferecnes();
@@ -42,13 +75,7 @@ public class PlayerMovement : MonoBehaviour
         _initialWalkSpeed = _walkSpeed;
     }
 
-    private void FixedUpdate()
-    {
-       if(!OnGround) return;
-       PlayerMoving();
-    }
-
-    public bool JoystickMovement()
+    private bool JoystickMovement()
     {
         
         _horizontal = _dynamicJoystick.Horizontal;
@@ -87,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         return isJoystickMoving;
     }
 
-    public void PlayerMoving()
+    private void PlayerMoving()
     {
         if(Input.touchCount > 0 || Input.GetMouseButton(0))
         {
@@ -130,24 +157,5 @@ public class PlayerMovement : MonoBehaviour
         _stopThreshold = _gameDesignData.StopThreshold;
     }
 
-    public void SetSpeed(bool isFlashed)
-    {
-        if(isFlashed)
-        {
-            _runSpeed *= _flashSpeedMultiplier;
-            _walkSpeed *= _flashSpeedMultiplier;
-        } 
-
-        else
-        {
-            _walkSpeed = _initialWalkSpeed;
-            _runSpeed = _initialRunSpeed;
-        } 
-    }
-
-    public void StopMovement()
-    {
-        _rbPlayer.linearVelocity = Vector3.zero;
-        IsMoving = false;
-    }
+    #endregion
 }

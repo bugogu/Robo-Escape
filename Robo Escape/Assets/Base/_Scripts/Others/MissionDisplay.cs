@@ -9,9 +9,7 @@ public class MissionDisplay : MonoBehaviour
     [FormerlySerializedAs("keyboardSound"), SerializeField] private AudioClip _keyboardSound;
 
     private System.Collections.Generic.List<string> _missions;
-    private float _typingSpeed; 
-    private float _delayBetweenMissions;
-    private float _closeDelay; 
+    private float _typingSpeed, _delayBetweenMissions, _closeDelay; 
 
     private void Start()
     {

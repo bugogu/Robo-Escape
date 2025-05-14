@@ -5,22 +5,26 @@ using UnityEngine.Serialization;
 
 public class SwitchToggle : MonoBehaviour 
 {
+   #region References
+
    [FormerlySerializedAs("uiHandleRectTransform")] [ SerializeField] RectTransform _uiHandleRectTransform ;
    [FormerlySerializedAs("backgroundActiveColor")] [ SerializeField] Color _backgroundActiveColor ;
    [FormerlySerializedAs("handleActiveColor")] [ SerializeField] Color _handleActiveColor ;
    [SerializeField] SwitchType _switchType ;
 
+   #endregion
+
    private enum SwitchType { Music, Sound, Haptic, Outlines }
 
+   #region Private Fields
+
    Image _backgroundImage, _handleImage ;
-
    Color _backgroundDefaultColor, _handleDefaultColor ;
-
    Toggle _toggle ;
-
    Vector2 _handlePosition ;
-
    private bool _firstLoad = true;
+
+   #endregion
 
    void Awake ( ) {
       _toggle = GetComponent <Toggle> ( ) ;
@@ -54,6 +58,8 @@ public class SwitchToggle : MonoBehaviour
       if (_toggle.isOn)
          OnSwitch (true) ;
    }
+
+   #region Private Methods
 
    void OnSwitch (bool on) {
 
@@ -132,4 +138,6 @@ public class SwitchToggle : MonoBehaviour
          Settings.Instance.SetOutlines(true);
       }
    }
+
+   #endregion
 }
