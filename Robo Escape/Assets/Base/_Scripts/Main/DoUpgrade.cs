@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class DoUpgrade : MonoBehaviour
 {
+    #region References
+
     [Header("Energy Capacity")]
     public UpgradeElementData _upgradeEnergyCapacity;
     [SerializeField] private RectTransform _progressEnergyParent;
     [SerializeField] private GameObject _progressEnergyCapacityPrefab;
     [SerializeField] private TMPro.TMP_Text _energyCapacityPriceText;
 
+    #endregion
+    
     private UpgradeManager _upgradeManager;
 
     void Awake()

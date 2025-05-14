@@ -5,21 +5,33 @@ using DG.Tweening;
 
 public class MenuUI : MonoSingleton<MenuUI>
 {
+    #region References
+
     [SerializeField] private GameDesignData _gameDesignData;
+
+    [Header("Texts")]
     [SerializeField] private TMPro.TMP_Text _levelText;
-    [SerializeField] private TMPro.TMP_Text _protocolText;
-    [SerializeField] private Button _playButton;
+    [SerializeField] private TMPro.TMP_Text _protocolText, _capacityText;
+
+    [Header("GameObjects")]
     [SerializeField] private GameObject _escapeButton;
-    [SerializeField] private Settings _settings;
+    [SerializeField] private GameObject _upgradesCanvas, _settingsPanel;
+
+    [Header("Transforms")]
     [SerializeField] private RectTransform _capacityRect;
-    [SerializeField] private TMPro.TMP_Text _capacityText;
+    [SerializeField] private RectTransform _handRect;
+    
+    [Header("Floats")]
     [SerializeField] private float _showDuration = 1f;
     [SerializeField] private float _closeDuration = 3f;
-    [SerializeField] private RectTransform _handRect;
-    [SerializeField] private Vector3 _handRectYThreshold = new Vector3(-140, 160, 0);
     [SerializeField] private float _handRectMoveDuration = 1f;
-    [SerializeField] private GameObject _upgradesCanvas;
-    [SerializeField] private GameObject _settingsPanel;
+    
+    [Header("Others")]
+    [SerializeField] private Button _playButton;
+    [SerializeField] private Settings _settings;
+    [SerializeField] private Vector3 _handRectYThreshold = new Vector3(-140, 160, 0);
+    
+    #endregion
 
     private bool _isShowed = false;
 
@@ -53,6 +65,20 @@ public class MenuUI : MonoSingleton<MenuUI>
         ShowEnergyCapacity();
          
     }
+    
+    public void UpgradesCanvasEnabled(bool status) 
+    {
+        Settings.Instance.PlayButtonSound();
+        _upgradesCanvas.SetActive(status);
+    }
+
+    public void SetProtocolText()
+    {
+        _protocolText.text = $"{PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0)}";
+    }
+
+    #region Private Methods
+
     private void PlayButton() 
     {
         Settings.Instance.PlayButtonSound();
@@ -85,15 +111,5 @@ public class MenuUI : MonoSingleton<MenuUI>
     private void CloseEnergyCapacity()=>
         _capacityRect.DOScale(Vector3.zero, _showDuration).OnComplete(()=> _isShowed = false);
 
-    public void UpgradesCanvasEnabled(bool status) 
-    {
-        Settings.Instance.PlayButtonSound();
-        _upgradesCanvas.SetActive(status);
-    }
-
-    public void SetProtocolText()
-    {
-        _protocolText.text = $"{PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0)}";
-    }
-
+    #endregion
 }

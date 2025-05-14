@@ -4,14 +4,19 @@ using UnityEngine.Serialization;
 
 public class InteractionPlate : MonoBehaviour, IInteractable
 {
+    #region Public Fields
+
     public bool IsPowerUpPlate = false;
     public bool OneTimeUseable = true;
 
     [FormerlySerializedAs("_plateFillImage")] public Image PlateFillImage;
     public InteractionType InteractionType => _interactionType;
 
-    [HideInInspector]
-    public bool IsInteractionComplete = false;
+    [HideInInspector] public bool IsInteractionComplete = false;
+
+    #endregion
+
+    #region References
 
     [SerializeField] private UnityEngine.Events.UnityEvent _action;
     [Space(10)]
@@ -19,6 +24,10 @@ public class InteractionPlate : MonoBehaviour, IInteractable
     [SerializeField] private GameObject _plateVisualObject;
     [SerializeField] private InteractionType _interactionType ;
     [SerializeField] private float _interactionDuration = 5f;
+
+    #endregion
+
+    #region Unity Events
 
     void Awake()
     {
@@ -65,5 +74,6 @@ public class InteractionPlate : MonoBehaviour, IInteractable
 
         PlateFillImage.fillAmount = 0f;
     }
-}
 
+    #endregion
+}

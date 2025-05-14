@@ -5,6 +5,8 @@ public class Drone : MonoBehaviour
     [SerializeField] private VisionCone _visionCone;
     private bool _isPatroling = true;
     private CheckForDroneVisibilty _checkForDroneVisibilty;
+
+    #region Unity Events
     
     void Awake()
     {
@@ -24,16 +26,6 @@ public class Drone : MonoBehaviour
         }
     }
 
-    public void PlayerSpotted()
-    {
-        GameManager.Instance.SetAlarm(true);
-    }
-
-    public void StopPatroling(bool status) 
-    {
-        _isPatroling = false;
-    }
-        
     void OnEnable()
     {
         GameManager.Instance.OnAlarmSetted += StopPatroling;
@@ -43,5 +35,17 @@ public class Drone : MonoBehaviour
     {
         if (GameManager.Instance != null)
             GameManager.Instance.OnAlarmSetted -= StopPatroling;
+    }
+
+    #endregion
+
+    public void PlayerSpotted()
+    {
+        GameManager.Instance.SetAlarm(true);
+    }
+
+    public void StopPatroling(bool status) 
+    {
+        _isPatroling = false;
     }
 }

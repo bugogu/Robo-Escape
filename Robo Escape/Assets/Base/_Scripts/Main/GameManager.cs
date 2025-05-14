@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    #region Public Fields
     
     public event Action<GameState> OnGameStateChanged;
     public event Action<bool> OnAlarmSetted;
@@ -11,10 +12,15 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public bool WaterLevel;
     [HideInInspector] public bool IsAlarmActive = false;
 
-    [SerializeField] private PlayableDirector _playableDirector;
+    #endregion
 
+    #region References
+
+    [SerializeField] private PlayableDirector _playableDirector;
     [SerializeField] private Material[] _outlines;
     [SerializeField] private float[] _initialScaleValues;
+
+    #endregion
 
     public int ProtocolCount 
     { 
@@ -24,18 +30,13 @@ public class GameManager : MonoSingleton<GameManager>
 
     private GameState _gameState;
 
+    #region Unity Events
+
     void Start()
     {
         WaterLevel = LevelManager.Instance.LevelData.WaterLevel;
 
         Settings.Instance?.SetOutlines(Settings.Instance.Outlines == 1);
-    }
-
-    public void ChangeGameState(GameState gameState) 
-    {
-        _gameState = gameState;
-        OnGameStateChanged?.Invoke(gameState);
-        Debug.Log("Game State : " + gameState);
     }
 
     private void OnEnable()
@@ -61,8 +62,16 @@ public class GameManager : MonoSingleton<GameManager>
             Settings.Instance.OnOutlinesSetted -= SetBasicOutlines;
     }
 
-    private void OnTimeLineFinished(PlayableDirector director)=>
-        ChangeGameState(GameState.Play);
+    #endregion
+
+    #region Public Methods
+
+    public void ChangeGameState(GameState gameState) 
+    {
+        _gameState = gameState;
+        OnGameStateChanged?.Invoke(gameState);
+        Debug.Log("Game State : " + gameState);
+    }
 
     public void SetAlarm(bool status)
     {
@@ -83,6 +92,18 @@ public class GameManager : MonoSingleton<GameManager>
         OnAlarmSetted?.Invoke(status);
         IsAlarmActive = status;
     }
+
+    public GameState GetCurrentState() 
+    {
+        return _gameState;
+    } 
+
+    #endregion
+    
+    #region Private Methods
+
+    private void OnTimeLineFinished(PlayableDirector director)=>
+        ChangeGameState(GameState.Play);
 
     private void PlayAlarmSound(bool alarmActive)
     {
@@ -111,8 +132,5 @@ public class GameManager : MonoSingleton<GameManager>
         CameraShake.Shake();
     }
 
-    public GameState GetCurrentState() 
-    {
-        return _gameState;
-    } 
+    #endregion
 }

@@ -4,10 +4,11 @@ using DG.Tweening;
 
 public class LaserGate : MonoBehaviour
 {
+    #region References
+
     [Header("General")]
     [SerializeField] private CheckForLaserGateVisibilty _checkForLaserGateVisibilty;
-    [SerializeField] private GameObject _lasersParent;
-    [SerializeField] private GameObject _interactionPlate;
+    [SerializeField] private GameObject _lasersParent, _interactionPlate;
     [SerializeField] private float _deactiveTime = 5f;
     [SerializeField] private Transform _reloadImageParent;
     [SerializeField] private Image _reloadFill;
@@ -15,14 +16,21 @@ public class LaserGate : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private bool _canMove = false;
-    [SerializeField] Transform _startPoint;
-    [SerializeField] Transform _endPoint;
+    [SerializeField] Transform _startPoint, _endPoint;
     [SerializeField] float _speed = 1.0f;
+
+    #endregion
+
+    #region Fields
 
     private float _passedTime = 0f;
 
     private InteractionPlate _interactionPlateScript;
     private BoxCollider _boxCollider;
+
+    #endregion
+
+    #region Unity Events
 
     void Start()
     {
@@ -38,6 +46,31 @@ public class LaserGate : MonoBehaviour
         if(!_canMove) return;
         Move();
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(!PlayerController.Instance.IsProtectionActive)
+        {
+            if(!other.CompareTag(Consts.Tags.PLAYER)) return;
+
+            CameraShake.Shake();
+
+            if(Settings.Instance.Sound == 1) SoundManager.Instance.PlaySFX(SoundManager.Instance.ElectricSfx);
+
+            if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
+
+            EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount, true); 
+
+            SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+            foreach (var sensor in allSensors)
+                sensor.SetTriggeredColor();
+        }
+
+        GameManager.Instance.SetAlarm(true);
+    }
+
+    #endregion
 
     public void DeactivateLasers()
     {
@@ -68,26 +101,4 @@ public class LaserGate : MonoBehaviour
         transform.position = Vector3.Lerp(_startPoint.position, _endPoint.position, lerpDegeri);
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if(!PlayerController.Instance.IsProtectionActive)
-        {
-            if(!other.CompareTag(Consts.Tags.PLAYER)) return;
-
-            CameraShake.Shake();
-
-            if(Settings.Instance.Sound == 1) SoundManager.Instance.PlaySFX(SoundManager.Instance.ElectricSfx);
-
-            if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
-
-            EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount, true); 
-
-            SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
-            foreach (var sensor in allSensors)
-                sensor.SetTriggeredColor();
-        }
-
-        GameManager.Instance.SetAlarm(true);
-    }
 }

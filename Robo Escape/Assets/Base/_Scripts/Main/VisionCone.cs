@@ -4,24 +4,36 @@ using UnityEngine;
 public class VisionCone : MonoBehaviour
 {
     public enum VisionType {Turret, Drone}
+    
+    #region Public Fields
+    
     public float VisionRange;
     
     [HideInInspector] public bool PlayerSpotted;
     [HideInInspector] public float InitialRange;
+
+    #endregion
+
+    #region References
 
     [SerializeField] private VisionType _visionType;
     [SerializeField] Material _visionConeMaterial;
     [SerializeField] float _visionAngle = 20f;
     [SerializeField] LayerMask _visionObstructingLayer;//layer with objects that obstruct the enemy view, like walls, for example
     [SerializeField] int _visionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the pretier the vision cone will be
-    [SerializeField] private Color _spottedColor;
-    [SerializeField] private Color _normalColor;
+    [SerializeField] private Color _spottedColor, _normalColor;
+
+    #endregion
+
+    #region Private Fields
 
     private Mesh _visionConeMesh;
     private MeshFilter _meshFilter;
 
     private Turret _turret;
     private Drone _drone;
+
+    #endregion
     
     //Create all of these variables, most of them are self explanatory, but for the ones that aren't i've added a comment to clue you in on what they do
     //for the ones that you dont understand dont worry, just follow along
@@ -39,7 +51,6 @@ public class VisionCone : MonoBehaviour
         else if (_visionType == VisionType.Drone)
             _drone = transform.parent.GetComponent<Drone>();
     }
-
     
     void Update()
     {

@@ -9,7 +9,7 @@ public class Settings : MonoSingleton<Settings>
 
     public RectTransform SettingsPanel;
 
-    #region Properties
+    #region Public Properties
 
     public int Music 
     {
@@ -58,6 +58,8 @@ public class Settings : MonoSingleton<Settings>
         OnOutlinesSetted?.Invoke(Outlines == 1);
     }
 
+    #region Public Methods
+
     public void SettingsPanelEnabled()
     {
         PlayButtonSound();
@@ -87,4 +89,6 @@ public class Settings : MonoSingleton<Settings>
         if(Sound == 1)
             _audioSource?.Play();
     } 
+
+    #endregion
 }

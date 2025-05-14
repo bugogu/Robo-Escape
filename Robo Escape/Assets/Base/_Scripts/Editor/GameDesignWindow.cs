@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GameDesignWindow : EditorWindow
 {
+    #region Fields
+
     private GameDesignData _designData;
     private bool _showCharacterMovementSettings = false;
     private bool _showCharacterEnergySettings = false;
@@ -13,6 +15,10 @@ public class GameDesignWindow : EditorWindow
     private bool _showMaxCapacitySettings = false;
 
     private Vector2 _scrollPosition;
+
+    #endregion
+
+    #region Setup
     
     [MenuItem("Design/Game Design Window")]
     public static void ShowWindow()
@@ -44,6 +50,8 @@ public class GameDesignWindow : EditorWindow
             AssetDatabase.SaveAssets();
         }
     }
+
+    #endregion
 
     #region Containers
 

@@ -10,38 +10,47 @@ using UnityEngine.Serialization;
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoSingleton<UIManager>
 {
+    #region References
+
+    [Header("Buttons")]
     [FormerlySerializedAs("magneticPulseButton")] public Button MagneticPulseButton;
+    [SerializeField] private Button _nextLevelButton, _menuButton, _tryAgainButton, _homeButton;
 
-    [SerializeField] private GameDesignData _gameDesignData;
-
-    [Header("General")]
-    [SerializeField] private Button _homeButton;
-    [SerializeField] private TMP_Text _levelText;
-    [SerializeField] private CanvasGroup _alarmImage;
-    [SerializeField] private GameObject _waterCanvas;
-    [SerializeField] private Animator _levelEndAnimation;
+    [Header("Texts")]
     [SerializeField] private TMP_Text _levelEndTitleText;
+    [SerializeField] private TMP_Text _missionChipsetsText, _missionTimeText, _missionAlarmText, _levelText;
+
+    [Header("GameObjects")]
+    [SerializeField] private GameObject _waterCanvas;
+    [SerializeField] private GameObject _powerUpCounter, _levelEndMissionCanvas;
+    
+    [Header("Colors")]
+    [SerializeField] private Color _shieldPowerUpColor;
+    [SerializeField] private Color _flashPowerUpColor, _completedMissionColor, _failedMissionColor;    
+
+    [Header("Others")]
+    [SerializeField] private GameDesignData _gameDesignData;
+    [SerializeField] private CanvasGroup _alarmImage;
+    [SerializeField] private Animator _levelEndAnimation;
     [SerializeField] private float _typingSpeed = 0.05f;
     [SerializeField] private AudioClip _keyboardSound;
     [SerializeField] private List<GameObject> _levelEndClosingElements;
-    [SerializeField] private GameObject _powerUpCounter;
     [SerializeField] private Image _powerUpFill;
-    [SerializeField] private Color _shieldPowerUpColor;
-    [SerializeField] private Color _flashPowerUpColor;
     [SerializeField] private ParticleSystem _levelEndConfetti;
-    [SerializeField] private Color _completedMissionColor;
-    [SerializeField] private Color _failedMissionColor;
-    [SerializeField] private TMP_Text _missionChipsetsText, _missionTimeText, _missionAlarmText;
-    [SerializeField] private GameObject _levelEndMissionCanvas;
-    [SerializeField] private Button _nextLevelButton, _menuButton, _tryAgainButton;
-    
-    [Header("UI Elements")]
-    [Tooltip("These element are going to open when cutscene is finished")] 
+    [Tooltip("These elements are going to open when cutscene is finished")] 
     [SerializeField] private GameObject[] _uiElements;
+
+    #endregion
+
+    #region Private Fields
 
     private float _loadDelay;
     private AudioSource _audioSource;
     private List<string> _missions;
+
+    #endregion
+
+    #region Unity Events
 
     void Start()
     {
@@ -73,6 +82,35 @@ public class UIManager : MonoSingleton<UIManager>
         GameManager.Instance.OnGameStateChanged -= OpenUI;
         GameManager.Instance.OnGameStateChanged -= PlayLevelEndAnimation;
     }
+
+    #endregion
+
+    public void ActivatePowerCounter(float time, bool isShield)
+    {
+        if(isShield) _powerUpFill.color = _shieldPowerUpColor;
+        else _powerUpFill.color = _flashPowerUpColor;
+
+        _powerUpCounter.SetActive(true);
+        
+        _powerUpFill.FillImageAnimation(1,0,time).SetEase(Ease.Linear).OnComplete(()=> ResetPowerCounter());
+    }
+
+    public void TryAgainButton()
+    {
+        if(GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
+        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
+
+        Settings.Instance.PlayButtonSound();
+
+        TransitionManager.Instance.PlayTransition(1f);
+        Invoke(nameof(LoadLevel), 0.3f);
+        _levelEndMissionCanvas.SetActive(false);
+        _levelEndAnimation.gameObject.SetActive(false);
+
+        if(_homeButton.transform.parent.gameObject.activeInHierarchy) _homeButton.transform.parent.gameObject.SetActive(false);
+    }
+
+    #region Private Methods
 
     private void SetOnClicks()
     {
@@ -190,23 +228,13 @@ public class UIManager : MonoSingleton<UIManager>
         }
     }
 
-    public void ActivatePowerCounter(float time, bool isShield)
-    {
-        if(isShield) _powerUpFill.color = _shieldPowerUpColor;
-        else _powerUpFill.color = _flashPowerUpColor;
-
-        _powerUpCounter.SetActive(true);
-        
-        _powerUpFill.FillImageAnimation(1,0,time).SetEase(Ease.Linear).OnComplete(()=> ResetPowerCounter());
-    }
-
     private void ResetPowerCounter()
     {
         _powerUpCounter.SetActive(false);
         _powerUpFill.fillAmount = 1f;
     }
 
-    IEnumerator ShowMissions(List<string> missions)
+    private IEnumerator ShowMissions(List<string> missions)
     {
         // 1. Görev (Chipsets)
         if(missions.Count > 0 && _missionChipsetsText != null)
@@ -239,7 +267,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     }
 
-    IEnumerator TypeText(string text, TMP_Text targetText)
+    private IEnumerator TypeText(string text, TMP_Text targetText)
     {
         targetText.text = "";
         
@@ -285,21 +313,8 @@ public class UIManager : MonoSingleton<UIManager>
         _levelEndAnimation.gameObject.SetActive(false);
     }
 
-    public void TryAgainButton()
-    {
-        if(GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
-        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
-
-        Settings.Instance.PlayButtonSound();
-
-        TransitionManager.Instance.PlayTransition(1f);
-        Invoke(nameof(LoadLevel), 0.3f);
-        _levelEndMissionCanvas.SetActive(false);
-        _levelEndAnimation.gameObject.SetActive(false);
-
-        if(_homeButton.transform.parent.gameObject.activeInHierarchy) _homeButton.transform.parent.gameObject.SetActive(false);
-    }
-
     private void LoadLevel()=>
         UnityEngine.SceneManagement.SceneManager.LoadScene(PlayerPrefs.GetInt("Level", 1) + 1);
+
+    #endregion
 }
