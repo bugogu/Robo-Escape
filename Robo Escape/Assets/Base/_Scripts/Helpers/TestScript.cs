@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
-
-#if UNITY_EDITOR
-
+    [System.Diagnostics.Conditional("UNITY_EDITOR")]
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab)) 
@@ -12,6 +10,4 @@ public class TestScript : MonoBehaviour
             GameManager.Instance.ChangeGameState(GameState.Lose);
         }
     }
-#endif
-
 }

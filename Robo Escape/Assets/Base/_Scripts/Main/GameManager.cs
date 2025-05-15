@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Playables;
+using Player;
 
 public class GameManager : MonoSingleton<GameManager>
 {

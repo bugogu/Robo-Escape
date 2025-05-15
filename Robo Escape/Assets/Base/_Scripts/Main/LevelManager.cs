@@ -15,8 +15,14 @@ public class LevelManager : MonoSingleton<LevelManager>
     [HideInInspector] public int ChipsetCount;
     [HideInInspector, Tooltip("Seconds")] public float TimeLimit;
 
+    #region References
+
     [SerializeField] private Light _directionalLight;
-    
+    [SerializeField] private Material _environmentMaterial;
+    [SerializeField] private Color _alarmMaterialColor, _normalColor;
+
+    #endregion
+
     #region Private Fields
 
     private int _collectedChipsetCount = 0;
@@ -47,6 +53,8 @@ public class LevelManager : MonoSingleton<LevelManager>
         GameManager.Instance.OnGameStateChanged -= IncreaseProtocolCount;
         GameManager.Instance.OnGameStateChanged -= StartTimer;
         GameManager.Instance.OnAlarmSetted -= ChangeTemperature;
+
+        _environmentMaterial.color = _normalColor;
     }
 
     void Update()
@@ -89,8 +97,11 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     private void ChangeTemperature(bool status)
     {
-        _directionalLight.useColorTemperature = status;
-        _directionalLight.colorTemperature = 1500f;
+        // Environment Material Unlit olduğu için bu yöntem etkisiz
+        // _directionalLight.useColorTemperature = status;
+        // _directionalLight.colorTemperature = 1500f;
+
+        _environmentMaterial.color = _alarmMaterialColor;
     }
 
     #endregion

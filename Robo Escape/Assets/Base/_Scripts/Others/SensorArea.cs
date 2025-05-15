@@ -13,7 +13,7 @@ public class SensorArea : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         
-        if(!PlayerController.Instance.IsProtectionActive)
+        if(!Player.PlayerController.Instance.IsProtectionActive)
         {
             if(other.CompareTag(Consts.Tags.PLAYER))
             {

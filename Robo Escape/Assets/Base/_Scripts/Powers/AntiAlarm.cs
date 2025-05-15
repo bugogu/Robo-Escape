@@ -4,6 +4,6 @@ public class AntiAlarm : MonoBehaviour
 {
     public void ActivateShield()
     {
-        PlayerController.Instance.GainPowerUp(PowerUpType.Shield);
+        Player.PlayerController.Instance.GainPowerUp(PowerUpType.Shield);
     }
 }

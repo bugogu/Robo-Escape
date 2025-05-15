@@ -68,7 +68,7 @@ public class EnergyBar : MonoSingleton<EnergyBar>
 
     private void EnoughForMagneticPulse() 
     {
-        if(!PlayerController.Instance.HasMagneticCharge) return;
+        if(!Player.PlayerController.Instance.HasMagneticCharge) return;
 
         if(GetCurrentEnergy() >= MaxEnergyCapacity/2)
         UIManager.Instance.MagneticPulseButton.interactable = true;

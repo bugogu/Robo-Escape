@@ -39,6 +39,7 @@ public class RotateY : MonoBehaviour
             return false;
 
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_mainCamera);
+        
         return GeometryUtility.TestPlanesAABB(planes, _renderer.bounds);
     }
 }

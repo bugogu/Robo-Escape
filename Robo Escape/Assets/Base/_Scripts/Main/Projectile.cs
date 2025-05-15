@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     {
         if(other.CompareTag(Consts.Tags.PLAYER)) 
         {
-            other.GetComponent<PlayerController>().GetHit(Damage);
+            other.GetComponent<Player.PlayerController>().GetHit(Damage);
             gameObject.SetActive(false);
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))

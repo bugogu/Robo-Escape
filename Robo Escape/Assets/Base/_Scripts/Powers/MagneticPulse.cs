@@ -4,6 +4,6 @@ public class MagneticPulse : MonoBehaviour
 {
     public void ActivateMagneticCharge()
     {
-        PlayerController.Instance.GainPowerUp(PowerUpType.MagneticPulse);
+        Player.PlayerController.Instance.GainPowerUp(PowerUpType.MagneticPulse);
     }
 }
