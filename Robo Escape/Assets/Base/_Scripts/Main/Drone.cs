@@ -2,12 +2,21 @@ using UnityEngine;
 
 public class Drone : MonoBehaviour
 {
+    #region References
+
     [SerializeField] private VisionCone _visionCone;
+
+    #endregion
+
+    #region Private Fields
+
     private bool _isPatroling = true;
     private CheckForDroneVisibilty _checkForDroneVisibilty;
 
+    #endregion
+
     #region Unity Events
-    
+
     void Awake()
     {
         _checkForDroneVisibilty = transform.GetChild(0).GetComponent<CheckForDroneVisibilty>();
@@ -15,7 +24,7 @@ public class Drone : MonoBehaviour
 
     void Update()
     {
-        if(!_checkForDroneVisibilty.IsVisibleToCamera())
+        if (!_checkForDroneVisibilty.IsVisibleToCamera())
         {
             _visionCone.enabled = false;
             return;
@@ -44,7 +53,7 @@ public class Drone : MonoBehaviour
         GameManager.Instance.SetAlarm(true);
     }
 
-    public void StopPatroling(bool status) 
+    public void StopPatroling(bool status)
     {
         _isPatroling = false;
     }
