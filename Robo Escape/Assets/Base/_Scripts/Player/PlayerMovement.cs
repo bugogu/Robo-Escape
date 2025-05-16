@@ -28,6 +28,7 @@ namespace Player
         private Rigidbody _rbPlayer;
         private float _horizontal = 0, _vertical = 0;
         private PlayerController _playerController;
+        private Vector3 _movementVector;
 
         #endregion
 
@@ -82,37 +83,20 @@ namespace Player
             _horizontal = _dynamicJoystick.Horizontal;
             _vertical = _dynamicJoystick.Vertical;
 
-            bool isJoystickMoving = Mathf.Abs(_horizontal) > _movementThreshold || Mathf.Abs(_vertical) > _movementThreshold;
+            var isJoystickMoving = Mathf.Abs(_horizontal) > _movementThreshold || Mathf.Abs(_vertical) > _movementThreshold;
 
-            if (isJoystickMoving)
+            _animator?.SetBool(Consts.PlayerAnimations.WALKING, isJoystickMoving);
+
+            if (!isJoystickMoving)
             {
-                _animator.SetBool(Consts.PlayerAnimations.WALKING, isJoystickMoving);
-
-                if (EnergyBar.Instance.GetCurrentEnergy() <= 0)
-                {
-                    Vector3 newPos = new Vector3(_horizontal * (IsMagnetized ? _walkSpeed / _magnetismSpeedMultiplier : _walkSpeed) * Time.fixedDeltaTime,
-                     0, _vertical * (IsMagnetized ? _walkSpeed / _magnetismSpeedMultiplier : _walkSpeed) * Time.fixedDeltaTime);
-                    _rbPlayer.linearVelocity = newPos;
-                }
-                else
-                {
-                    Vector3 newPos = new Vector3(_horizontal * (IsMagnetized ? _runSpeed / _magnetismSpeedMultiplier : _runSpeed) * Time.fixedDeltaTime,
-                     0, _vertical * (IsMagnetized ? _runSpeed / _magnetismSpeedMultiplier : _runSpeed) * Time.fixedDeltaTime);
-                    _rbPlayer.linearVelocity = newPos;
-                }
-
-                Vector3 dir = (Vector3.forward * _vertical) + (Vector3.right * _horizontal);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), _turnSpeed * Time.fixedDeltaTime);
-            }
-            else
-            {
-                if (Mathf.Abs(_horizontal) < _stopThreshold || Mathf.Abs(_vertical) < _stopThreshold)
-                {
-                    return false;
-                }
+                return Mathf.Abs(_horizontal) >= _stopThreshold ||
+                Mathf.Abs(_vertical) >= _stopThreshold;
             }
 
-            return isJoystickMoving;
+            HandleMovement();
+            HandleRotation();
+
+            return true;
         }
 
         private void PlayerMoving()
@@ -156,6 +140,34 @@ namespace Player
 
             _movementThreshold = _gameDesignData.MovementThreshold;
             _stopThreshold = _gameDesignData.StopThreshold;
+        }
+
+        private void HandleMovement()
+        {
+            var speed = GetCurrentSpeed();
+            var speedMultiplier = IsMagnetized ? 1f / _magnetismSpeedMultiplier : 1f;
+
+            _movementVector.x = _horizontal * speed * speedMultiplier * Time.fixedDeltaTime;
+            _movementVector.z = _vertical * speed * speedMultiplier * Time.fixedDeltaTime;
+            _movementVector.y = 0;
+
+            _rbPlayer.linearVelocity = _movementVector;
+        }
+
+        private void HandleRotation()
+        {
+            var direction = (Vector3.forward * _vertical) + (Vector3.right * _horizontal);
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _turnSpeed * Time.fixedDeltaTime);
+            }
+        }
+
+        private float GetCurrentSpeed()
+        {
+            return EnergyBar.Instance.GetCurrentEnergy() > 0 ? _runSpeed : _walkSpeed;
         }
 
         #endregion

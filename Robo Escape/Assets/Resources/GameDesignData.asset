@@ -16,8 +16,8 @@ MonoBehaviour:
   CharacterWalkSpeed: 625
   CharacterTurnSpeed: 50
   MagnetismSpeedMultiplier: 2
-  MovementThreshold: 0.35
-  StopThreshold: 0.2
+  MovementThreshold: 0.5
+  StopThreshold: 0.495
   ReplenishAmount: 0.45
   ConsumeAmount: 0.225
   MagnetismConsumptionMultiplier: 2
