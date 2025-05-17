@@ -37,8 +37,12 @@ public class LaserGate : MonoBehaviour
         _interactionPlateScript = _interactionPlate.GetComponent<InteractionPlate>();
         _boxCollider = GetComponent<BoxCollider>();
 
-        if(_canMove)
-        _reloadImageParent.parent = null;
+        if (_canMove)
+        {
+            _reloadImageParent.parent = null;
+            _startPoint.parent = null; _endPoint.parent = null;
+        }
+        
     }
 
     void Update()

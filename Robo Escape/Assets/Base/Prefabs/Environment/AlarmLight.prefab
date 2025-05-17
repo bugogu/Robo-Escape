@@ -99,4 +99,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3620607cdd25bec4bbd36ea31b94a973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alarmLightIntensity: -30
+  _alarmLightIntensity: -30
