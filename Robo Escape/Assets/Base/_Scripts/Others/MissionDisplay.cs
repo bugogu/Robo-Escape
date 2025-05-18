@@ -13,11 +13,12 @@ public class MissionDisplay : MonoBehaviour
 
     private void Start()
     {
-        if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
-		{
-			gameObject.SetActive(false);
-			return;
-        }
+        // if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
+        // {
+        // 	gameObject.SetActive(false);
+        // 	return;
+        // }
+        
         _typingSpeed = LevelManager.Instance.LevelData.TypingSpeed;
         _delayBetweenMissions = LevelManager.Instance.LevelData.DelayBetweenMissions;
         _closeDelay = LevelManager.Instance.LevelData.CloseDelay;

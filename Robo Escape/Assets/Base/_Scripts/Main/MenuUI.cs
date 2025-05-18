@@ -39,11 +39,9 @@ public class MenuUI : MonoSingleton<MenuUI>
     {
         if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
         {
-            _levelText.text = "Test-Lab";
             _handRect.parent.gameObject.SetActive(true);
             _handRect.DOAnchorPos(_handRectYThreshold, _handRectMoveDuration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
         }
-        
         else
        _levelText.text = "Lab-" + (PlayerPrefs.GetInt("Level", 1) -1).ToString();  
        

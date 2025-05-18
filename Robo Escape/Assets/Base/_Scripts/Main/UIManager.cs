@@ -54,7 +54,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     void Start()
     {
-        _levelText.text = PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1 ? "Test-Lab" : "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL) - 1).ToString();
+        _levelText.text = "Lab-" + PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1).ToString();
         _loadDelay = _gameDesignData.MenuLoadDelay;
 
         _audioSource = GetComponent<AudioSource>();
@@ -178,6 +178,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     private IEnumerator TypeTextForTitle(string text)
     {
+        yield return new WaitForSeconds(1f);
+
         _levelEndTitleText.text = "";
 
         foreach (char letter in text.ToCharArray())
@@ -190,24 +192,12 @@ public class UIManager : MonoSingleton<UIManager>
             yield return new WaitForSeconds(_typingSpeed); 
         }
 
-        if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
-        {
-            _nextLevelButton.gameObject.SetActive(true);
-            _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale ,0.5f,5,10);
-            
-            yield return new WaitForSeconds(1f);
-
-            _menuButton.gameObject.SetActive(true);
-            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,0.5f,5,10);
-            
-        }
-
         if(GameManager.Instance.GetCurrentState() == GameState.Lose)
         {
             _tryAgainButton.gameObject.SetActive(true);
             _tryAgainButton.transform.DOPunchScale(_tryAgainButton.transform.localScale ,0.5f,5,10);
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.3f);
 
             _menuButton.gameObject.SetActive(true);
             _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,0.5f,5,10);
@@ -215,16 +205,21 @@ public class UIManager : MonoSingleton<UIManager>
 
         if(GameManager.Instance.GetCurrentState() == GameState.Win)
         {
-            if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) != 1)
-            {
-                _levelEndMissionCanvas.SetActive(true);
+            _nextLevelButton.gameObject.SetActive(true);
+            _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale ,0.5f,5,10);
 
-                _missionChipsetsText.color = LevelManager.Instance.ChipsetMissionCompleted ? _completedMissionColor : _failedMissionColor;
-                _missionTimeText.color = LevelManager.Instance.TimeMissionCompleted ? _completedMissionColor : _failedMissionColor;
-                _missionAlarmText.color = LevelManager.Instance.AlarmMissionCompleted ? _completedMissionColor : _failedMissionColor;
+            yield return new WaitForSeconds(.3f);
 
-                StartCoroutine(ShowMissions(_missions));
-            }
+            _menuButton.gameObject.SetActive(true);
+            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,0.5f,5,10);
+
+            yield return new WaitForSeconds(1f);
+
+            _levelEndMissionCanvas.SetActive(true);
+            _missionChipsetsText.color = LevelManager.Instance.ChipsetMissionCompleted ? _completedMissionColor : _failedMissionColor;
+            _missionTimeText.color = LevelManager.Instance.TimeMissionCompleted ? _completedMissionColor : _failedMissionColor;
+            _missionAlarmText.color = LevelManager.Instance.AlarmMissionCompleted ? _completedMissionColor : _failedMissionColor;
+            StartCoroutine(ShowMissions(_missions));
         }
     }
 
@@ -256,15 +251,6 @@ public class UIManager : MonoSingleton<UIManager>
             yield return StartCoroutine(TypeText(missions[2], _missionAlarmText));
             yield return new WaitForSeconds(0.1f);
         }
-
-        _nextLevelButton.gameObject.SetActive(true);
-        _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale ,0.5f,5,10);
-
-        yield return new WaitForSeconds(1f);
-
-        _menuButton.gameObject.SetActive(true);
-        _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,0.5f,5,10);
-
     }
 
     private IEnumerator TypeText(string text, TMP_Text targetText)

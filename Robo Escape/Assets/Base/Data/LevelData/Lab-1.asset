@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22b0e80944f73c4459282fc4bfbfcd92, type: 3}
-  m_Name: TestLab
+  m_Name: Lab-1
   m_EditorClassIdentifier: 
-  ChipsetCount: 100
-  TimeLimit: 0
+  ChipsetCount: 1
+  TimeLimit: 300
   WaterLevel: 0
   WaterFillTime: 60
   Password: 4283
