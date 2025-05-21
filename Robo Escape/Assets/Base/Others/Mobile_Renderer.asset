@@ -42,6 +42,27 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
+--- !u!114 &-8631382711741348503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1614fc811f8f184697d9bee70ab9fe5, type: 3}
+  m_Name: DecalRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  m_Settings:
+    technique: 0
+    maxDrawDistance: 1000
+    decalLayers: 0
+    dBufferSettings:
+      surfaceData: 2
+    screenSpaceSettings:
+      normalBlend: 0
 --- !u!114 &-8077195570269148228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,11 +73,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: RenderObjects
+  m_Name: Elevator
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: RenderObjects
+    passTag: Elevator
     Event: 450
     filterSettings:
       RenderQueueType: 0
@@ -220,11 +241,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: RenderObjects
+  m_Name: Elevator
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: RenderObjects
+    passTag: Elevator
     Event: 400
     filterSettings:
       RenderQueueType: 0
@@ -331,7 +352,8 @@ MonoBehaviour:
   - {fileID: -6646417473053826125}
   - {fileID: 9115812448650984181}
   - {fileID: 4773984018486387886}
-  m_RendererFeatureMap: 21f170f3b13bb60c237546033fb27aa1e264b3b898d348d22dd8a89ce988249290f2606ae425dd94c6e64fbd629ffb84be5c19ed6e45b4551191ce7fbe972479bcabbf746c09e88fb363adc1852ec3a3f5faecd81fdf817eaee445d12b994042
+  - {fileID: -8631382711741348503}
+  m_RendererFeatureMap: 21f170f3b13bb60c237546033fb27aa1e264b3b898d348d22dd8a89ce988249290f2606ae425dd94c6e64fbd629ffb84be5c19ed6e45b4551191ce7fbe972479bcabbf746c09e88fb363adc1852ec3a3f5faecd81fdf817eaee445d12b9940426985359a272b3788
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}

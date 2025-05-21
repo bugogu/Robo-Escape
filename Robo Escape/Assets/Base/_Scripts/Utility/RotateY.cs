@@ -1,10 +1,11 @@
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class RotateY : MonoBehaviour
 {
     #region References
-    
-    [SerializeField] float _rotationSpeed = 100f; 
+
+    [SerializeField] float _rotationSpeed = 100f;
     [SerializeField] bool x = false;
     [SerializeField] bool y = true;
     [SerializeField] bool z = false;
@@ -39,7 +40,7 @@ public class RotateY : MonoBehaviour
             return false;
 
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_mainCamera);
-        
+
         return GeometryUtility.TestPlanesAABB(planes, _renderer.bounds);
     }
 }

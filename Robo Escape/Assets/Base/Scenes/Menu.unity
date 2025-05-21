@@ -202,7 +202,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94192682}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
@@ -260,9 +260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cfa81d39df0a24993f684444681777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiHandleRectTransform: {fileID: 1337331336}
-  backgroundActiveColor: {r: 0.18926479, g: 0.79622644, b: 0.18478456, a: 1}
-  handleActiveColor: {r: 0.6784314, g: 1, b: 0.18431373, a: 1}
+  _uiHandleRectTransform: {fileID: 1337331336}
+  _backgroundActiveColor: {r: 0.18926479, g: 0.79622644, b: 0.18478456, a: 1}
+  _handleActiveColor: {r: 0.6784314, g: 1, b: 0.18431373, a: 1}
   _switchType: 1
 --- !u!114 &173449549
 MonoBehaviour:
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae91551be1f14d45b0a981d7ae92b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 50
+  _rotationSpeed: 100
   x: 0
   y: 1
   z: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cd2c4de61daf443b00befe92add13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerName: OutlinePlatform
+  _layerName: OutlinePlatform
 --- !u!1 &413002941
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +734,6 @@ GameObject:
   - component: {fileID: 430298933}
   - component: {fileID: 430298932}
   - component: {fileID: 430298934}
-  - component: {fileID: 430298935}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -749,17 +748,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 430298930}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.19509031, w: 0.98078537}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1758325021}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 22.5}
   m_AnchorMin: {x: 0.87100005, y: 0.7537095}
   m_AnchorMax: {x: 0.87100005, y: 0.7537095}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 133.5713, y: 133.5713}
+  m_SizeDelta: {x: 130.5517, y: 130.5517}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &430298932
 MonoBehaviour:
@@ -781,7 +780,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a76d505ed753bb545ab1fbe270d8bf1b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f5d3be65fbffaf4b8c649d9899d45ad, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -843,21 +842,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &430298935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430298930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
-  m_UseGraphicAlpha: 1
 --- !u!1 &484940940
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,8 +982,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lab-1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 425047296edd92247b1d6ebea6bc1533, type: 2}
-  m_sharedMaterial: {fileID: -5037192756915038536, guid: 425047296edd92247b1d6ebea6bc1533, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3c59bb748fb87504d89866b314acea01, type: 2}
+  m_sharedMaterial: {fileID: 8095425516300830220, guid: 3c59bb748fb87504d89866b314acea01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1029,7 +1013,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1331,18 +1315,18 @@ MonoBehaviour:
   _gameDesignData: {fileID: 11400000, guid: 3ab85925d1febac40a7d197bb1ea49c0, type: 2}
   _levelText: {fileID: 488105097}
   _protocolText: {fileID: 1684378553}
-  _playButton: {fileID: 1387826324}
-  _escapeButton: {fileID: 430298930}
-  _settings: {fileID: 1758325022}
-  _capacityRect: {fileID: 1672004378}
   _capacityText: {fileID: 306203464}
-  _showDuration: 0.3
-  _closeDuration: 3
-  _handRect: {fileID: 1878341368}
-  _handRectYThreshold: {x: -85, y: 100, z: 0}
-  _handRectMoveDuration: 0.4
+  _escapeButton: {fileID: 430298930}
   _upgradesCanvas: {fileID: 751044725}
   _settingsPanel: {fileID: 484940940}
+  _capacityRect: {fileID: 1672004378}
+  _handRect: {fileID: 1878341368}
+  _showDuration: 0.3
+  _closeDuration: 3
+  _handRectMoveDuration: 0.4
+  _playButton: {fileID: 1387826324}
+  _settings: {fileID: 1758325022}
+  _handRectYThreshold: {x: -85, y: 100, z: 0}
 --- !u!1 &545500984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,9 +1377,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cfa81d39df0a24993f684444681777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiHandleRectTransform: {fileID: 416105838}
-  backgroundActiveColor: {r: 0.18926479, g: 0.79622644, b: 0.18478456, a: 1}
-  handleActiveColor: {r: 0.6784314, g: 1, b: 0.18431373, a: 1}
+  _uiHandleRectTransform: {fileID: 416105838}
+  _backgroundActiveColor: {r: 0.18926479, g: 0.79622644, b: 0.18478456, a: 1}
+  _handleActiveColor: {r: 0.6784314, g: 1, b: 0.18431373, a: 1}
   _switchType: 0
 --- !u!114 &545500987
 MonoBehaviour:
@@ -1694,7 +1678,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.645283, g: 0.2678533, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.35215962, g: 0, b: 0.64705884, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1844,9 +1828,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cfa81d39df0a24993f684444681777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiHandleRectTransform: {fileID: 1953769071}
-  backgroundActiveColor: {r: 0.18926479, g: 0.79622644, b: 0.18478456, a: 1}
-  handleActiveColor: {r: 0.6784314, g: 1, b: 0.18431373, a: 1}
+  _uiHandleRectTransform: {fileID: 1953769071}
+  _backgroundActiveColor: {r: 0.18926479, g: 0.79622644, b: 0.18478456, a: 1}
+  _handleActiveColor: {r: 0.6784314, g: 1, b: 0.18431373, a: 1}
   _switchType: 3
 --- !u!114 &669493415
 MonoBehaviour:
@@ -4605,8 +4589,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 425047296edd92247b1d6ebea6bc1533, type: 2}
-  m_sharedMaterial: {fileID: -5037192756915038536, guid: 425047296edd92247b1d6ebea6bc1533, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3c59bb748fb87504d89866b314acea01, type: 2}
+  m_sharedMaterial: {fileID: 8095425516300830220, guid: 3c59bb748fb87504d89866b314acea01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6060,9 +6044,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cfa81d39df0a24993f684444681777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiHandleRectTransform: {fileID: 2123542871}
-  backgroundActiveColor: {r: 0.18926479, g: 0.79622644, b: 0.18478456, a: 1}
-  handleActiveColor: {r: 0.6784314, g: 1, b: 0.18431373, a: 1}
+  _uiHandleRectTransform: {fileID: 2123542871}
+  _backgroundActiveColor: {r: 0.18926479, g: 0.79622644, b: 0.18478456, a: 1}
+  _handleActiveColor: {r: 0.6784314, g: 1, b: 0.18431373, a: 1}
   _switchType: 2
 --- !u!114 &2092123803
 MonoBehaviour:
@@ -6272,9 +6256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1f6a08a05b97f4bac3425521de0c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawImage: {fileID: 2135608216}
-  scrollSpeedX: -0.1
-  scrollSpeedY: -0.1
+  _scrollSpeedX: -0.1
+  _scrollSpeedY: -0.1
 --- !u!1 &49685891825539730
 GameObject:
   m_ObjectHideFlags: 0

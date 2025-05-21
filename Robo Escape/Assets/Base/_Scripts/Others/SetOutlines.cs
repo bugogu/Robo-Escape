@@ -3,7 +3,7 @@ using UnityEngine.Serialization;
 
 public class SetOutlines : MonoBehaviour
 {
-    [FormerlySerializedAs("layerName")] [ SerializeField] private string _layerName = "";
+    [FormerlySerializedAs("layerName")] [SerializeField] private string _layerName = "";
 
     void OnEnable()
     {
