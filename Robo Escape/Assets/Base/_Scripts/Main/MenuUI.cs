@@ -11,6 +11,7 @@ public class MenuUI : MonoSingleton<MenuUI>
 
     [Header("Texts")]
     [SerializeField] private TMPro.TMP_Text _levelText;
+    [SerializeField] private TMPro.TMP_Text _levelTextBlack;
     [SerializeField] private TMPro.TMP_Text _protocolText, _capacityText;
 
     [Header("GameObjects")]
@@ -37,13 +38,16 @@ public class MenuUI : MonoSingleton<MenuUI>
 
     void Start()
     {
-        if(PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
+        if (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
         {
             _handRect.parent.gameObject.SetActive(true);
             _handRect.DOAnchorPos(_handRectYThreshold, _handRectMoveDuration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
         }
         else
-       _levelText.text = "Lab-" + (PlayerPrefs.GetInt("Level", 1) -1).ToString();  
+        {
+            _levelText.text = "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) -1).ToString();  
+            _levelTextBlack.text = "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) -1).ToString();  
+        }
        
        _protocolText.text = $"{PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0)}";
 
