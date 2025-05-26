@@ -549,7 +549,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399193870}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ae91551be1f14d45b0a981d7ae92b7f, type: 3}
   m_Name: 
@@ -914,7 +914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.45490196, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -998,8 +998,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lab-1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3c59bb748fb87504d89866b314acea01, type: 2}
-  m_sharedMaterial: {fileID: 8095425516300830220, guid: 3c59bb748fb87504d89866b314acea01, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 425047296edd92247b1d6ebea6bc1533, type: 2}
+  m_sharedMaterial: {fileID: -5037192756915038536, guid: 425047296edd92247b1d6ebea6bc1533, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1848,7 +1848,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.35215962, g: 0, b: 0.64705884, a: 1}
+  m_BackGroundColor: {r: 0.3412412, g: 0, b: 0.6666667, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2061,7 +2061,6 @@ GameObject:
   - component: {fileID: 685203735}
   - component: {fileID: 685203734}
   - component: {fileID: 685203733}
-  - component: {fileID: 685203732}
   m_Layer: 5
   m_Name: HandCanvas
   m_TagString: Untagged
@@ -2069,23 +2068,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &685203732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685203731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &685203733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2184,9 +2166,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 544667437}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.86913687}
-  m_AnchorMax: {x: 0.5, y: 0.86913687}
-  m_AnchoredPosition: {x: 0, y: 6.5999756}
+  m_AnchorMin: {x: 0.5, y: 0.87558335}
+  m_AnchorMax: {x: 0.5, y: 0.87558335}
+  m_AnchoredPosition: {x: 0, y: 0.2999878}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &717799736
@@ -4987,7 +4969,7 @@ GameObject:
   - component: {fileID: 1692183731}
   - component: {fileID: 1692183730}
   m_Layer: 5
-  m_Name: 30Text_2
+  m_Name: 60Text_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5007,9 +4989,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1604568436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.83500004, y: 0.6194792}
-  m_AnchorMax: {x: 0.83500004, y: 0.6194792}
-  m_AnchoredPosition: {x: 0, y: -74.099815}
+  m_AnchorMin: {x: 0.83500004, y: 0.5884792}
+  m_AnchorMax: {x: 0.83500004, y: 0.5884792}
+  m_AnchoredPosition: {x: 0, y: 0.2999878}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1692183730
@@ -5193,7 +5175,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1758325021
 RectTransform:
@@ -5590,7 +5572,6 @@ GameObject:
   - component: {fileID: 1915972549}
   - component: {fileID: 1915972548}
   - component: {fileID: 1915972547}
-  - component: {fileID: 1915972546}
   m_Layer: 5
   m_Name: RawCanvas
   m_TagString: Untagged
@@ -5598,23 +5579,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1915972546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915972545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1915972547
 MonoBehaviour:
   m_ObjectHideFlags: 0
