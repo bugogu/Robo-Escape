@@ -29,11 +29,8 @@ public class WaterLevel : MonoBehaviour
             _canFill = false;
             return;
         }
-        
-        _currentFillAmount += Time.deltaTime / _timeToFill;
-        _currentTime += Time.deltaTime / 1;
-        SetWaterCounter(_currentTime);
-        SetWaterLevel(_currentFillAmount);
+
+        HandleWaterTimer();
     }
 
     void OnEnable()
@@ -48,11 +45,19 @@ public class WaterLevel : MonoBehaviour
 
     #endregion
 
-    private void SetWaterLevel(float value) =>  _waterFill.fillAmount = Mathf.Clamp01(value);
+    private void HandleWaterTimer()
+    { 
+        _currentFillAmount += Time.deltaTime / _timeToFill;
+        _currentTime += Time.deltaTime / 1;
+        SetWaterCounter(_currentTime);
+        SetWaterLevel(_currentFillAmount);
+    }
+
+    private void SetWaterLevel(float value) => _waterFill.fillAmount = Mathf.Clamp01(value);
 
     private void SetWaterCounter(float value)
     {
-        _waterCounterText.text = $"{value.ToString("0")}/{_timeToFill}";
+        _waterCounterText.text = $"{value.ToString("0")} / {_timeToFill}";
     }
 
     private void Fillable(GameState gameState)

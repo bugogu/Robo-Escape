@@ -3,14 +3,8 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class RotateY : MonoBehaviour
 {
-    #region References
-
     [SerializeField] float _rotationSpeed = 100f;
-    [SerializeField] bool x = false;
-    [SerializeField] bool y = true;
-    [SerializeField] bool z = false;
-
-    #endregion
+    [SerializeField] bool x = false, y = true, z = false;
 
     private Camera _mainCamera;
     private Renderer _renderer;
@@ -23,15 +17,7 @@ public class RotateY : MonoBehaviour
 
     void Update()
     {
-        if (IsVisibleToCamera())
-        {
-            if (x)
-                transform.Rotate(_rotationSpeed * Time.deltaTime, 0, 0);
-            if (y)
-                transform.Rotate(0, _rotationSpeed * Time.deltaTime, 0);
-            if (z)
-                transform.Rotate(0, 0, _rotationSpeed * Time.deltaTime);
-        }
+        if(IsVisibleToCamera()) HandeRotation();
     }
 
     bool IsVisibleToCamera()
@@ -42,5 +28,15 @@ public class RotateY : MonoBehaviour
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_mainCamera);
 
         return GeometryUtility.TestPlanesAABB(planes, _renderer.bounds);
+    }
+
+    void HandeRotation()
+    { 
+        if (x)
+            transform.Rotate(_rotationSpeed * Time.deltaTime, 0, 0);
+        if (y)
+            transform.Rotate(0, _rotationSpeed * Time.deltaTime, 0);
+        if (z)
+            transform.Rotate(0, 0, _rotationSpeed * Time.deltaTime);
     }
 }

@@ -11,9 +11,9 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
     [SerializeField] private float _projectileEnergyConsumptionAmount = 10f, _fireRate = 2f, _empEffectDuration = 3f, _projectileSpeed;
 
     [Header("Recoil Settings")]
-    [SerializeField] private float _recoilDistance = -0.5f;
-    [SerializeField] private float _recoilDuration = 0.1f;
-    [SerializeField] private float _returnDuration = 0.3f;
+    [SerializeField] private float _recoilDistance = -.5f;
+    [SerializeField] private float _recoilDuration = .1f;
+    [SerializeField] private float _returnDuration = .3f;
     [SerializeField] private Ease _recoilEase = Ease.OutQuad;
     [SerializeField] private Ease _returnEase = Ease.OutElastic;
 
@@ -143,7 +143,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
         _isEffected = true;
         transform.parent.GetComponent<Renderer>().material = _turretInactiveMaterial;
         _visionCone.VisionRange = 0;
-        Invoke(nameof(DeactivateVision), 0.2f);
+        Invoke(nameof(DeactivateVision), .2f);
         _empDurationFillImage.transform.parent.gameObject.SetActive(true);
         _empDurationFillImage.FillImageAnimation(0, 1, _empEffectDuration).SetEase(Ease.Linear);
         Invoke(nameof(RemoveEmpEffects), _empEffectDuration);

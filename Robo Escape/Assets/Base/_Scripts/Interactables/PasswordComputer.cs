@@ -13,8 +13,6 @@ public class PasswordComputer : MonoBehaviour
         transform.SetParent(_newParent);
     }
 
-    public void ShowPassword() 
-    {
+    public void ShowPassword() =>
         GetComponent<TextMeshPro>().text = _password;
-    }
 }

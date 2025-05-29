@@ -39,15 +39,9 @@ public class MenuUI : MonoSingleton<MenuUI>
     void Start()
     {
         if (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) == 1)
-        {
-            _handRect.parent.gameObject.SetActive(true);
-            _handRect.DOAnchorPos(_handRectYThreshold, _handRectMoveDuration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
-        }
+            StartHandAnimation();
         else
-        {
-            _levelText.text = "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) -1).ToString();  
-            _levelTextBlack.text = "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) -1).ToString();  
-        }
+            SetLevelText();
        
        _protocolText.text = $"{PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0)}";
 
@@ -74,22 +68,32 @@ public class MenuUI : MonoSingleton<MenuUI>
         _upgradesCanvas.SetActive(status);
     }
 
-    public void SetProtocolText()
-    {
+    public void SetProtocolText() =>
         _protocolText.text = $"{PlayerPrefs.GetInt(Consts.Prefs.PROTOCOLCOUNT, 0)}";
-    }
 
     #region Private Methods
 
-    private void PlayButton() 
+    private void StartHandAnimation()
+    { 
+        _handRect.parent.gameObject.SetActive(true);
+        _handRect.DOAnchorPos(_handRectYThreshold, _handRectMoveDuration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+    }
+
+    private void SetLevelText()
+    {
+        _levelText.text = "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) - 1).ToString();
+        _levelTextBlack.text = "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) - 1).ToString();
+    }
+
+    private void PlayButton()
     {
         Settings.Instance.PlayButtonSound();
 
         _escapeButton.SetActive(false);
         _settings.SettingsPanel.gameObject.SetActive(false);
         TransitionManager.Instance.PlayTransition(1f);
-        Invoke(nameof(LoadLevel), 0.3f);
-        
+        Invoke(nameof(LoadLevel), .3f);
+
     } 
 
     private void LoadLevel()=>

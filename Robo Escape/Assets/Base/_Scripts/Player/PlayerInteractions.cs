@@ -26,41 +26,20 @@ namespace Player
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out ICollectable collectable))
-            {
-                var fxPlay = collectable.Collect() ? _playerController.ParticleReferences.EnergyCellFX : _playerController.ParticleReferences.DrainCellFX;
-                fxPlay.Play();
-            }
-
             if (other.TryGetComponent(out IInteractable interactable))
-            {
-                _currentInteractable = interactable;
-                _currentInteractable.OnInteractionTrigger();
-                _playerController.HackFxActive(_currentInteractable.InteractionType, true);
-                _interactionTimer = 0f;
-            }
+                BeginInteraction(interactable);
 
             switch (other.tag)
             {
                 case Consts.Tags.MAGNETIC_AREA:
 
-                    if (_playerController.GetFlashStatus()) return;
-
-                    CameraShake.Shake();
-
-                    GetComponent<Animator>().speed /= _gameDesignData.MagnetismSpeedMultiplier;
-
-                    if (Settings.Instance.Haptic == 1) Handheld.Vibrate();
-                    _playerMovement.IsMagnetized = true;
+                    MagneticAreaInteraction();
 
                     break;
 
                 case Consts.Tags.ELEVATOR:
 
-                    GameManager.Instance.ChangeGameState(GameState.Win);
-                    other.GetComponent<Animator>().SetTrigger(Consts.AnimationParameters.CLOSEELEVATOR);
-                    GetComponent<Animator>().enabled = false;
-                    _playerMovement.StopMovement();
+                    ElevatorInteraction(other.GetComponent<Animator>());
 
                     break;
             }
@@ -83,7 +62,6 @@ namespace Player
                 GetComponent<Animator>().speed = _initialAnimatorSpeed;
             }
 
-
             if (_currentInteractable != null)
             {
                 _playerController.HackFxActive(_currentInteractable.InteractionType, false);
@@ -91,6 +69,37 @@ namespace Player
                 _currentInteractable = null;
                 _interactionTimer = 0f;
             }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void MagneticAreaInteraction()
+        {
+            if (_playerController.GetFlashStatus()) return;
+
+            CameraShake.Shake();
+
+            GetComponent<Animator>().speed /= _gameDesignData.MagnetismSpeedMultiplier;
+            if (Settings.Instance.Haptic == 1) Handheld.Vibrate();
+            _playerMovement.IsMagnetized = true;
+        }
+
+        private void ElevatorInteraction(Animator elevatorAnimation)
+        {
+            GameManager.Instance.ChangeGameState(GameState.Win);
+            elevatorAnimation.GetComponent<Animator>().SetTrigger(Consts.AnimationParameters.CLOSEELEVATOR);
+            GetComponent<Animator>().enabled = false;
+            _playerMovement.StopMovement();
+        }
+
+        private void BeginInteraction(IInteractable interactable)
+        {
+            _currentInteractable = interactable;
+            _currentInteractable.OnInteractionTrigger();
+            _playerController.HackFxActive(_currentInteractable.InteractionType, true);
+            _interactionTimer = 0f;
         }
 
         #endregion

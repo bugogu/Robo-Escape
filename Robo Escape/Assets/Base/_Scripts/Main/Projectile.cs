@@ -1,18 +1,12 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : EnemyProjectile
 {
     [HideInInspector] public float Damage;
-
-    void OnTriggerEnter(Collider other)
+    
+    protected override void GiveDamage(Collider player)
     {
-        if(other.CompareTag(Consts.Tags.PLAYER)) 
-        {
-            other.GetComponent<Player.PlayerController>().GetHit(Damage);
-            gameObject.SetActive(false);
-        }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-        DisableProjectile();
+        player.GetComponent<Player.PlayerController>().GetHit(Damage);
+        gameObject.SetActive(false);
     }
-    private void DisableProjectile() => gameObject.SetActive(false);
 }

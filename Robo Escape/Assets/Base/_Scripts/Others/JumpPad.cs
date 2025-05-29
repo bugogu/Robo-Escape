@@ -21,22 +21,25 @@ public class JumpPad : MonoBehaviour
     {
         if(!other.CompareTag(Consts.Tags.PLAYER)) return;
 
+        HandleJumpActions();
+        
+        ActivateJumpPad(other.GetComponent<PlayerController>());
+    }
+
+    private void ActivateJumpPad(PlayerController playerController) =>
+        playerController.Jump(_target, _jumpPower, _jumpDuration);
+
+    private void HandleJumpActions()
+    { 
         SoundManager.Instance.PlaySFX(SoundManager.Instance.JumpPadSfx);
         
         _animator.enabled = true;
 
         Invoke(nameof(CloseAnimator), 1f);
-        
-        ActivateJumpPad(other.GetComponent<PlayerController>());
-        
+
         _target.gameObject.SetActive(false);
     }
 
-    private void ActivateJumpPad(PlayerController playerController)
-    {
-        playerController.Jump(_target, _jumpPower, _jumpDuration);
-    }
-
-    private void CloseAnimator()=>
+    private void CloseAnimator() =>
         _animator.enabled = false;
 }

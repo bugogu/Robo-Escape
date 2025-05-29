@@ -34,8 +34,7 @@ namespace Player
         [FormerlySerializedAs("magneticPulseRadius"), SerializeField] private float _magneticPulseRadius;
         [FormerlySerializedAs("globalVolume"), SerializeField] private Volume _globalVolume;
         [FormerlySerializedAs("hitVignetteColor"), SerializeField] private Color _hitVignetteColor = Color.red;
-        [Range(0f, 1f), SerializeField] private float _hitEffectsRestartTime = 0.2f;
-        // [SerializeField] private GameObject passwordCanvas;
+        [Range(0f, 1f), SerializeField] private float _hitEffectsRestartTime = .2f;
 
         #endregion
 
@@ -90,6 +89,12 @@ namespace Player
                 GameManager.Instance.OnGameStateChanged -= CanMove;
         }
 
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(transform.position, _magneticPulseRadius);
+        }
+
         #endregion
 
         #region Public Methods
@@ -111,7 +116,7 @@ namespace Player
             EnergyBar.Instance.ConsumeEnergy(energyDamage, true);
             CameraShake.Shake();
             ParticleReferences.DrainCellFX.Play();
-            // GameManager.Instance.SetAlarm(true);
+            GameManager.Instance.SetAlarm(true);
             Invoke(nameof(RestartHitEffects), _hitEffectsRestartTime);
         }
 
@@ -280,12 +285,6 @@ namespace Player
 
         private void CloseMagneticPulseFX() =>
             _magneticPulseFX.SetActive(false);
-
-        void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawWireSphere(transform.position, _magneticPulseRadius);
-        }
 
         private void RestartHitEffects()
         {

@@ -12,34 +12,34 @@ public class EnergyBar : MonoSingleton<EnergyBar>
 
     #endregion
 
-    void Awake()
-    {
+    void Awake() =>
         MaxEnergyCapacity = _gameDesignData.MaxEnergyCapacity + (PlayerPrefs.GetInt(Consts.Prefs.CAPACITY, 0) * _gameDesignData.EnergyCapacityUpgradeAmount);
-    }
 
     #region Public Methods
 
+    /// <param name="burst"> If true, the amount will be shown in the UI</param>
     public void ConsumeEnergy(float amount, bool burst = false)
     {
         if (amount <= 0) return;
 
-        if(burst)
-        EnergyPopUpText.Instance.ShowEnergyPopup((int)amount, false);
+        if (burst)
+            EnergyPopUpText.Instance.ShowEnergyPopup((int)amount, false);
 
-        float newEnergy = GetCurrentEnergy() - amount;
+        var newEnergy = GetCurrentEnergy() - amount;
         SetEnergy(newEnergy);
 
         EnoughForMagneticPulse();
     }
-
+    
+    /// <param name="burst"> If true, the amount will be shown in the UI</param>
     public void ReplenishEnergy(float amount, bool burst = false)
     {
         if (amount <= 0) return;
 
-        if(burst)
-        EnergyPopUpText.Instance.ShowEnergyPopup((int)amount, true);
+        if (burst)
+            EnergyPopUpText.Instance.ShowEnergyPopup((int)amount, true);
 
-        float newEnergy = GetCurrentEnergy() + amount;
+        var newEnergy = GetCurrentEnergy() + amount;
         SetEnergy(newEnergy);
 
         EnoughForMagneticPulse();
@@ -56,7 +56,7 @@ public class EnergyBar : MonoSingleton<EnergyBar>
 
     private void SetEnergy(float newEnergy)
     {
-        float clampedEnergy = Mathf.Clamp(newEnergy, 0f, MaxEnergyCapacity);
+        var clampedEnergy = Mathf.Clamp(newEnergy, 0f, MaxEnergyCapacity);
         UpdateEnergyUI(clampedEnergy);
     }
 

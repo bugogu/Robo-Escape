@@ -24,20 +24,16 @@ public class SensorSprite : MonoBehaviour
         _startRotation = transform.rotation;
 
         if (_visionConeSprite != null)
-        {
             UpdateSpriteSize();
-        }
     }
 
     void Update()
     {
         if (_rotateSprite && !GameManager.Instance.IsAlarmActive)
-        {
-            RotateCamera();
-        }
+            RotateSprite();
     }
 
-    void RotateCamera()
+    void RotateSprite()
     {
         if(!_checkForCameraVisibilty.IsVisibleToCamera()) return;
 

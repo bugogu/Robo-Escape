@@ -11,7 +11,7 @@ public class LevelDesignData : ScriptableObject
     public string Password;
 
     [Header("Mission Display")]
-    public float TypingSpeed = 0.035f; 
-    public float DelayBetweenMissions = 0.1f;
+    public float TypingSpeed = .035f; 
+    public float DelayBetweenMissions = .1f;
     public float CloseDelay = 2f; 
 }

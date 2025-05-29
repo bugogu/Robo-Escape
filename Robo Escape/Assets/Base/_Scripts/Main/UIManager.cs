@@ -1,3 +1,5 @@
+#region Libraries
+
 using System.Collections.Generic;
 using MaskTransitions;
 using UnityEngine;
@@ -6,6 +8,8 @@ using DG.Tweening;
 using TMPro;
 using System.Collections;
 using UnityEngine.Serialization;
+
+#endregion
 
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoSingleton<UIManager>
@@ -32,7 +36,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameDesignData _gameDesignData;
     [SerializeField] private CanvasGroup _alarmImage;
     [SerializeField] private Animator _levelEndAnimation;
-    [SerializeField] private float _typingSpeed = 0.05f;
+    [SerializeField] private float _typingSpeed = .05f;
     [SerializeField] private AudioClip _keyboardSound;
     [SerializeField] private List<GameObject> _levelEndClosingElements;
     [SerializeField] private Image _powerUpFill;
@@ -83,7 +87,7 @@ public class UIManager : MonoSingleton<UIManager>
         GameManager.Instance.OnGameStateChanged -= PlayLevelEndAnimation;
     }
 
-    #endregion
+    #endregion 
 
     public void ActivatePowerCounter(float time, bool isShield)
     {

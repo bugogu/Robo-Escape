@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f980f5d7d518064438b1539c87dca041, type: 3}
   m_Name: GameDesignData
   m_EditorClassIdentifier: 
-  CharacterRunSpeed: 925
-  CharacterWalkSpeed: 700
+  CharacterRunSpeed: 1300
+  CharacterWalkSpeed: 675
   CharacterTurnSpeed: 50
   MagnetismSpeedMultiplier: 2
   MovementThreshold: 0.15

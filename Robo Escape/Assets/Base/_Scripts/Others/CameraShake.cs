@@ -24,8 +24,6 @@ public class CameraShake : MonoBehaviour
         
     }
 
-    public static void Shake()
-    {
-        _shakeSource.GenerateImpulse(); // Kamera sallanır
-    }
+    public static void Shake() =>
+        _shakeSource.GenerateImpulse(); 
 }

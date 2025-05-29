@@ -37,9 +37,13 @@ namespace Player
         private void FixedUpdate()
         {
             if (!OnGround) return;
-            PlayerMoving();
+            PlayerMovementActions();
         }
 
+        /// <summary>
+        /// Sets the speed of the player with flash powerup.
+        /// </summary>
+        /// <param name="isFlashed"> If set to <c>true</c> is flashed. </param>
         public void SetSpeed(bool isFlashed)
         {
             if (isFlashed)
@@ -54,6 +58,9 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Stops the movement of the player with linearVelocity and changes the public field IsMoving to false.
+        /// </summary>
         public void StopMovement()
         {
             _rbPlayer.linearVelocity = Vector3.zero;
@@ -83,47 +90,52 @@ namespace Player
             _horizontal = _dynamicJoystick.Horizontal;
             _vertical = _dynamicJoystick.Vertical;
 
-            var isJoystickMoving = Mathf.Abs(_horizontal) > _movementThreshold || Mathf.Abs(_vertical) > _movementThreshold;
+            var isMoving = Mathf.Abs(_horizontal) > _movementThreshold || Mathf.Abs(_vertical) > _movementThreshold;
+            var isStopping = Mathf.Abs(_horizontal) >= _stopThreshold || Mathf.Abs(_vertical) >= _stopThreshold;
 
-            _animator?.SetBool(Consts.PlayerAnimations.WALKING, isJoystickMoving);
-
-            if (!isJoystickMoving)
+            if (isMoving)
             {
-                return Mathf.Abs(_horizontal) >= _stopThreshold ||
-                Mathf.Abs(_vertical) >= _stopThreshold;
+                HandleMovement();
+                HandleRotation();
+                return true;
             }
 
-            HandleMovement();
-            HandleRotation();
-
-            return true;
+            return isStopping;
         }
 
-        private void PlayerMoving()
+        private void PlayerMovementActions()
         {
-            if (Input.touchCount > 0 || Input.GetMouseButton(0))
-            {
-                if (JoystickMovement())
-                {
-                    IsMoving = true;
+            var isInputActive = Input.touchCount > 0 || Input.GetMouseButton(0);
+            var isJoystickMoving = JoystickMovement();
 
-                    if (!_playerController.GetFlashStatus())
-                        EnergyBar.Instance.ConsumeEnergy(IsMagnetized ? _magnetismConsumptionMultiplier * _consumeAmount : _consumeAmount);
-                }
-                else
-                {
-                    _animator.SetBool(Consts.PlayerAnimations.WALKING, false);
-                    StopMovement();
-                    EnergyBar.Instance.ReplenishEnergy(IsMagnetized ? _magnetismReplenishMultiplier * _replenishAmount : _replenishAmount);
-                }
+            IsMoving = isInputActive && isJoystickMoving;
+
+            HandleMovementAnimation();
+            HandleEnergyConsumption();
+
+            PlayerController.Instance.MovingFX(IsMoving);
+        }
+
+        private void HandleMovementAnimation()
+        {
+            _animator.SetBool(Consts.PlayerAnimations.WALKING, IsMoving);
+
+            if (!IsMoving)
+                StopMovement();
+        }
+
+        private void HandleEnergyConsumption()
+        {
+            if (IsMoving && !_playerController.GetFlashStatus())
+            {
+                var consumption = _consumeAmount * (IsMagnetized ? _magnetismConsumptionMultiplier : 1f);
+                EnergyBar.Instance.ConsumeEnergy(consumption);
             }
             else
             {
-                _animator.SetBool(Consts.PlayerAnimations.WALKING, false);
-                StopMovement();
-                EnergyBar.Instance.ReplenishEnergy(IsMagnetized ? _magnetismReplenishMultiplier * _replenishAmount : _replenishAmount);
+                var replenish = _replenishAmount * (IsMagnetized ? _magnetismReplenishMultiplier : 1f);
+                EnergyBar.Instance.ReplenishEnergy(replenish);
             }
-            PlayerController.Instance.MovingFX(IsMoving);
         }
 
         private void SetReferecnes()
@@ -158,11 +170,10 @@ namespace Player
         {
             var direction = (Vector3.forward * _vertical) + (Vector3.right * _horizontal);
 
-            if (direction != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _turnSpeed * Time.fixedDeltaTime);
-            }
+            if (direction == Vector3.zero) return;
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _turnSpeed * Time.fixedDeltaTime);
         }
 
         private float GetCurrentSpeed()

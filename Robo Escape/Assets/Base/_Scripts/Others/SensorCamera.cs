@@ -16,17 +16,13 @@ public class SensorCamera : MonoBehaviour
     private int _rotationDirection = 1;
     private Quaternion _startRotation;
 
-    void Start()
-    {
+    void Start() =>
         _startRotation = transform.rotation;
-    }
 
     void Update()
     {
         if (_rotateCamera && !GameManager.Instance.IsAlarmActive)
-        {
             RotateCamera();
-        }
     }
 
     void RotateCamera()

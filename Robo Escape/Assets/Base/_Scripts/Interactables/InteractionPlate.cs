@@ -31,17 +31,10 @@ public class InteractionPlate : MonoBehaviour, IInteractable
 
     #region Unity Events
 
-    void Awake()
-    {
-        if (_visualCanHide)
-            _plateVisualObject.SetActive(false);
-    }
+    void Awake() => HandleVisualVisibilty(false);
 
-    public void OnInteractionTrigger()
-    {
-        if (_visualCanHide)
-            _plateVisualObject.SetActive(true);
-    }
+    public void OnInteractionTrigger() =>
+        HandleVisualVisibilty(true);
 
     public void OnInteractionStay(float duration)
     {
@@ -75,6 +68,18 @@ public class InteractionPlate : MonoBehaviour, IInteractable
             _plateVisualObject.SetActive(false);
 
         PlateFillImage.fillAmount = 0f;
+    }
+
+    public void ReActive()
+    {
+        gameObject.SetActive(true);
+        IsInteractionComplete = false;
+    }
+
+    private void HandleVisualVisibilty(bool status)
+    { 
+        if (_visualCanHide)
+            _plateVisualObject.SetActive(status);
     }
 
     #endregion

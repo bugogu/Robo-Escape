@@ -7,17 +7,21 @@ public class JumpPadArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(!other.CompareTag(Consts.Tags.PLAYER)) return;
+        if (!other.CompareTag(Consts.Tags.PLAYER)) return;
 
-        InArea = true;
-        Target.gameObject.SetActive(true);
+        Check(true);
     }
 
     void OnTriggerExit(Collider other)
     {
-        if(!other.CompareTag(Consts.Tags.PLAYER)) return;
+        if (!other.CompareTag(Consts.Tags.PLAYER)) return;
 
-        InArea = false;
-        Target.gameObject.SetActive(false);
+        Check(false);
+    }
+
+    private void Check(bool status)
+    {
+        InArea = status;
+        Target.gameObject.SetActive(status);
     }
 }

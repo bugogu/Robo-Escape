@@ -42,28 +42,28 @@ public class LaserGate : MonoBehaviour
             _reloadImageParent.parent = null;
             _startPoint.parent = null; _endPoint.parent = null;
         }
-        
+
     }
 
     void Update()
     {
-        if(!_canMove) return;
+        if (!_canMove) return;
         Move();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(!Player.PlayerController.Instance.IsProtectionActive)
+        if (!Player.PlayerController.Instance.IsProtectionActive)
         {
-            if(!other.CompareTag(Consts.Tags.PLAYER)) return;
+            if (!other.CompareTag(Consts.Tags.PLAYER)) return;
 
             CameraShake.Shake();
 
-            if(Settings.Instance.Sound == 1) SoundManager.Instance.PlaySFX(SoundManager.Instance.ElectricSfx);
+            if (Settings.Instance.Sound == 1) SoundManager.Instance.PlaySFX(SoundManager.Instance.ElectricSfx);
 
-            if(Settings.Instance.Haptic == 1) Handheld.Vibrate();
+            if (Settings.Instance.Haptic == 1) Handheld.Vibrate();
 
-            EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount, true); 
+            EnergyBar.Instance.ConsumeEnergy(_consumeEnergyAmount, true);
 
             SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
@@ -78,31 +78,60 @@ public class LaserGate : MonoBehaviour
 
     public void DeactivateLasers()
     {
-        _lasersParent.SetActive(false);
-         transform.parent = null;
-        Invoke(nameof(ActivateLasers), _deactiveTime);
-        _reloadFill.FillImageAnimation(0f, 1f, _deactiveTime).SetEase(Ease.Linear).OnComplete(()=> _reloadFill.fillAmount = 0f);
-        _reloadImageParent.parent = null;
-        _boxCollider.enabled = false;
+        SetLasersActive(false);
+        DetachFromParent();
+        ScheduleLaserActivation();
+        AnimateReloadFill();
+        DisableCollider();
     }
+
+    #region Private Methods
 
     private void ActivateLasers()
     {
-        _lasersParent.SetActive(true);
+        SetLasersActive(true);
+        AttachToInteractionPlate();
+        ResetInteractionPlate();
+        EnableCollider();
+    }
+
+    private void SetLasersActive(bool isActive) => _lasersParent.SetActive(isActive);
+
+    private void DetachFromParent() => transform.parent = null;
+
+    private void ScheduleLaserActivation() => Invoke(nameof(ActivateLasers), _deactiveTime);
+
+    private void AnimateReloadFill() =>
+        _reloadFill.FillImageAnimation(0f, 1f, _deactiveTime)
+            .SetEase(Ease.Linear)
+            .OnComplete(ResetReloadFill);
+
+    private void ResetReloadFill() => _reloadFill.fillAmount = 0f;
+
+    private void DisableCollider() => _boxCollider.enabled = false;
+
+    private void AttachToInteractionPlate()
+    {
         transform.SetParent(_interactionPlate.transform);
         _interactionPlate.SetActive(true);
+    }
+
+    private void ResetInteractionPlate()
+    {
         _interactionPlateScript.IsInteractionComplete = false;
         _interactionPlateScript.PlateFillImage.fillAmount = 0f;
-        _boxCollider.enabled = true;
     }
+
+    private void EnableCollider() => _boxCollider.enabled = true;
 
     private void Move()
     {
-        if(!_checkForLaserGateVisibilty.IsVisibleToCamera()) return;
-        
+        if (!_checkForLaserGateVisibilty.IsVisibleToCamera()) return;
+
         _passedTime += _speed * Time.deltaTime;
-        float lerpDegeri = Mathf.PingPong(_passedTime, 1.0f); 
-        transform.position = Vector3.Lerp(_startPoint.position, _endPoint.position, lerpDegeri);
+        var lerpValue = Mathf.PingPong(_passedTime, 1.0f);
+        transform.position = Vector3.Lerp(_startPoint.position, _endPoint.position, lerpValue);
     }
 
+    #endregion
 }
