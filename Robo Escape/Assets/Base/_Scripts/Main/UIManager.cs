@@ -161,10 +161,17 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void PlayLevelEndAnimation(GameState gameState)
     {
-        if(gameState == GameState.Win)
+        if (gameState == GameState.Win)
+        {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.WinSfx);
             SetText($"Escaped From {_levelText.text}");
-        else if(gameState == GameState.Lose)
+        }
+            
+        else if (gameState == GameState.Lose)
+        {   
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.LoseSfx);
             SetText("Try Again?");
+        }
         else
             return;
 

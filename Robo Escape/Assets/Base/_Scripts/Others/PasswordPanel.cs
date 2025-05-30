@@ -33,8 +33,10 @@ public class PasswordPanel : MonoBehaviour
     }
 
     public void AddDigit(string digit)
-    {   _passwordBlankText.SetActive(false);
+    {
+        _passwordBlankText.SetActive(false);
         _passwordInput += digit;
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.DigitSfx);
     }
 
     public void CancelPanel()

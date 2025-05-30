@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
-    public AudioClip ElectricSfx, JumpPadSfx, GateClosingSfx;
+    public AudioClip ElectricSfx, JumpPadSfx, GateClosingSfx, LoseSfx, WinSfx, DigitSfx;
 
     private AudioSource _audioSource;
 
@@ -14,6 +14,6 @@ public class SoundManager : MonoSingleton<SoundManager>
     public void PlaySFX(AudioClip clip) 
     {
         _audioSource.clip = clip;
-        _audioSource.Play();
+        _audioSource?.Play();
     }
 }
