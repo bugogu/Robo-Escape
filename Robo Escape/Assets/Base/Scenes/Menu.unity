@@ -998,8 +998,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lab-1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 425047296edd92247b1d6ebea6bc1533, type: 2}
-  m_sharedMaterial: {fileID: -5037192756915038536, guid: 425047296edd92247b1d6ebea6bc1533, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3c59bb748fb87504d89866b314acea01, type: 2}
+  m_sharedMaterial: {fileID: 8095425516300830220, guid: 3c59bb748fb87504d89866b314acea01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1023,8 +1023,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2151,7 +2151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &717799735
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2218,8 +2218,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5376,8 +5376,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2b82b61fa01446442bfa9bce1c8db7c8, type: 3}
-  m_Resource: {fileID: 8300000, guid: 2b82b61fa01446442bfa9bce1c8db7c8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e0d05edf490f59843bafbaece13e6c00, type: 3}
+  m_Resource: {fileID: 8300000, guid: e0d05edf490f59843bafbaece13e6c00, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6590,10 +6590,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ba3dfa3c6ea85244fbe6f64460569618, type: 3}
-  m_Resource: {fileID: 8300000, guid: ba3dfa3c6ea85244fbe6f64460569618, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e5b2cc10d6e67234284342b283520f5b, type: 3}
+  m_Resource: {fileID: 8300000, guid: e5b2cc10d6e67234284342b283520f5b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
