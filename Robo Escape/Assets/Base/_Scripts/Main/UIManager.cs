@@ -195,34 +195,40 @@ public class UIManager : MonoSingleton<UIManager>
 
         foreach (char letter in text.ToCharArray())
         {
-            _levelEndTitleText.text += letter; 
+            _levelEndTitleText.text += letter;
 
             if (letter != ' ' && letter != '\n' && _audioSource != null && _keyboardSound != null)
-                _audioSource.PlayOneShot(_keyboardSound); 
+                _audioSource.PlayOneShot(_keyboardSound);
 
-            yield return new WaitForSeconds(_typingSpeed); 
+            yield return new WaitForSeconds(_typingSpeed);
         }
 
+        StartCoroutine(HandleLevelEndPanelUIElements());
+        
+    }
+
+    private IEnumerator HandleLevelEndPanelUIElements()
+    { 
         if(GameManager.Instance.GetCurrentState() == GameState.Lose)
         {
             _tryAgainButton.gameObject.SetActive(true);
-            _tryAgainButton.transform.DOPunchScale(_tryAgainButton.transform.localScale ,0.5f,5,10);
+            _tryAgainButton.transform.DOPunchScale(_tryAgainButton.transform.localScale ,.5f,5,10);
 
             yield return new WaitForSeconds(.3f);
 
             _menuButton.gameObject.SetActive(true);
-            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,0.5f,5,10);
+            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,.5f,5,10);
         }
 
         if(GameManager.Instance.GetCurrentState() == GameState.Win)
         {
             _nextLevelButton.gameObject.SetActive(true);
-            _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale ,0.5f,5,10);
+            _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale ,.5f,5,10);
 
             yield return new WaitForSeconds(.3f);
 
             _menuButton.gameObject.SetActive(true);
-            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,0.5f,5,10);
+            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,.5f,5,10);
 
             yield return new WaitForSeconds(1f);
 
@@ -286,14 +292,19 @@ public class UIManager : MonoSingleton<UIManager>
         if(GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
         GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
 
-        if(GameManager.Instance.GetCurrentState() == GameState.Win)
-        {
-            PlayerPrefs.SetInt(Consts.Prefs.LEVEL, PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) + 1);
-            TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
-        }
+        if (GameManager.Instance.GetCurrentState() == GameState.Win)
+        {            
+            var currentLevel = PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1);
+            var maxLevel = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 2;
 
-        if(GameManager.Instance.GetCurrentState() == GameState.Lose)
-        TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
+            var newLevel = currentLevel >= maxLevel ? 1 : currentLevel + 1;
+
+            PlayerPrefs.SetInt(Consts.Prefs.LEVEL, newLevel);
+            TransitionManager.Instance.LoadLevel("Menu", _loadDelay);
+        }
+        
+        if (GameManager.Instance.GetCurrentState() == GameState.Lose)
+            TransitionManager.Instance.LoadLevel("Menu", _loadDelay);
 
         _levelEndMissionCanvas.SetActive(false);
         _levelEndAnimation.gameObject.SetActive(false);
@@ -303,7 +314,11 @@ public class UIManager : MonoSingleton<UIManager>
     {
         Settings.Instance.PlayButtonSound();
 
-        PlayerPrefs.SetInt(Consts.Prefs.LEVEL, PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) + 1);
+        var currentLevel = PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1);
+        var maxLevel = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 2;
+        var newLevel = currentLevel >= maxLevel ? 1 : currentLevel + 1;
+
+        PlayerPrefs.SetInt(Consts.Prefs.LEVEL, newLevel);
         TransitionManager.Instance.PlayTransition(1f);
         Invoke(nameof(LoadLevel), 0.3f);
         _levelEndMissionCanvas.SetActive(false);

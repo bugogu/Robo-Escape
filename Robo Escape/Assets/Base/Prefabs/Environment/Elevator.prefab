@@ -5517,6 +5517,7 @@ GameObject:
   - component: {fileID: 2463521103507550538}
   - component: {fileID: 8898304065000099166}
   - component: {fileID: 5571958985875197523}
+  - component: {fileID: 6233751436959428834}
   m_Layer: 12
   m_Name: ElevatorTrigger
   m_TagString: Elevator
@@ -5583,6 +5584,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6233751436959428834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2886669959445273580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c63287d40352d459c15a370c6c13c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3014253104999011199
 GameObject:
   m_ObjectHideFlags: 0
@@ -15654,7 +15667,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.196, y: 6.08, z: 433.7341}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1228008, y: 1.1228008, z: 1.1228008}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2463521103507550538}
@@ -15855,7 +15868,7 @@ GameObject:
   - component: {fileID: 4222659452429447807}
   - component: {fileID: 7715263131528720113}
   - component: {fileID: 3040081120606279135}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Wall_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21816,6 +21829,7 @@ GameObject:
   - component: {fileID: 5803047388568373861}
   - component: {fileID: 8605366870271377071}
   - component: {fileID: 6966490497771774505}
+  - component: {fileID: 5211749530176760586}
   m_Layer: 12
   m_Name: WallExtension_4x5_01
   m_TagString: Untagged
@@ -21913,6 +21927,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4481055, y: 5, z: 4}
   m_Center: {x: -0.27594727, y: 2.5, z: 2}
+--- !u!114 &5211749530176760586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812790854969401210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cd2c4de61daf443b00befe92add13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerName: OutlineElevator
 --- !u!1 &7875015047954223434
 GameObject:
   m_ObjectHideFlags: 0

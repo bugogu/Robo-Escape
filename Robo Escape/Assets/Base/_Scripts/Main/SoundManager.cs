@@ -13,6 +13,8 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void PlaySFX(AudioClip clip) 
     {
+        if(Settings.Instance.Sound == 0) return;
+        
         _audioSource.clip = clip;
         _audioSource?.Play();
     }

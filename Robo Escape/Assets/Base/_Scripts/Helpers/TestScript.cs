@@ -6,6 +6,6 @@ public class TestScript : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab)) 
-            GameManager.Instance.ChangeGameState(GameState.Lose);
+            GameManager.Instance.ChangeGameState(GameState.Win);
     }
 }

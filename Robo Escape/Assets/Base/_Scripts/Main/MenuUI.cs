@@ -81,8 +81,8 @@ public class MenuUI : MonoSingleton<MenuUI>
 
     private void SetLevelText()
     {
-        _levelText.text = "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) - 1).ToString();
-        _levelTextBlack.text = "Lab-" + (PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1) - 1).ToString();
+        _levelText.text = "Lab-" + PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1).ToString();
+        _levelTextBlack.text = "Lab-" + PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1).ToString();
     }
 
     private void PlayButton()
