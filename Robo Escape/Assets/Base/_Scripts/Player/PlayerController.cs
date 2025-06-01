@@ -34,8 +34,12 @@ namespace Player
         [FormerlySerializedAs("magneticPulseRadius"), SerializeField] private float _magneticPulseRadius;
         [FormerlySerializedAs("globalVolume"), SerializeField] private Volume _globalVolume;
         [FormerlySerializedAs("hitVignetteColor"), SerializeField] private Color _hitVignetteColor = Color.red;
+        [SerializeField] private GameObject _shadow, _dieFX;
+        [SerializeField] private Transform _bodyParent;
+        [SerializeField] private float _dieForce = 10f;
+        [SerializeField] private Unity.Cinemachine.CinemachineCamera _cinemachineCamera;
         [Range(0f, 1f), SerializeField] private float _hitEffectsRestartTime = .2f;
-
+        
         #endregion
 
         #region Private Fields
@@ -45,12 +49,10 @@ namespace Player
         private float _flashDuration = 10f;
         private float _initialAnimatorSpeed;
 
-        private Color _flashOutline;
-        private Color _empOutline;
-        private Color _shieldOutline;
-        private Color _initialOutline;
+        private Color _flashOutline, _empOutline, _shieldOutline, _initialOutline;
         private Vignette _vignette;
         private int _outlineColor = Shader.PropertyToID("_Color");
+        private Collider _playerCollider => GetComponent<Collider>();
 
         #endregion
 
@@ -79,6 +81,7 @@ namespace Player
             _playerMovement = GetComponent<PlayerMovement>();
             _playerMovement.enabled = false;
             GameManager.Instance.OnGameStateChanged += CanMove;
+            GameManager.Instance.OnGameStateChanged += Die;
             UIManager.Instance.MagneticPulseButton.onClick.RemoveAllListeners();
             UIManager.Instance.MagneticPulseButton.onClick.AddListener(UseMagneticPulse);
         }
@@ -86,7 +89,10 @@ namespace Player
         void OnDisable()
         {
             if (GameManager.Instance != null)
+            {
                 GameManager.Instance.OnGameStateChanged -= CanMove;
+                GameManager.Instance.OnGameStateChanged -= Die;
+            }
         }
 
         void OnDrawGizmosSelected()
@@ -118,6 +124,18 @@ namespace Player
             ParticleReferences.DrainCellFX.Play();
             GameManager.Instance.SetAlarm(true);
             Invoke(nameof(RestartHitEffects), _hitEffectsRestartTime);
+        }
+
+        public void Die(GameState state)
+        {
+            if (GameManager.Instance.GetCurrentState() != GameState.Lose) return;
+
+            _cinemachineCamera.Follow = null;
+            GetComponent<Animator>().enabled = false;
+            _playerCollider.enabled = false;
+            _shadow.SetActive(false);
+            _dieFX.SetActive(true); _dieFX.transform.parent = null;
+            GetComponent<Rigidbody>().AddForce(transform.up * _dieForce);
         }
 
         public void MovingFX(bool status)

@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41fb3e84a19124a469fcacd06eee572c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testIterations: 1000
   VisionRange: 20
   PlayerSpotted: 0
   InitialRange: 0
@@ -187,7 +188,7 @@ MonoBehaviour:
   _visionObstructingLayer:
     serializedVersion: 2
     m_Bits: 8200
-  VisionConeResolution: 200
+  _visionConeResolution: 120
   _spottedColor: {r: 1, g: 0, b: 0, a: 0.39215687}
   _normalColor: {r: 1, g: 1, b: 1, a: 0.39215687}
 --- !u!1 &3602199214457732155
@@ -328,26 +329,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spottedRotationSpeed: 10
-  _visionCone: {fileID: 7557287018350024538}
-  _fireRate: 1.5
   _projectileEnergyConsumptionAmount: 20
-  _firePoint: {fileID: 9216645436607555738}
-  _projectilePrefab: {fileID: 1735489306325569051, guid: c41e4207f507ce5488309053e2e99261, type: 3}
-  _projectileSpeed: 50
-  _projectileFireEffect: {fileID: 4975064057830824273}
+  _fireRate: 1.5
   _empEffectDuration: 5
-  _empDurationFillImage: {fileID: 6939516886285659840}
-  _turretActiveMaterial: {fileID: 2100000, guid: a85712b22ad692b42b5b2abc52c2e7c0, type: 2}
-  _turretInactiveMaterial: {fileID: 2100000, guid: 91b68ccea8f8d434f90acae5e6b88601, type: 2}
+  _projectileSpeed: 50
+  _projectileKnockbackForce: 300
   _recoilDistance: -0.5
   _recoilDuration: 0.1
   _returnDuration: 0.3
   _recoilEase: 6
   _returnEase: 24
-  _rotateTurret: 1
+  _rotateTurret: 0
   _rotationSpeed: 15
-  _minAngle: -45
-  _maxAngle: 45
+  _minAngle: -180
+  _maxAngle: 180
+  _visionCone: {fileID: 7557287018350024538}
+  _firePoint: {fileID: 9216645436607555738}
+  _projectilePrefab: {fileID: 1735489306325569051, guid: c41e4207f507ce5488309053e2e99261, type: 3}
+  _projectileFireEffect: {fileID: 4975064057830824273}
+  _empDurationFillImage: {fileID: 6939516886285659840}
+  _turretActiveMaterial: {fileID: 2100000, guid: a85712b22ad692b42b5b2abc52c2e7c0, type: 2}
+  _turretInactiveMaterial: {fileID: 2100000, guid: 91b68ccea8f8d434f90acae5e6b88601, type: 2}
 --- !u!82 &8299989991898942936
 AudioSource:
   m_ObjectHideFlags: 0

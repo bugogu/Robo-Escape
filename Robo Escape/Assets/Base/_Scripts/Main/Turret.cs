@@ -8,7 +8,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
 
     [Header("Floats")]
     [SerializeField] private float _spottedRotationSpeed = 10f;
-    [SerializeField] private float _projectileEnergyConsumptionAmount = 10f, _fireRate = 2f, _empEffectDuration = 3f, _projectileSpeed;
+    [SerializeField] private float _projectileEnergyConsumptionAmount = 10f, _fireRate = 2f, _empEffectDuration = 3f, _projectileSpeed, _projectileKnockbackForce;
 
     [Header("Recoil Settings")]
     [SerializeField] private float _recoilDistance = -.5f;
@@ -67,14 +67,11 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
     void Update()
     {
         if(!IsVisibleToCamera()) _visionCone.enabled = false;
+        else _visionCone.enabled = true;
 
-        if(_isEffected) return;
+        if (_isEffected) return;
 
-        if(_rotateTurret && IsVisibleToCamera())
-        {
-            _visionCone.enabled = true;
-            RotateTurret();
-        } 
+        if(_rotateTurret) RotateTurret();
     }
 
     #endregion
@@ -177,6 +174,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
         GameObject projectile = Instantiate(_projectilePrefab, _firePoint.position, _firePoint.rotation);
 
         projectile.GetComponent<Projectile>().Damage = _projectileEnergyConsumptionAmount;
+        projectile.GetComponent<Projectile>().KnockbackForce = _projectileKnockbackForce;
     
         var rb = projectile.GetComponent<Rigidbody>();
 

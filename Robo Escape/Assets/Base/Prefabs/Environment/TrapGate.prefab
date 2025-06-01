@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 199547481742772975}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Panel_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1021584436711461185}
   - component: {fileID: 7425337280876934523}
   - component: {fileID: 1244988234240804419}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Door_4x5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1666008828411311949}
   - component: {fileID: 4502481832738623232}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Door_Panel_4x5.Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1857695822852777086}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Panel_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6706855057085025994}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1056553656757898610}
   - component: {fileID: 468288027480606025}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Panel_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1410051646630529545}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Door_Panel_4x5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2489092126807328469}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Door_Panel_4x5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 2198661262533627107}
   - component: {fileID: 2501229920054382467}
   - component: {fileID: 3556060967974397376}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TrapGate
   m_TagString: TrapGate
   m_Icon: {fileID: 0}
@@ -492,7 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8154785364307831386}
   - component: {fileID: 286071043471584483}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Panel_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
