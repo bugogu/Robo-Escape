@@ -7,7 +7,8 @@ public class Consts
 
     public struct AnimationParameters
     {
-        public const string CLOSEELEVATOR = "Close";
+        public const string CLOSE_ELEVATOR = "Close";
+        public const string OPEN_ELEVATOR = "Open";
         public const string OPEN = "Open";
         public const string CLOSE = "Close";
     }
@@ -29,6 +30,7 @@ public class Consts
         public const string MAGNETIC_AREA = "MagneticArea";
         public const string PLAYER = "Player";
         public const string ELEVATOR = "Elevator";
+        public const string FIRST_ELEVATOR_TRIGGER = "FirstElevatorTrigger";
 
     }
 }

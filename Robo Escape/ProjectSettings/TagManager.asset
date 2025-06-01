@@ -9,6 +9,7 @@ TagManager:
   - MagneticArea
   - Elevator
   - TrapGate
+  - FirstElevatorTrigger
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ namespace Player
     public class PlayerInteractions : MonoBehaviour
     {
         [SerializeField] private GameDesignData _gameDesignData;
+        [SerializeField] private BoxCollider _elevatorFirstTrigger;
 
         #region Private Fields
 
@@ -40,6 +41,12 @@ namespace Player
                 case Consts.Tags.ELEVATOR:
 
                     ElevatorInteraction(other.GetComponent<Animator>());
+
+                    break;
+
+                case Consts.Tags.FIRST_ELEVATOR_TRIGGER:
+
+                    ElevatorInteraction(other.transform.GetChild(0).GetComponent<Animator>(), true);
 
                     break;
             }
@@ -86,10 +93,18 @@ namespace Player
             _playerMovement.IsMagnetized = true;
         }
 
-        private void ElevatorInteraction(Animator elevatorAnimation)
+        private void ElevatorInteraction(Animator elevatorAnimation, bool first = false)
         {
+            if (first)
+            {
+                _elevatorFirstTrigger.enabled = false;
+                elevatorAnimation.SetTrigger(Consts.AnimationParameters.OPEN_ELEVATOR);
+
+                return;
+            }
+
             GameManager.Instance.ChangeGameState(GameState.Win);
-            elevatorAnimation.GetComponent<Animator>().SetTrigger(Consts.AnimationParameters.CLOSEELEVATOR);
+            elevatorAnimation.GetComponent<Animator>().SetTrigger(Consts.AnimationParameters.CLOSE_ELEVATOR);
             GetComponent<Animator>().enabled = false;
             _playerMovement.StopMovement();
         }

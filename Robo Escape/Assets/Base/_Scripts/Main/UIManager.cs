@@ -22,11 +22,11 @@ public class UIManager : MonoSingleton<UIManager>
 
     [Header("Texts")]
     [SerializeField] private TMP_Text _levelEndTitleText;
-    [SerializeField] private TMP_Text _missionChipsetsText, _missionTimeText, _missionAlarmText, _levelText;
+    [SerializeField] private TMP_Text _missionChipsetsText, _missionTimeText, _missionAlarmText, _levelText, _elevatorLevelText;
 
     [Header("GameObjects")]
     [SerializeField] private GameObject _waterCanvas;
-    [SerializeField] private GameObject _powerUpCounter, _levelEndMissionCanvas;
+    [SerializeField] private GameObject _powerUpCounter, _levelEndMissionCanvas, _nextButtonWhite, _menuButtonWhite;
     
     [Header("Colors")]
     [SerializeField] private Color _shieldPowerUpColor;
@@ -59,6 +59,7 @@ public class UIManager : MonoSingleton<UIManager>
     void Start()
     {
         _levelText.text = "Lab-" + PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1).ToString();
+        _elevatorLevelText.text = PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1).ToString();
         _loadDelay = _gameDesignData.MenuLoadDelay;
 
         _audioSource = GetComponent<AudioSource>();
@@ -217,17 +218,23 @@ public class UIManager : MonoSingleton<UIManager>
             yield return new WaitForSeconds(.3f);
 
             _menuButton.gameObject.SetActive(true);
+            _menuButtonWhite.gameObject.SetActive(true);
+            _menuButtonWhite.transform.DOPunchScale(_menuButtonWhite.transform.localScale ,.5f,5,10);
             _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,.5f,5,10);
         }
 
         if(GameManager.Instance.GetCurrentState() == GameState.Win)
         {
             _nextLevelButton.gameObject.SetActive(true);
+            _nextButtonWhite.gameObject.SetActive(true);
+            _nextButtonWhite.transform.DOPunchScale(_nextButtonWhite.transform.localScale ,.5f,5,10);
             _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale ,.5f,5,10);
 
             yield return new WaitForSeconds(.3f);
 
             _menuButton.gameObject.SetActive(true);
+            _menuButtonWhite.gameObject.SetActive(true);
+            _menuButtonWhite.transform.DOPunchScale(_menuButtonWhite.transform.localScale ,.5f,5,10);
             _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,.5f,5,10);
 
             yield return new WaitForSeconds(1f);
