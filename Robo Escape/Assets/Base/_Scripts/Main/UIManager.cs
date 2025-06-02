@@ -35,7 +35,7 @@ public class UIManager : MonoSingleton<UIManager>
     [Header("Others")]
     [SerializeField] private GameDesignData _gameDesignData;
     [SerializeField] private CanvasGroup _alarmImage;
-    [SerializeField] private Animator _levelEndAnimation;
+    [SerializeField] private Animator _levelEndAnimation, _passwordPanel;
     [SerializeField] private float _typingSpeed = .05f;
     [SerializeField] private AudioClip _keyboardSound;
     [SerializeField] private List<GameObject> _levelEndClosingElements;
@@ -167,9 +167,9 @@ public class UIManager : MonoSingleton<UIManager>
             SoundManager.Instance.PlaySFX(SoundManager.Instance.WinSfx);
             SetText($"Escaped From {_levelText.text}");
         }
-            
+
         else if (gameState == GameState.Lose)
-        {   
+        {
             SoundManager.Instance.PlaySFX(SoundManager.Instance.LoseSfx);
             SetText("Try Again?");
         }
@@ -179,8 +179,10 @@ public class UIManager : MonoSingleton<UIManager>
         _levelEndConfetti.Play();
 
         foreach (GameObject element in _levelEndClosingElements) element.SetActive(false);
-        
-        _levelEndAnimation.gameObject.SetActive(true);
+
+        _levelEndAnimation.gameObject.SetActive(true); 
+
+        _passwordPanel.enabled = true;
     }
 
     private void SetText(string text)

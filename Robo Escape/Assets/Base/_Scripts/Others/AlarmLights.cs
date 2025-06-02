@@ -27,9 +27,10 @@ public class AlarmLights : MonoBehaviour
 
     private void AlarmLightsEnabled(bool status)
     {
-        if(_isAlarmActive == status) return;
-        
+        if (_isAlarmActive == status) return;
+
         _isAlarmActive = status;
         _material.SetFloat("_Shades", status ? _alarmLightIntensity : _initialValue);
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 }

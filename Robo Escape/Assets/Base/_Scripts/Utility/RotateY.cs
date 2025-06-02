@@ -33,7 +33,7 @@ public class RotateY : MonoBehaviour
     void HandeRotation()
     { 
         if (x)
-            transform.Rotate(_rotationSpeed * Time.deltaTime, 0, 0);
+            transform.Rotate(_rotationSpeed * Time.deltaTime, 0, 0, Space.World);
         if (y)
             transform.Rotate(0, _rotationSpeed * Time.deltaTime, 0);
         if (z)
