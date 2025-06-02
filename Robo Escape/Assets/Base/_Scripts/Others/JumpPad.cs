@@ -5,6 +5,7 @@ public class JumpPad : MonoBehaviour
 {
     [SerializeField] private float _jumpPower;
     [SerializeField] private float _jumpDuration;
+    [SerializeField] private ParticleSystem _jumpFX;
     
     private Animator _animator;
     private JumpPadArea _jumpPadArea;
@@ -30,14 +31,16 @@ public class JumpPad : MonoBehaviour
         playerController.Jump(_target, _jumpPower, _jumpDuration);
 
     private void HandleJumpActions()
-    { 
+    {
         SoundManager.Instance.PlaySFX(SoundManager.Instance.JumpPadSfx);
-        
+
         _animator.enabled = true;
 
         Invoke(nameof(CloseAnimator), 1f);
 
         _target.gameObject.SetActive(false);
+        
+        _jumpFX?.Play();
     }
 
     private void CloseAnimator() =>
