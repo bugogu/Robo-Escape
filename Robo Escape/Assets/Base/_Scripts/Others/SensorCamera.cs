@@ -37,7 +37,11 @@ public class SensorCamera : MonoBehaviour
             _rotationDirection *= -1;
             _currentAngle = Mathf.Clamp(_currentAngle, _minAngle, _maxAngle);
         }
-        
-        transform.rotation = _startRotation * Quaternion.Euler(0, _currentAngle, 0);
+
+        transform.rotation = Quaternion.Euler(
+        transform.rotation.eulerAngles.x, 
+        _currentAngle,                     
+        transform.rotation.eulerAngles.z   
+        );
     }
 }
