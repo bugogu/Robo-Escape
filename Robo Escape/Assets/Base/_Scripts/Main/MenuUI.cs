@@ -31,6 +31,7 @@ public class MenuUI : MonoSingleton<MenuUI>
     [SerializeField] private Button _playButton;
     [SerializeField] private Settings _settings;
     [SerializeField] private Vector3 _handRectYThreshold = new Vector3(-140, 160, 0);
+    [SerializeField] private Canvas _infoCanvas;
     
     #endregion
 
@@ -61,11 +62,13 @@ public class MenuUI : MonoSingleton<MenuUI>
         ShowEnergyCapacity();
          
     }
-    
-    public void UpgradesCanvasEnabled(bool status) 
+
+    public void UpgradesCanvasEnabled()
     {
         Settings.Instance.PlayButtonSound();
-        _upgradesCanvas.SetActive(status);
+        _upgradesCanvas.SetActive(!_upgradesCanvas.activeSelf);
+
+        _upgradesCanvas.transform.parent.GetComponent<Canvas>().sortingOrder = _infoCanvas.sortingOrder + 1;
     }
 
     public void SetProtocolText() =>
