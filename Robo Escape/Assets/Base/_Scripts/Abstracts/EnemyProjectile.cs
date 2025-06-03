@@ -4,7 +4,10 @@ public abstract class EnemyProjectile : MonoBehaviour
 {
     protected abstract void GiveDamage(Collider player);
 
-    protected virtual void DestroyProjectile() => gameObject.SetActive(false);
+    protected virtual void DestroyProjectile(bool instantDestroy = true)
+    { 
+        if(instantDestroy) gameObject.SetActive(false);
+    } 
 
     void OnTriggerEnter(Collider other)
     {
