@@ -34,7 +34,7 @@ public class EnergyBar : MonoSingleton<EnergyBar>
             ReduceMaxEnergy(amount);
 
             if (MaxEnergyCapacity <= 0)
-                Invoke(nameof(ZeroEnergyAction), 1f);
+                Invoke(nameof(ZeroEnergyAction), 0.1f);
         }
     }
 

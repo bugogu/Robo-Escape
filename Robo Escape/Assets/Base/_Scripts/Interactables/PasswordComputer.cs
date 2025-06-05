@@ -8,6 +8,9 @@ public class PasswordComputer : MonoBehaviour
 
     void Start()
     {
+        if(_password == "" || string.IsNullOrEmpty(_password))
+            _password = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().LevelData.Password;
+
         _newParent.parent = null;
 
         transform.SetParent(_newParent);

@@ -8,6 +8,7 @@ using DG.Tweening;
 using TMPro;
 using System.Collections;
 using UnityEngine.Serialization;
+using UnityEngine.InputSystem;
 
 #endregion
 
@@ -27,10 +28,10 @@ public class UIManager : MonoSingleton<UIManager>
     [Header("GameObjects")]
     [SerializeField] private GameObject _waterCanvas;
     [SerializeField] private GameObject _powerUpCounter, _levelEndMissionCanvas, _nextButtonWhite, _menuButtonWhite;
-    
+
     [Header("Colors")]
     [SerializeField] private Color _shieldPowerUpColor;
-    [SerializeField] private Color _flashPowerUpColor, _completedMissionColor, _failedMissionColor;    
+    [SerializeField] private Color _flashPowerUpColor, _completedMissionColor, _failedMissionColor;
 
     [Header("Others")]
     [SerializeField] private GameDesignData _gameDesignData;
@@ -41,7 +42,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private List<GameObject> _levelEndClosingElements;
     [SerializeField] private Image _powerUpFill;
     [SerializeField] private ParticleSystem _levelEndConfetti;
-    [Tooltip("These elements are going to open when cutscene is finished")] 
+    [Tooltip("These elements are going to open when cutscene is finished")]
     [SerializeField] private GameObject[] _uiElements;
 
     #endregion
@@ -66,16 +67,16 @@ public class UIManager : MonoSingleton<UIManager>
 
         _missions = new List<string>()
         {
-            $"Collect {LevelManager.Instance.ChipsetCount} chipsets!",  
-            $"Finish under {LevelManager.Instance.TimeLimit} sec!", 
-            "No alarm allowed!"                           
+            $"Collect {LevelManager.Instance.ChipsetCount} chipsets!",
+            $"Finish under {LevelManager.Instance.TimeLimit} sec!",
+            "No alarm allowed!"
         };
     }
 
     void OnEnable()
     {
         SetOnClicks();
-        
+
         GameManager.Instance.OnAlarmSetted += AlarmImageAlpha;
         GameManager.Instance.OnGameStateChanged += OpenUI;
         GameManager.Instance.OnGameStateChanged += PlayLevelEndAnimation;
@@ -92,18 +93,18 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void ActivatePowerCounter(float time, bool isShield)
     {
-        if(isShield) _powerUpFill.color = _shieldPowerUpColor;
+        if (isShield) _powerUpFill.color = _shieldPowerUpColor;
         else _powerUpFill.color = _flashPowerUpColor;
 
         _powerUpCounter.SetActive(true);
-        
-        _powerUpFill.FillImageAnimation(1,0,time).SetEase(Ease.Linear).OnComplete(()=> ResetPowerCounter());
+
+        _powerUpFill.FillImageAnimation(1, 0, time).SetEase(Ease.Linear).OnComplete(() => ResetPowerCounter());
     }
 
     public void TryAgainButton()
     {
-        if(GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
-        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
+        if (GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
+            GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
 
         Settings.Instance.PlayButtonSound();
 
@@ -112,7 +113,7 @@ public class UIManager : MonoSingleton<UIManager>
         _levelEndMissionCanvas.SetActive(false);
         _levelEndAnimation.gameObject.SetActive(false);
 
-        if(_homeButton.transform.parent.gameObject.activeInHierarchy) _homeButton.transform.parent.gameObject.SetActive(false);
+        if (_homeButton.transform.parent.gameObject.activeInHierarchy) _homeButton.transform.parent.gameObject.SetActive(false);
     }
 
     #region Private Methods
@@ -136,28 +137,28 @@ public class UIManager : MonoSingleton<UIManager>
     {
         Settings.Instance.PlayButtonSound();
 
-        if(GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
-        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
+        if (GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
+            GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
 
-        TransitionManager.Instance.LoadLevel("Menu",_loadDelay);
+        TransitionManager.Instance.LoadLevel("Menu", _loadDelay);
     }
 
     private void AlarmImageAlpha(bool IsAlarmActive)
     {
-        if(IsAlarmActive)
-        _alarmImage.alpha = 1f;
+        if (IsAlarmActive)
+            _alarmImage.alpha = 1f;
 
-        if(!IsAlarmActive)
-        _alarmImage.alpha = 0.3f;
+        if (!IsAlarmActive)
+            _alarmImage.alpha = 0.3f;
     }
 
     private void OpenUI(GameState gameState)
     {
-        if(gameState != GameState.Play) return;
+        if (gameState != GameState.Play) return;
 
-        foreach (GameObject uiElement in _uiElements) uiElement.SetActive(true); 
+        foreach (GameObject uiElement in _uiElements) uiElement.SetActive(true);
 
-        if(GameManager.Instance.WaterLevel) _waterCanvas.SetActive(true);
+        if (GameManager.Instance.WaterLevel) _waterCanvas.SetActive(true);
     }
 
     private void PlayLevelEndAnimation(GameState gameState)
@@ -180,7 +181,7 @@ public class UIManager : MonoSingleton<UIManager>
 
         foreach (GameObject element in _levelEndClosingElements) element.SetActive(false);
 
-        _levelEndAnimation.gameObject.SetActive(true); 
+        _levelEndAnimation.gameObject.SetActive(true);
 
         _passwordPanel.enabled = true;
     }
@@ -207,37 +208,37 @@ public class UIManager : MonoSingleton<UIManager>
         }
 
         StartCoroutine(HandleLevelEndPanelUIElements());
-        
+
     }
 
     private IEnumerator HandleLevelEndPanelUIElements()
-    { 
-        if(GameManager.Instance.GetCurrentState() == GameState.Lose)
+    {
+        if (GameManager.Instance.GetCurrentState() == GameState.Lose)
         {
             _tryAgainButton.gameObject.SetActive(true);
-            _tryAgainButton.transform.DOPunchScale(_tryAgainButton.transform.localScale ,.5f,5,10);
+            _tryAgainButton.transform.DOPunchScale(_tryAgainButton.transform.localScale, .5f, 5, 10);
 
             yield return new WaitForSeconds(.3f);
 
             _menuButton.gameObject.SetActive(true);
             _menuButtonWhite.gameObject.SetActive(true);
-            _menuButtonWhite.transform.DOPunchScale(_menuButtonWhite.transform.localScale ,.5f,5,10);
-            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,.5f,5,10);
+            _menuButtonWhite.transform.DOPunchScale(_menuButtonWhite.transform.localScale, .5f, 5, 10);
+            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale, .5f, 5, 10);
         }
 
-        if(GameManager.Instance.GetCurrentState() == GameState.Win)
+        if (GameManager.Instance.GetCurrentState() == GameState.Win)
         {
             _nextLevelButton.gameObject.SetActive(true);
             _nextButtonWhite.gameObject.SetActive(true);
-            _nextButtonWhite.transform.DOPunchScale(_nextButtonWhite.transform.localScale ,.5f,5,10);
-            _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale ,.5f,5,10);
+            _nextButtonWhite.transform.DOPunchScale(_nextButtonWhite.transform.localScale, .5f, 5, 10);
+            _nextLevelButton.transform.DOPunchScale(_nextLevelButton.transform.localScale, .5f, 5, 10);
 
             yield return new WaitForSeconds(.3f);
 
             _menuButton.gameObject.SetActive(true);
             _menuButtonWhite.gameObject.SetActive(true);
-            _menuButtonWhite.transform.DOPunchScale(_menuButtonWhite.transform.localScale ,.5f,5,10);
-            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale ,.5f,5,10);
+            _menuButtonWhite.transform.DOPunchScale(_menuButtonWhite.transform.localScale, .5f, 5, 10);
+            _menuButton.transform.DOPunchScale(_menuButton.transform.localScale, .5f, 5, 10);
 
             yield return new WaitForSeconds(1f);
 
@@ -258,21 +259,21 @@ public class UIManager : MonoSingleton<UIManager>
     private IEnumerator ShowMissions(List<string> missions)
     {
         // 1. Görev (Chipsets)
-        if(missions.Count > 0 && _missionChipsetsText != null)
+        if (missions.Count > 0 && _missionChipsetsText != null)
         {
             yield return StartCoroutine(TypeText(missions[0], _missionChipsetsText));
             yield return new WaitForSeconds(0.1f);
         }
 
         // 2. Görev (Time)
-        if(missions.Count > 1 && _missionTimeText != null)
+        if (missions.Count > 1 && _missionTimeText != null)
         {
             yield return StartCoroutine(TypeText(missions[1], _missionTimeText));
             yield return new WaitForSeconds(0.1f);
         }
 
         // 3. Görev (Alarm)
-        if(missions.Count > 2 && _missionAlarmText != null)
+        if (missions.Count > 2 && _missionAlarmText != null)
         {
             yield return StartCoroutine(TypeText(missions[2], _missionAlarmText));
             yield return new WaitForSeconds(0.1f);
@@ -282,14 +283,14 @@ public class UIManager : MonoSingleton<UIManager>
     private IEnumerator TypeText(string text, TMP_Text targetText)
     {
         targetText.text = "";
-        
+
         foreach (char letter in text.ToCharArray())
         {
             targetText.text += letter;
 
             if (letter != ' ' && letter != '\n' && _audioSource != null && _keyboardSound != null)
                 _audioSource.PlayOneShot(_keyboardSound);
-                
+
             yield return new WaitForSeconds(_typingSpeed);
         }
     }
@@ -297,12 +298,12 @@ public class UIManager : MonoSingleton<UIManager>
     private void MenuButton()
     {
         Settings.Instance.PlayButtonSound();
-        
-        if(GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
-        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
+
+        if (GameManager.Instance.IsAlarmActive && Settings.Instance.Music == 1)
+            GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>().Play();
 
         if (GameManager.Instance.GetCurrentState() == GameState.Win)
-        {            
+        {
             var currentLevel = PlayerPrefs.GetInt(Consts.Prefs.LEVEL, 1);
             var maxLevel = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 2;
 
@@ -311,7 +312,7 @@ public class UIManager : MonoSingleton<UIManager>
             PlayerPrefs.SetInt(Consts.Prefs.LEVEL, newLevel);
             TransitionManager.Instance.LoadLevel("Menu", _loadDelay);
         }
-        
+
         if (GameManager.Instance.GetCurrentState() == GameState.Lose)
             TransitionManager.Instance.LoadLevel("Menu", _loadDelay);
 
@@ -334,8 +335,7 @@ public class UIManager : MonoSingleton<UIManager>
         _levelEndAnimation.gameObject.SetActive(false);
     }
 
-    private void LoadLevel()=>
+    private void LoadLevel() =>
         UnityEngine.SceneManagement.SceneManager.LoadScene(PlayerPrefs.GetInt("Level", 1) + 1);
-
     #endregion
 }

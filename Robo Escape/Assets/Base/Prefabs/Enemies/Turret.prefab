@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 2800891248574135540}
   - component: {fileID: 8299989991898942936}
   - component: {fileID: 4018596041402878266}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TBasic_lvl1_top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 4929552598852878936}
   - component: {fileID: 5690650226467004206}
   - component: {fileID: 551534198077086656}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TBasic_lvl1_bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

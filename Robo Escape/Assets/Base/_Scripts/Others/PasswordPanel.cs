@@ -64,13 +64,17 @@ public class PasswordPanel : MonoBehaviour
     {
         if (Settings.Instance.Haptic == 1) Handheld.Vibrate();
 
+        ClearPasswordInput();
+        _passwordBlankText.SetActive(true);
+
+        if (GameManager.Instance.IsAlarmActive) return;
+
+        GameManager.Instance.SetAlarm(true, true);
+
         SensorArea[] allSensors = FindObjectsByType<SensorArea>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (var sensor in allSensors)
             sensor.SetTriggeredColor();
 
-        GameManager.Instance.SetAlarm(true, true);
-        HandleAnimationAndGameState();
-        ClosePasswordPanel();
     }
 
     private void HandleAnimationAndGameState()

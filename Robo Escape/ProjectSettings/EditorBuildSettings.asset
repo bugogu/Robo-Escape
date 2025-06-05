@@ -12,8 +12,14 @@ EditorBuildSettings:
     path: Assets/Base/Scenes/Menu.unity
     guid: d056ca08b70938d448e5ca2d84ccac31
   - enabled: 1
-    path: Assets/Base/Scenes/Labs/TestLab.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Base/Scenes/Labs/1.unity
+    guid: 370aaea58de5628478ce23f2b280dcbf
+  - enabled: 1
+    path: Assets/Base/Scenes/Labs/2.unity
+    guid: 08eda06af853c674faaf5c8a18d6477e
+  - enabled: 1
+    path: Assets/Base/Scenes/Labs/3.unity
+    guid: 9f89a82052adb2b44be87178218f8ba2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7797151490334220804}
   - component: {fileID: 8051405615105924555}
   - component: {fileID: 7662849646721691947}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Drone_light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,7 +1161,7 @@ GameObject:
   - component: {fileID: 6369122208996076622}
   - component: {fileID: 1558739362364997343}
   - component: {fileID: 1296755213339749697}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Drone_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

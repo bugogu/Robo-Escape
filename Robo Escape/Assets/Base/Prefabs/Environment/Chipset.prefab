@@ -88,6 +88,10 @@ PrefabInstance:
       value: Chip
       objectReference: {fileID: 0}
     - target: {fileID: 4645620463839564147, guid: 39bc5e3f041c7d8449e37a6e56ed1f1a, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645620463839564147, guid: 39bc5e3f041c7d8449e37a6e56ed1f1a, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -173,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae91551be1f14d45b0a981d7ae92b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
+  _rotationSpeed: 100
   x: 0
   y: 0
   z: 1
