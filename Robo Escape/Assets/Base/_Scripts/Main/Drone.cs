@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Drone : MonoBehaviour
+public class Drone : MonoBehaviour, IEffectorForProp
 {
     #region References
 

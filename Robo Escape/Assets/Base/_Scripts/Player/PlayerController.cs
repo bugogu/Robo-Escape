@@ -135,6 +135,9 @@ namespace Player
             _playerCollider.enabled = false;
             _shadow.SetActive(false);
             _dieFX.SetActive(true); _dieFX.transform.parent = null;
+            
+            GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionY;
+
             GetComponent<Rigidbody>().AddForce(transform.up * _dieForce);
         }
 

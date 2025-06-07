@@ -19,7 +19,7 @@ MonoBehaviour:
   MovementThreshold: 0.15
   StopThreshold: 0.149
   ReplenishAmount: 0.375
-  ConsumeAmount: 0.225
+  ConsumeAmount: 0.325
   MagnetismConsumptionMultiplier: 2
   MagnetismReplenishMultiplier: 3
   MaxEnergyCapacity: 100
