@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 76774066}
   - component: {fileID: 76774069}
   - component: {fileID: 76774068}
-  - component: {fileID: 76774067}
   m_Layer: 5
   m_Name: PlayButtonWhite
   m_TagString: Untagged
@@ -152,26 +151,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 544667437}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.15340652}
-  m_AnchorMax: {x: 0.5, y: 0.15340652}
-  m_AnchoredPosition: {x: 0, y: -0.3831787}
-  m_SizeDelta: {x: 596.0067, y: 255.6644}
+  m_AnchorMin: {x: 0.5, y: 0.14976063}
+  m_AnchorMax: {x: 0.5, y: 0.14976063}
+  m_AnchoredPosition: {x: 0, y: -1.2901}
+  m_SizeDelta: {x: 596.0067, y: 271.4781}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &76774067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76774065}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.39215687}
-  m_EffectDistance: {x: 0, y: -18.34}
-  m_UseGraphicAlpha: 1
 --- !u!114 &76774068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2978,6 +2962,7 @@ GameObject:
   - component: {fileID: 1387826323}
   - component: {fileID: 1387826322}
   - component: {fileID: 1387826324}
+  - component: {fileID: 1387826325}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -3019,15 +3004,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.611593, b: 0.2471698, a: 1}
+  m_Color: {r: 0.45882356, g: 0.43137258, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0f98894af3930e047b80c1988c0492a5, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 6614cc27b251cea4996029bae890eef7, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3035,7 +3020,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.01
 --- !u!222 &1387826323
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3184,6 +3169,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1387826325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387826320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.03529412, g: 0, b: 0.6313726, a: 0.9137255}
+  m_EffectDistance: {x: 0, y: -14.19}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1431281870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,8 +3216,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1387826321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.43620196}
+  m_AnchorMax: {x: 0.5, y: 0.43620196}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3268,8 +3268,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 85
-  m_fontSizeBase: 85
+  m_fontSize: 95
+  m_fontSizeBase: 95
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4458,9 +4458,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1387826321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.55953205}
-  m_AnchorMax: {x: 0.5, y: 0.55953205}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1916513514
@@ -4510,8 +4510,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 85
-  m_fontSizeBase: 85
+  m_fontSize: 95
+  m_fontSizeBase: 95
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
