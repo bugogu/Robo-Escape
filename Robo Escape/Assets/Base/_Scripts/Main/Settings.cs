@@ -13,7 +13,7 @@ public class Settings : MonoSingleton<Settings>
 
     public int Music 
     {
-        get => PlayerPrefs.GetInt(Consts.Prefs.MUSIC, 1);
+        get => PlayerPrefs.GetInt(Consts.Prefs.MUSIC, 0);
         set => PlayerPrefs.SetInt(Consts.Prefs.MUSIC, value);
     } 
 
