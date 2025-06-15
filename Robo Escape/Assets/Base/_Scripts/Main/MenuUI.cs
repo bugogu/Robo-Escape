@@ -32,6 +32,7 @@ public class MenuUI : MonoSingleton<MenuUI>
     [SerializeField] private Settings _settings;
     [SerializeField] private Vector3 _handRectYThreshold = new Vector3(-140, 160, 0);
     [SerializeField] private Canvas _infoCanvas;
+    [SerializeField] private Animator _playerAnimator;
 
     #endregion
 
@@ -94,8 +95,9 @@ public class MenuUI : MonoSingleton<MenuUI>
 
         _escapeButton.SetActive(false);
         _settings.SettingsPanel.gameObject.SetActive(false);
-        TransitionManager.Instance.PlayTransition(1f);
-        Invoke(nameof(LoadLevel), .3f);
+        _playerAnimator.SetBool(Consts.PlayerAnimations.WALKING, true);
+        Invoke(nameof(DelayedPlayAnimation), 1f);
+        Invoke(nameof(LoadLevel), 1.3f);
 
     }
 
@@ -121,7 +123,7 @@ public class MenuUI : MonoSingleton<MenuUI>
         _capacityRect.DOScale(Vector3.zero, _showDuration).OnComplete(() => _isShowed = false);
 
     private bool ActivePanelsCheck()
-    { 
+    {
         switch (true)
         {
             case true when _upgradesCanvas.activeSelf:
@@ -135,5 +137,6 @@ public class MenuUI : MonoSingleton<MenuUI>
         }
     }
 
+    private void DelayedPlayAnimation() => TransitionManager.Instance.PlayTransition(1f);
     #endregion
 }
