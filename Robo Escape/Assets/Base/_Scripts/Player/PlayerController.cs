@@ -112,7 +112,8 @@ namespace Player
 
             //CameraShake.Shake();
             _playerMovement.OnGround = false;
-            transform.DOJump(target.position, jumpPower, 1, jumpDuration).SetUpdate(UpdateType.Fixed).OnComplete(() => _playerMovement.OnGround = true);
+            transform.DOJump(target.position, jumpPower, 1, jumpDuration).SetUpdate(UpdateType.Fixed).
+            OnComplete(() => _playerMovement.OnGround = true).SetEase(Ease.Linear);
         }
 
         public void GetHit(float energyDamage)

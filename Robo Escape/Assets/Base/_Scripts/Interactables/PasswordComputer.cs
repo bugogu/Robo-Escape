@@ -11,9 +11,12 @@ public class PasswordComputer : MonoBehaviour
         if(_password == "" || string.IsNullOrEmpty(_password))
             _password = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().LevelData.Password;
 
-        _newParent.parent = null;
-
-        transform.SetParent(_newParent);
+        if (_newParent != null)
+        {
+            _newParent.parent = null;
+            transform.SetParent(_newParent);
+        }
+        
     }
 
     public void ShowPassword() =>

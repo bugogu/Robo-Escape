@@ -122,7 +122,6 @@ GameObject:
   - component: {fileID: 7713533392939723898}
   - component: {fileID: 8009320136760474441}
   - component: {fileID: 2237323709894776680}
-  - component: {fileID: 3907136192052280791}
   m_Layer: 0
   m_Name: ReloadImage
   m_TagString: Untagged
@@ -195,24 +194,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
---- !u!114 &3907136192052280791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330981063769463788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  m_PresetInfoIsWorld: 0
 --- !u!1 &1976194303434696428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +1009,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3231658342266463301, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4338995656917058521, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_Name
@@ -1095,11 +1077,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -15.762336
+      value: -15.762329
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.009935759
+      value: 0.009887695
       objectReference: {fileID: 0}
     - target: {fileID: 4636856237101652639, guid: 02c5474378679d149a1ef01bf1df9313, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
