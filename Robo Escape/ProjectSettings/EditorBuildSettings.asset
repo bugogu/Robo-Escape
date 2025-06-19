@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Base/Scenes/Labs/7.unity
     guid: 99d7a95085a24b740ab660358c823ff4
+  - enabled: 1
+    path: Assets/Base/Scenes/Labs/8.unity
+    guid: f83bac0d1b5aec24db428206ff02d7e9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
