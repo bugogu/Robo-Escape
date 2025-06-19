@@ -5,6 +5,7 @@ namespace Player
     using UnityEngine.Rendering;
     using UnityEngine.Rendering.Universal;
     using UnityEngine.Serialization;
+    using System.Collections;
 
     public class PlayerController : MonoSingleton<PlayerController>
     {
@@ -13,6 +14,7 @@ namespace Player
         [HideInInspector] public bool IsProtectionActive = false;
         [HideInInspector] public bool HasAnyPowerUp = false;
         [HideInInspector] public bool HasMagneticCharge = false;
+        [HideInInspector] public Coroutine CurrentShieldCoroutine;
 
         #endregion
 
@@ -217,6 +219,12 @@ namespace Player
             IsProtectionActive = false;
             _antiAlarmShieldFX.gameObject.SetActive(false);
             HasAnyPowerUp = false;
+            UIManager.Instance.DeactivatePowerCounter();
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.PropBreakSfx);
+
+            if(UIManager.Instance.PowerUpTween != null)
+                UIManager.Instance.PowerUpTween.Kill();
+            
         }
 
         #endregion
@@ -235,8 +243,6 @@ namespace Player
             HasAnyPowerUp = true;
             IsProtectionActive = true;
             _antiAlarmShieldFX.gameObject.SetActive(true);
-
-            Invoke("RemoveProtection", _shieldDuration);
         }
 
         private void GainFlash()

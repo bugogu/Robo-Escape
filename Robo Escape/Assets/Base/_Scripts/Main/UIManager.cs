@@ -9,12 +9,15 @@ using TMPro;
 using System.Collections;
 using UnityEngine.Serialization;
 using UnityEngine.InputSystem;
+using Player;
 
 #endregion
 
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoSingleton<UIManager>
 {
+    public Tween PowerUpTween;
+
     #region References
 
     [Header("Buttons")]
@@ -98,7 +101,14 @@ public class UIManager : MonoSingleton<UIManager>
 
         _powerUpCounter.SetActive(true);
 
-        _powerUpFill.FillImageAnimation(1, 0, time).SetEase(Ease.Linear).OnComplete(() => ResetPowerCounter());
+        PowerUpTween =_powerUpFill.FillImageAnimation(1, 0, time).SetEase(Ease.Linear).OnComplete(() => ResetPowerCounter(isShield));
+    }
+
+    public void DeactivatePowerCounter()
+    {
+        _powerUpCounter.SetActive(false);
+        
+        _powerUpFill.fillAmount = 1;
     }
 
     public void TryAgainButton()
@@ -250,10 +260,13 @@ public class UIManager : MonoSingleton<UIManager>
         }
     }
 
-    private void ResetPowerCounter()
+    private void ResetPowerCounter(bool shieldCounter)
     {
         _powerUpCounter.SetActive(false);
         _powerUpFill.fillAmount = 1f;
+
+        if (shieldCounter)
+            PlayerController.Instance.RemoveProtection();
     }
 
     private IEnumerator ShowMissions(List<string> missions)
