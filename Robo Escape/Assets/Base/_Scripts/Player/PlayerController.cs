@@ -125,7 +125,7 @@ namespace Player
             EnergyBar.Instance.ConsumeEnergy(energyDamage, true);
             CameraShake.Shake();
             ParticleReferences.DrainCellFX.Play();
-            GameManager.Instance.SetAlarm(true);
+            // GameManager.Instance.SetAlarm(true);
             Invoke(nameof(RestartHitEffects), _hitEffectsRestartTime);
         }
 

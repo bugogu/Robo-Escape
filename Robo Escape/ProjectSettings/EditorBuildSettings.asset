@@ -35,6 +35,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Base/Scenes/Labs/8.unity
     guid: f83bac0d1b5aec24db428206ff02d7e9
+  - enabled: 1
+    path: Assets/Base/Scenes/Labs/9.unity
+    guid: cdc700d9b234795469515b5db23bd5e4
+  - enabled: 1
+    path: Assets/Base/Scenes/Labs/10.unity
+    guid: 4029a66e42d043646bfd869334862df9
+  - enabled: 1
+    path: Assets/Base/Scenes/Labs/11.unity
+    guid: 3bb3ab729930d09449638c416eb2e0df
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

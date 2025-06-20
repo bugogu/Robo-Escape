@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b0e80944f73c4459282fc4bfbfcd92, type: 3}
   m_Name: 9
   m_EditorClassIdentifier: 
-  ChipsetCount: 10
-  TimeLimit: 20
+  ChipsetCount: 4
+  TimeLimit: 60
   WaterLevel: 0
   WaterFillTime: 60
   Password: 5321

@@ -141,6 +141,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
         transform.parent.GetComponent<Renderer>().material = _turretInactiveMaterial;
         _visionCone.VisionRange = 0;
         Invoke(nameof(DeactivateVision), .2f);
+        transform.parent.GetComponent<BoxCollider>().enabled = false;
         _empDurationFillImage.transform.parent.gameObject.SetActive(true);
         _empDurationFillImage.FillImageAnimation(0, 1, _empEffectDuration).SetEase(Ease.Linear);
         Invoke(nameof(RemoveEmpEffects), _empEffectDuration);
@@ -209,6 +210,7 @@ public class Turret : MonoBehaviour, IEffectableFromEMP
         _empDurationFillImage.transform.parent.gameObject.SetActive(false);
         _isEffected = false;
         _visionCone.enabled = true;
+        transform.parent.GetComponent<BoxCollider>().enabled = true;
     }
 
     private void DeactivateVision() => _visionCone.enabled = false;
